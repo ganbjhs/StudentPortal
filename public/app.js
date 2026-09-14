@@ -185,6 +185,10 @@
           <div class="entry-foot"><span>Added ${esc(when)}</span>
             <span class="links"><button class="link-btn" type="button" data-act="edit">Edit</button><button class="link-btn danger" type="button" data-act="del">Delete</button></span></div>
         </div>`;
+      const vid = card.querySelector("video");
+      if (vid) vid.addEventListener("loadedmetadata", () => {
+        if (vid.videoHeight >= vid.videoWidth) card.querySelector(".media").classList.add("portrait");
+      });
       card.querySelector('[data-act="edit"]').addEventListener("click", () => startEdit(en, card));
       card.querySelector('[data-act="del"]').addEventListener("click", () => del(en));
       grid.appendChild(card);
