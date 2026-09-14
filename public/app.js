@@ -1,0 +1,199 @@
+(function () {
+  const $ = (id) => document.getElementById(id);
+  const STATES = ["Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh","Goa","Gujarat","Haryana","Himachal Pradesh","Jharkhand","Karnataka","Kerala","Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Pradesh","Uttarakhand","West Bengal","Andaman & Nicobar","Chandigarh","Dadra & Nagar Haveli and Daman & Diu","Delhi","Jammu & Kashmir","Ladakh","Lakshadweep","Puducherry"];
+  const CLASSES = ["Nursery","LKG","UKG","1","2","3","4","5","6","7","8","9","10","11","12"];
+  STATES.forEach((s) => { const o = document.createElement("option"); o.textContent = s; $("rState").appendChild(o); });
+  CLASSES.forEach((c) => { const o = document.createElement("option"); o.value = c; $("classList").appendChild(o); });
+
+  let school = null, entries = [], pendingFile = null;
+
+  // ---------- helpers ----------
+  const toast = (t) => { const el = $("toast"); el.textContent = t; el.classList.add("show"); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove("show"), 2600); };
+  const showMsg = (id, text, ok) => { const el = $(id); if (!text) { el.hidden = true; return; } el.textContent = text; el.className = "msg " + (ok ? "ok" : "err"); el.hidden = false; };
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  async function api(method, url, body) {
+    const opts = { method, headers: {} };
+    if (body instanceof FormData) opts.body = body;
+    else if (body) { opts.headers["Content-Type"] = "application/json"; opts.body = JSON.stringify(body); }
+    const r = await fetch(url, opts);
+    const data = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(data.error || `Request failed (${r.status})`);
+    return data;
+  }
+  const classLabel = (c) => (/^\d+$/.test(c) ? "Class " + c : c);
+
+  // ---------- tabs ----------
+  document.querySelectorAll(".tab").forEach((t) => t.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach((x) => x.setAttribute("aria-selected", x === t));
+    $("loginForm").hidden = t.dataset.tab !== "login";
+    $("regForm").hidden = t.dataset.tab !== "reg";
+  }));
+
+  // ---------- auth ----------
+  $("regForm").addEventListener("submit", async (e) => {
+    e.preventDefault(); showMsg("regMsg", "");
+    if ($("rPass").value !== $("rPass2").value) return showMsg("regMsg", "Passwords do not match.");
+    $("regBtn").disabled = true;
+    try {
+      const { school: s } = await api("POST", "/api/register", {
+        name: $("rName").value, city: $("rCity").value, state: $("rState").value, phone: $("rPhone").value,
+        email: $("rEmail").value, udise: $("rUdise").value, userId: $("rUser").value, password: $("rPass").value,
+      });
+      enter(s); toast("School registered 🎉");
+    } catch (err) { showMsg("regMsg", err.message); }
+    finally { $("regBtn").disabled = false; }
+  });
+
+  $("loginForm").addEventListener("submit", async (e) => {
+    e.preventDefault(); showMsg("loginMsg", "");
+    $("loginBtn").disabled = true;
+    try {
+      const { school: s } = await api("POST", "/api/login", { userId: $("lUser").value, password: $("lPass").value });
+      enter(s);
+    } catch (err) { showMsg("loginMsg", err.message); }
+    finally { $("loginBtn").disabled = false; }
+  });
+
+  $("logoutBtn").addEventListener("click", async () => { await api("POST", "/api/logout").catch(() => {}); leave(); });
+
+  async function enter(s) {
+    school = s;
+    $("authView").hidden = true; $("dashView").hidden = false; $("who").hidden = false;
+    $("whoName").textContent = s.name || s.userId;
+    $("whoCity").textContent = [s.city, s.state].filter(Boolean).concat(s.userId).join(" · ");
+    await loadEntries();
+  }
+  function leave() {
+    school = null; entries = []; render();
+    $("authView").hidden = false; $("dashView").hidden = true; $("who").hidden = true;
+    $("loginForm").reset(); $("regForm").reset();
+  }
+  async function loadEntries() {
+    try { entries = (await api("GET", "/api/videos")).videos; render(); }
+    catch (err) { toast(err.message); }
+  }
+
+  // ---------- video file pick / drag ----------
+  const drop = $("drop");
+  function setFile(f) {
+    if (!f) return;
+    if (!f.type.startsWith("video/")) return showMsg("addMsg", "Please choose a video file (MP4, MOV, WebM).");
+    pendingFile = f;
+    $("fname").textContent = `${f.name} · ${(f.size / 1048576).toFixed(1)} MB`;
+    showMsg("addMsg", "");
+  }
+  $("aFile").addEventListener("change", (e) => setFile(e.target.files[0]));
+  ["dragenter", "dragover"].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add("over"); }));
+  ["dragleave", "drop"].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.remove("over"); }));
+  drop.addEventListener("drop", (e) => setFile(e.dataTransfer.files[0]));
+
+  function resetForm() {
+    $("addForm").reset(); $("editId").value = ""; pendingFile = null;
+    $("fname").textContent = "MP4 / MOV / WebM";
+    $("formTitle").textContent = "Add a student's invention";
+    $("addBtn").textContent = "Save entry"; $("cancelBtn").textContent = "Clear";
+    showMsg("addMsg", "");
+    document.querySelectorAll(".entry.editing").forEach((el) => el.classList.remove("editing"));
+  }
+  $("cancelBtn").addEventListener("click", resetForm);
+
+  // ---------- save (create or update) with upload progress ----------
+  $("addForm").addEventListener("submit", (e) => {
+    e.preventDefault(); showMsg("addMsg", "");
+    const editId = $("editId").value;
+    const fd = new FormData();
+    fd.append("studentName", $("aName").value);
+    fd.append("rollNo", $("aRoll").value);
+    fd.append("class", $("aClass").value);
+    fd.append("section", $("aSec").value);
+    fd.append("caption", $("aCaption").value);
+    fd.append("description", $("aDesc").value);
+    fd.append("videoUrl", $("aLink").value);
+    if (pendingFile) fd.append("video", pendingFile);
+
+    const hasAnything = [...fd.values()].some((v) => (v instanceof File ? v.size > 0 : String(v).trim()));
+    if (!hasAnything) return showMsg("addMsg", "Fill in at least one field or add a video.");
+
+    const prog = $("prog"), bar = prog.querySelector("i");
+    $("addBtn").disabled = true; prog.hidden = false; bar.style.width = "2%";
+
+    const xhr = new XMLHttpRequest();
+    xhr.open(editId ? "PUT" : "POST", editId ? `/api/videos/${editId}` : "/api/videos");
+    xhr.upload.onprogress = (ev) => { if (ev.lengthComputable) bar.style.width = Math.round((ev.loaded / ev.total) * 100) + "%"; };
+    xhr.onload = () => {
+      $("addBtn").disabled = false;
+      let data = {}; try { data = JSON.parse(xhr.responseText); } catch (_) {}
+      if (xhr.status >= 200 && xhr.status < 300) {
+        toast(editId ? "Entry updated ✓" : "Entry saved ✓"); resetForm(); loadEntries();
+      } else showMsg("addMsg", data.error || "Could not save the entry.");
+      setTimeout(() => { prog.hidden = true; bar.style.width = "0"; }, 500);
+    };
+    xhr.onerror = () => { $("addBtn").disabled = false; prog.hidden = true; showMsg("addMsg", "Network error — is the server running?"); };
+    xhr.send(fd);
+  });
+
+  // ---------- edit / delete ----------
+  function startEdit(en, card) {
+    resetForm();
+    $("editId").value = en.id;
+    $("aName").value = en.studentName || ""; $("aRoll").value = en.rollNo || "";
+    $("aClass").value = en.class || ""; $("aSec").value = en.section || "";
+    $("aCaption").value = en.caption || ""; $("aDesc").value = en.description || "";
+    $("aLink").value = en.videoUrl || "";
+    if (en.videoFile) $("fname").textContent = `Current: ${en.originalName || "uploaded video"} (choose a file to replace)`;
+    $("formTitle").textContent = "Edit entry"; $("addBtn").textContent = "Update entry"; $("cancelBtn").textContent = "Cancel";
+    card.classList.add("editing");
+    $("addCard").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  async function del(en) {
+    if (!confirm(`Delete the entry for ${en.studentName || "this student"}?`)) return;
+    try { await api("DELETE", `/api/videos/${en.id}`); toast("Entry deleted"); loadEntries(); }
+    catch (err) { toast(err.message); }
+  }
+
+  // ---------- render ----------
+  $("search").addEventListener("input", render);
+  function hostOf(u) { try { const h = new URL(u).hostname.replace(/^www\./, ""); return h.includes("youtu") ? "YouTube" : h.includes("google") ? "Google Drive" : h; } catch (_) { return "link"; } }
+  function render() {
+    const q = $("search").value.trim().toLowerCase();
+    const list = q ? entries.filter((e) => [e.studentName, e.rollNo, e.class, e.section, e.caption].join(" ").toLowerCase().includes(q)) : entries;
+    $("stTotal").textContent = entries.length;
+    $("stStudents").textContent = new Set(entries.map((e) => `${e.studentName}|${e.class}${e.section}|${e.rollNo}`.toLowerCase())).size;
+    $("stClasses").textContent = new Set(entries.map((e) => e.class).filter(Boolean)).size;
+    const grid = $("grid"); grid.innerHTML = "";
+    $("empty").hidden = list.length > 0;
+    $("emptyTitle").textContent = q ? "No matching entries" : "No entries yet";
+
+    list.forEach((en) => {
+      const card = document.createElement("article"); card.className = "card entry";
+      let media;
+      if (en.videoFile) media = `<video controls preload="metadata" src="${esc(en.videoFile)}"></video>`;
+      else if (en.videoUrl) media = `<a class="ext" href="${esc(en.videoUrl)}" target="_blank" rel="noopener"><span class="play"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>Open video<small>${esc(hostOf(en.videoUrl))}</small></a>`;
+      else media = `<div class="novideo">No video yet<small>Edit to add one</small></div>`;
+      const chips = [];
+      if (en.class || en.section) chips.push(`<span class="chip">${esc([en.class && classLabel(en.class), en.section].filter(Boolean).join(" – "))}</span>`);
+      if (en.rollNo) chips.push(`<span class="chip roll">Roll No. ${esc(en.rollNo)}</span>`);
+      const when = en.createdAt ? new Date(en.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) : "";
+      card.innerHTML = `<div class="media">${media}</div>
+        <div class="entry-body">
+          <h3>${esc(en.caption || "Untitled invention")}</h3>
+          ${chips.length ? `<div class="chips">${chips.join("")}</div>` : ""}
+          <dl class="meta">
+            ${en.studentName ? `<dt>Student</dt><dd>${esc(en.studentName)}</dd>` : ""}
+            ${en.description ? `<dt>About</dt><dd class="desc">${esc(en.description)}</dd>` : ""}
+          </dl>
+          <div class="entry-foot"><span>Added ${esc(when)}</span>
+            <span class="links"><button class="link-btn" type="button" data-act="edit">Edit</button><button class="link-btn danger" type="button" data-act="del">Delete</button></span></div>
+        </div>`;
+      card.querySelector('[data-act="edit"]').addEventListener("click", () => startEdit(en, card));
+      card.querySelector('[data-act="del"]').addEventListener("click", () => del(en));
+      grid.appendChild(card);
+    });
+  }
+
+  // ---------- boot: restore session ----------
+  (async () => {
+    try { const { school: s } = await api("GET", "/api/me"); await enter(s); }
+    catch (_) { $("authView").hidden = false; }
+  })();
+})();

@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Student Innovation Portal</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Mukta:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="tri"></div>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/">
+      <span class="mark" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 2l2.6 6.6L22 11l-6.4 2.4L13 20l-2.6-6.6L4 11l6.4-2.4L13 2z" fill="#E8711A"/><circle cx="13" cy="11" r="2.2" fill="#fff"/></svg>
+      </span>
+      <span>
+        <span class="brand-name">Student Innovation Portal</span><br>
+        <span class="brand-sub">Where schools showcase young inventors</span>
+      </span>
+    </a>
+    <div class="who" id="who" hidden>
+      <span><span class="sname" id="whoName"></span><br><span class="scity" id="whoCity"></span></span>
+      <button class="btn btn-ghost" id="logoutBtn" type="button">Logout</button>
+    </div>
+  </header>
+
+  <!-- AUTH -->
+  <section class="auth" id="authView" hidden>
+    <div class="hero">
+      <h1>Every school's <em>young inventors</em>, in one place.</h1>
+      <p>Register your school, add your students' inventions with a short video, and keep every entry safely stored — ready for judges and showcases later.</p>
+      <div class="steps">
+        <div class="step"><span class="n">1</span><div><b>Register your school</b><span>School name, city and a User ID + password</span></div></div>
+        <div class="step"><span class="n">2</span><div><b>Add a student's invention</b><span>Name, roll no., class, section, caption and a video</span></div></div>
+        <div class="step"><span class="n">3</span><div><b>Everything on one dashboard</b><span>Watch, edit or delete entries any time</span></div></div>
+      </div>
+    </div>
+
+    <div class="card auth-card">
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" aria-selected="true" data-tab="login" type="button">School Login</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="reg" type="button">Register School</button>
+      </div>
+
+      <form class="form" id="loginForm">
+        <div class="field"><label for="lUser">User ID</label><input class="input" id="lUser" required autocomplete="username" placeholder="e.g. dps-rohini"></div>
+        <div class="field"><label for="lPass">Password</label><input class="input" id="lPass" type="password" required autocomplete="current-password"></div>
+        <div class="msg err" id="loginMsg" hidden></div>
+        <button class="btn btn-primary btn-block" id="loginBtn" type="submit">Login</button>
+        <p class="hint">New school? Choose the <b>Register School</b> tab above.</p>
+      </form>
+
+      <form class="form" id="regForm" hidden>
+        <div class="field"><label for="rName">School name</label><input class="input" id="rName" placeholder="Delhi Public School, Rohini"></div>
+        <div class="row-2">
+          <div class="field"><label for="rCity">City</label><input class="input" id="rCity" placeholder="New Delhi"></div>
+          <div class="field"><label for="rState">State</label><select class="input" id="rState"><option value="">Select</option></select></div>
+        </div>
+        <div class="row-2">
+          <div class="field"><label for="rPhone">Contact mobile</label><input class="input" id="rPhone" inputmode="tel" placeholder="98xxxxxxxx"></div>
+          <div class="field"><label for="rEmail">Email</label><input class="input" id="rEmail" type="email" placeholder="principal@school.edu.in"></div>
+        </div>
+        <div class="field"><label for="rUdise">UDISE code <small>(optional)</small></label><input class="input" id="rUdise" placeholder="11 digit" inputmode="numeric"></div>
+        <div class="field"><label for="rUser">Choose a User ID</label><input class="input" id="rUser" required autocomplete="username" placeholder="lowercase, no spaces" pattern="[a-z0-9._-]{3,40}" title="3–40 characters: lowercase letters, digits, . _ -"></div>
+        <div class="row-2">
+          <div class="field"><label for="rPass">Password</label><input class="input" id="rPass" type="password" required minlength="4" autocomplete="new-password"></div>
+          <div class="field"><label for="rPass2">Confirm password</label><input class="input" id="rPass2" type="password" required minlength="4" autocomplete="new-password"></div>
+        </div>
+        <div class="msg err" id="regMsg" hidden></div>
+        <button class="btn btn-primary btn-block" id="regBtn" type="submit">Register &amp; Login</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- DASHBOARD -->
+  <section class="dash" id="dashView" hidden>
+    <div class="stats">
+      <div class="card stat accent"><span class="v" id="stTotal">0</span><span class="l">Total entries</span></div>
+      <div class="card stat"><span class="v" id="stStudents">0</span><span class="l">Students</span></div>
+      <div class="card stat"><span class="v" id="stClasses">0</span><span class="l">Classes covered</span></div>
+    </div>
+
+    <div class="card add-card" id="addCard">
+      <h2 id="formTitle">Add a student's invention</h2>
+      <p class="hint">One invention = one entry. Upload a video file, or paste a YouTube / Google Drive link. All fields are optional.</p>
+      <form class="form" id="addForm">
+        <input type="hidden" id="editId" value="">
+        <div class="row-2">
+          <div class="field"><label for="aName">Student name</label><input class="input" id="aName" placeholder="Aarav Sharma"></div>
+          <div class="field"><label for="aRoll">Roll No.</label><input class="input" id="aRoll" placeholder="17"></div>
+        </div>
+        <div class="row-2">
+          <div class="field"><label for="aClass">Class</label>
+            <input class="input" id="aClass" list="classList" placeholder="e.g. 8"><datalist id="classList"></datalist></div>
+          <div class="field"><label for="aSec">Section</label>
+            <input class="input" id="aSec" list="secList" placeholder="e.g. B"><datalist id="secList"><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></datalist></div>
+        </div>
+        <div class="field"><label for="aCaption">Caption <small>(name of the invention / one line)</small></label><input class="input" id="aCaption" maxlength="200" placeholder="Solar-powered water purifier for village wells"></div>
+        <div class="field"><label for="aDesc">Description <small>(optional)</small></label><textarea class="input" id="aDesc" rows="2" maxlength="2000" placeholder="What problem it solves, how it was built…"></textarea></div>
+
+        <div class="field">
+          <label>Video</label>
+          <label class="drop" id="drop" for="aFile">
+            <input type="file" id="aFile" accept="video/*" hidden>
+            <b>Choose a video file</b> or drag &amp; drop here
+            <span class="fname" id="fname">MP4 / MOV / WebM</span>
+          </label>
+          <div class="or">or</div>
+          <input class="input" id="aLink" type="url" placeholder="Paste a YouTube / Google Drive video link">
+        </div>
+        <div class="progress" id="prog" hidden><i></i></div>
+        <div class="msg err" id="addMsg" hidden></div>
+        <div class="actions">
+          <button class="btn btn-primary" id="addBtn" type="submit">Save entry</button>
+          <button class="btn btn-ghost" type="button" id="cancelBtn">Clear</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="section-head">
+      <h2>Your students' inventions</h2>
+      <input class="input" id="search" placeholder="Search name, roll no., class or caption…" style="max-width:340px">
+    </div>
+    <div class="grid" id="grid"></div>
+    <div class="card empty" id="empty" hidden>
+      <svg width="48" height="48" viewBox="0 0 26 26" fill="none"><path d="M13 2l2.6 6.6L22 11l-6.4 2.4L13 20l-2.6-6.6L4 11l6.4-2.4L13 2z" fill="#E8711A"/></svg>
+      <b id="emptyTitle">No entries yet</b>
+      <span>Add the first invention using the form above.</span>
+    </div>
+  </section>
+
+  <footer class="foot">Student Innovation Portal · Pilot build · Judges &amp; scoring module coming next</footer>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script src="/app.js"></script>
+</body>
+</html>
