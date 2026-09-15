@@ -77,6 +77,13 @@ a{color:var(--saffron-deep)}
 .stat.accent .v{color:#fff}.stat.accent .l{color:#C9D1F2}
 .section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 .section-head h2{font-size:24px}
+.view-tabs{margin-bottom:0;flex:0 0 auto}
+.view-tabs .tab{padding:8px 16px;white-space:nowrap}
+.filters{display:flex;gap:10px;flex:1 1 320px;justify-content:flex-end;flex-wrap:wrap}
+.filters .input{max-width:340px;flex:1 1 200px}
+.filters select.input{max-width:220px}
+.chip.zone{background:var(--green-soft);color:var(--green)}
+.entry-body .school{font-size:13px;color:var(--muted);font-weight:600}
 .add-card{padding:24px}
 .add-card h2{margin-bottom:4px}
 .add-card .hint{margin-bottom:16px}

@@ -8,6 +8,8 @@
  *   PORT            default 3000
  *   SESSION_SECRET  any long random string (change in production)
  *   MAX_UPLOAD_MB   default 200
+ *   DATA_DIR        folder for db.json   (default ./data)   — point both at a
+ *   UPLOAD_DIR      folder for videos    (default ./uploads)  persistent disk when deployed
  */
 const path = require("path");
 const fs = require("fs");
@@ -20,10 +22,11 @@ const store = require("./src/store");
 const PORT = process.env.PORT || 3000;
 const SESSION_SECRET = process.env.SESSION_SECRET || "change-me-in-production";
 const MAX_UPLOAD_MB = Number(process.env.MAX_UPLOAD_MB || 200);
-const UPLOAD_DIR = path.join(__dirname, "uploads");
+const UPLOAD_DIR = process.env.UPLOAD_DIR || path.join(__dirname, "uploads");
 fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 
 const app = express();
+app.set("trust proxy", 1); // behind Railway/Render/nginx proxy
 app.use(express.json({ limit: "1mb" }));
 app.use(
   session({
@@ -82,19 +85,26 @@ app.post("/api/register", async (req, res) => {
   if (password.length < 4) return res.status(400).json({ error: "Password must be at least 4 characters." });
   if (store.findSchoolByUserId(userId)) return res.status(409).json({ error: "This User ID is already taken." });
 
+  const zone = store.findZone(clean(b.zoneId, 40));
   const school = store.createSchool({
     userId,
     passwordHash: await bcrypt.hash(password, 10),
     name: clean(b.name, 200),
-    city: clean(b.city, 100),
-    state: clean(b.state, 100),
+    zoneId: zone ? zone.id : "",
+    zoneName: zone ? zone.name : "",
+    city: clean(b.city, 100) || (zone ? zone.city : ""),
+    state: clean(b.state, 100) || (zone ? zone.state : ""),
     udise: clean(b.udise, 20),
     phone: clean(b.phone, 20),
     email: clean(b.email, 120),
   });
+  if (zone && school.name) store.addSchoolToZone(zone.id, school.name);
   req.session.schoolId = school.id;
   res.status(201).json({ school: publicSchool(school) });
 });
+
+// ---------- Zones (public: needed on the registration form) ----------
+app.get("/api/zones", (req, res) => res.json({ zones: store.listZones() }));
 
 app.post("/api/login", async (req, res) => {
   const userId = clean(req.body?.userId, 40).toLowerCase();
@@ -114,13 +124,33 @@ app.put("/api/me", requireLogin, (req, res) => {
   const b = req.body || {};
   const patch = {};
   for (const k of ["name", "city", "state", "udise", "phone", "email"]) if (k in b) patch[k] = clean(b[k], 200);
+  if ("zoneId" in b) { const z = store.findZone(clean(b.zoneId, 40)); patch.zoneId = z ? z.id : ""; patch.zoneName = z ? z.name : ""; }
   res.json({ school: publicSchool(store.updateSchool(req.school.id, patch)) });
 });
 
 // ---------- Videos / entries ----------
 app.get("/api/videos", requireLogin, (req, res) => {
-  res.json({ videos: store.listVideosForSchool(req.school.id) });
+  res.json({ videos: store.listVideosForSchool(req.school.id).map(withSchool) });
 });
+
+// Every school's entries, filterable — ?zone=<zoneId>&q=<text>. Text search covers
+// caption/title, description, student, roll no., class, section, school and zone.
+app.get("/api/videos/all", requireLogin, (req, res) => {
+  const zone = clean(req.query.zone, 40);
+  const q = clean(req.query.q, 100).toLowerCase();
+  let list = store.listAllVideos().map(withSchool);
+  if (zone) list = list.filter((v) => v.zoneId === zone);
+  if (q) list = list.filter((v) =>
+    [v.caption, v.description, v.studentName, v.rollNo, v.class, v.section, v.schoolName, v.zoneName]
+      .join(" ").toLowerCase().includes(q));
+  res.json({ videos: list });
+});
+
+// Attach the owning school's name/zone to an entry for display and search.
+function withSchool(v) {
+  const s = store.findSchoolById(v.schoolId);
+  return { ...v, schoolName: s ? s.name || s.userId : "", zoneId: s ? s.zoneId || "" : "", zoneName: s ? s.zoneName || "" : "" };
+}
 
 function entryFields(b) {
   return {

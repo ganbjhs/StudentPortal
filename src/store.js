@@ -16,14 +16,14 @@ const crypto = require("crypto");
 const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, "..", "data");
 const DB_FILE = path.join(DATA_DIR, "db.json");
 
-let db = { schools: [], videos: [] };
+let db = { schools: [], videos: [], zoneSchools: {} }; // zoneSchools: { zoneId: [extra school names] }
 
 function load() {
   fs.mkdirSync(DATA_DIR, { recursive: true });
   if (fs.existsSync(DB_FILE)) {
     try {
       const parsed = JSON.parse(fs.readFileSync(DB_FILE, "utf8"));
-      db = { schools: parsed.schools || [], videos: parsed.videos || [] };
+      db = { schools: parsed.schools || [], videos: parsed.videos || [], zoneSchools: parsed.zoneSchools || {} };
     } catch (e) {
       console.error("Could not read db.json, starting empty:", e.message);
     }
@@ -65,6 +65,31 @@ function updateSchool(schoolId, patch) {
   return s;
 }
 
+// ---------- Zones ----------
+const ZONES_FILE = path.join(__dirname, "..", "config", "zones.json");
+function loadZoneSeed() {
+  try { return JSON.parse(fs.readFileSync(ZONES_FILE, "utf8")).zones || []; }
+  catch (e) { console.error("Could not read config/zones.json:", e.message); return []; }
+}
+/** Zones with their schools = seed list from config + schools that registered under that zone. */
+function listZones() {
+  return loadZoneSeed().map((z) => {
+    const extra = db.zoneSchools[z.id] || [];
+    const names = new Set([...(z.schools || []), ...extra].map((n) => n.trim()).filter(Boolean));
+    return { ...z, schools: [...names].sort((a, b) => a.localeCompare(b)) };
+  });
+}
+function findZone(zoneId) {
+  return listZones().find((z) => z.id === zoneId) || null;
+}
+/** Remember a school name under a zone so it appears in the dropdown for the next school. */
+function addSchoolToZone(zoneId, name) {
+  if (!zoneId || !name) return;
+  const list = db.zoneSchools[zoneId] || (db.zoneSchools[zoneId] = []);
+  const exists = listZones().find((z) => z.id === zoneId)?.schools.some((n) => n.toLowerCase() === name.toLowerCase());
+  if (!exists) { list.push(name); save(); }
+}
+
 // ---------- Videos / entries ----------
 function listVideosForSchool(schoolId) {
   return db.videos
@@ -101,6 +126,9 @@ function deleteVideo(videoId) {
 load();
 
 module.exports = {
+  listZones,
+  findZone,
+  addSchoolToZone,
   findSchoolByUserId,
   findSchoolById,
   createSchool,

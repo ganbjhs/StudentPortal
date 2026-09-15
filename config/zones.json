@@ -1,0 +1,30 @@
+{
+  "_readme": "Master list of zones and the schools in each zone. Edit freely: add zones, rename them, paste school names from the client's Excel. Schools that register with a name not in this list are added automatically to their zone (stored in data/db.json, this file stays as the seed). Delhi zones follow its 11 revenue districts; NCR cities and nearby states are one zone each — split them later if needed.",
+  "zones": [
+    { "id": "dl-north",      "name": "North Delhi",        "state": "Delhi", "city": "New Delhi", "schools": [] },
+    { "id": "dl-northwest",  "name": "North West Delhi",   "state": "Delhi", "city": "New Delhi", "schools": [] },
+    { "id": "dl-northeast",  "name": "North East Delhi",   "state": "Delhi", "city": "New Delhi", "schools": [] },
+    { "id": "dl-east",       "name": "East Delhi",         "state": "Delhi", "city": "New Delhi", "schools": [] },
+    { "id": "dl-shahdara",   "name": "Shahdara",           "state": "Delhi", "city": "New Delhi", "schools": [] },
+    { "id": "dl-central",    "name": "Central Delhi",      "state": "Delhi", "city": "New Delhi", "schools": [] },
+    { "id": "dl-newdelhi",   "name": "New Delhi",          "state": "Delhi", "city": "New Delhi", "schools": [] },
+    { "id": "dl-west",       "name": "West Delhi",         "state": "Delhi", "city": "New Delhi", "schools": [] },
+    { "id": "dl-southwest",  "name": "South West Delhi",   "state": "Delhi", "city": "New Delhi", "schools": [] },
+    { "id": "dl-south",      "name": "South Delhi",        "state": "Delhi", "city": "New Delhi", "schools": [] },
+    { "id": "dl-southeast",  "name": "South East Delhi",   "state": "Delhi", "city": "New Delhi", "schools": [] },
+
+    { "id": "ncr-gurugram",  "name": "Gurugram",           "state": "Haryana",       "city": "Gurugram",  "schools": [] },
+    { "id": "ncr-faridabad", "name": "Faridabad",          "state": "Haryana",       "city": "Faridabad", "schools": [] },
+    { "id": "ncr-noida",     "name": "Noida / Greater Noida", "state": "Uttar Pradesh", "city": "Noida",  "schools": [] },
+    { "id": "ncr-ghaziabad", "name": "Ghaziabad",          "state": "Uttar Pradesh", "city": "Ghaziabad", "schools": [] },
+
+    { "id": "hr-other",      "name": "Haryana (other cities)",       "state": "Haryana",          "city": "", "schools": [] },
+    { "id": "up-other",      "name": "Uttar Pradesh (other cities)", "state": "Uttar Pradesh",    "city": "", "schools": [] },
+    { "id": "pb",            "name": "Punjab",                       "state": "Punjab",           "city": "", "schools": [] },
+    { "id": "ch",            "name": "Chandigarh",                   "state": "Chandigarh",       "city": "Chandigarh", "schools": [] },
+    { "id": "rj",            "name": "Rajasthan",                    "state": "Rajasthan",        "city": "", "schools": [] },
+    { "id": "uk",            "name": "Uttarakhand",                  "state": "Uttarakhand",      "city": "", "schools": [] },
+    { "id": "hp",            "name": "Himachal Pradesh",             "state": "Himachal Pradesh", "city": "", "schools": [] },
+    { "id": "other",         "name": "Other",                        "state": "",                 "city": "", "schools": [] }
+  ]
+}

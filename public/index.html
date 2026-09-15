@@ -32,7 +32,7 @@
       <h1>Every school's <em>young inventors</em>, in one place.</h1>
       <p>Register your school, add your students' inventions with a short video, and keep every entry safely stored — ready for judges and showcases later.</p>
       <div class="steps">
-        <div class="step"><span class="n">1</span><div><b>Register your school</b><span>School name, city and a User ID + password</span></div></div>
+        <div class="step"><span class="n">1</span><div><b>Register your school</b><span>Pick your zone and school, choose a User ID + password</span></div></div>
         <div class="step"><span class="n">2</span><div><b>Add a student's invention</b><span>Name, roll no., class, section, caption and a video</span></div></div>
         <div class="step"><span class="n">3</span><div><b>Everything on one dashboard</b><span>Watch, edit or delete entries any time</span></div></div>
       </div>
@@ -53,7 +53,11 @@
       </form>
 
       <form class="form" id="regForm" hidden>
-        <div class="field"><label for="rName">School name</label><input class="input" id="rName" placeholder="Delhi Public School, Rohini"></div>
+        <div class="field"><label for="rZone">Zone <small>(area / district)</small></label>
+          <select class="input" id="rZone"><option value="">Select your zone</option></select></div>
+        <div class="field"><label for="rSchool">School</label>
+          <select class="input" id="rSchool"><option value="">Select zone first</option></select></div>
+        <div class="field" id="rNameField" hidden><label for="rName">School name</label><input class="input" id="rName" placeholder="Type your school's full name"></div>
         <div class="row-2">
           <div class="field"><label for="rCity">City</label><input class="input" id="rCity" placeholder="New Delhi"></div>
           <div class="field"><label for="rState">State</label><select class="input" id="rState"><option value="">Select</option></select></div>
@@ -97,7 +101,7 @@
           <div class="field"><label for="aSec">Section</label>
             <input class="input" id="aSec" list="secList" placeholder="e.g. B"><datalist id="secList"><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></datalist></div>
         </div>
-        <div class="field"><label for="aCaption">Caption <small>(name of the invention / one line)</small></label><input class="input" id="aCaption" maxlength="200" placeholder="Solar-powered water purifier for village wells"></div>
+        <div class="field"><label for="aCaption">Title / caption <small>(name of the invention, one line)</small></label><input class="input" id="aCaption" maxlength="200" placeholder="Solar-powered water purifier for village wells"></div>
         <div class="field"><label for="aDesc">Description <small>(optional)</small></label><textarea class="input" id="aDesc" rows="2" maxlength="2000" placeholder="What problem it solves, how it was built…"></textarea></div>
 
         <div class="field">
@@ -120,8 +124,14 @@
     </div>
 
     <div class="section-head">
-      <h2>Your students' inventions</h2>
-      <input class="input" id="search" placeholder="Search name, roll no., class or caption…" style="max-width:340px">
+      <div class="tabs view-tabs" role="tablist">
+        <button class="tab" role="tab" aria-selected="true" data-view="mine" type="button">My school's entries</button>
+        <button class="tab" role="tab" aria-selected="false" data-view="all" type="button">All entries</button>
+      </div>
+      <div class="filters">
+        <select class="input" id="zoneFilter" hidden><option value="">All zones</option></select>
+        <input class="input" id="search" placeholder="Search title, caption, student, roll no., class…">
+      </div>
     </div>
     <div class="grid" id="grid"></div>
     <div class="card empty" id="empty" hidden>
