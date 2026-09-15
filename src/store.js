@@ -16,14 +16,14 @@ const crypto = require("crypto");
 const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, "..", "data");
 const DB_FILE = path.join(DATA_DIR, "db.json");
 
-let db = { schools: [], videos: [], zoneSchools: {} }; // zoneSchools: { zoneId: [extra school names] }
+let db = { schools: [], videos: [], zoneSchools: {}, users: [], scores: [] }; // users = officials (admin/district/judge); scores = judge score sheets
 
 function load() {
   fs.mkdirSync(DATA_DIR, { recursive: true });
   if (fs.existsSync(DB_FILE)) {
     try {
       const parsed = JSON.parse(fs.readFileSync(DB_FILE, "utf8"));
-      db = { schools: parsed.schools || [], videos: parsed.videos || [], zoneSchools: parsed.zoneSchools || {} };
+      db = { schools: parsed.schools || [], videos: parsed.videos || [], zoneSchools: parsed.zoneSchools || {}, users: parsed.users || [], scores: parsed.scores || [] };
     } catch (e) {
       console.error("Could not read db.json, starting empty:", e.message);
     }
@@ -130,9 +130,30 @@ function deleteVideo(videoId) {
   return removed;
 }
 
+// ---------- Officials (admin / district nodal officer / judge) ----------
+function listUsers() { return db.users.slice(); }
+function findUserByUserId(userId) { return db.users.find((u) => u.userId === userId) || null; }
+function findUserById(id) { return db.users.find((u) => u.id === id) || null; }
+function createUser(fields) { const u = { id: id(), createdAt: now(), ...fields }; db.users.push(u); save(); return u; }
+function updateUser(userId, patch) { const u = findUserById(userId); if (!u) return null; Object.assign(u, patch, { updatedAt: now() }); save(); return u; }
+function deleteUser(userId) { const i = db.users.findIndex((u) => u.id === userId); if (i === -1) return null; const [r] = db.users.splice(i, 1); save(); return r; }
+
+// ---------- Scores (one sheet per judge per reel per level) ----------
+function listScores(filter = {}) {
+  return db.scores.filter((s) => Object.entries(filter).every(([k, v]) => s[k] === v));
+}
+function upsertScore(fields) {
+  const i = db.scores.findIndex((s) => s.reelId === fields.reelId && s.judgeId === fields.judgeId && s.level === fields.level);
+  if (i >= 0) { Object.assign(db.scores[i], fields, { updatedAt: now() }); save(); return db.scores[i]; }
+  const sc = { id: id(), createdAt: now(), ...fields }; db.scores.push(sc); save(); return sc;
+}
+function listAllSchools() { return db.schools.slice(); }
+
 load();
 
 module.exports = {
+  listUsers, findUserByUserId, findUserById, createUser, updateUser, deleteUser,
+  listScores, upsertScore, listAllSchools,
   getSettings,
   listZones,
   findZone,

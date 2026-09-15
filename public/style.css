@@ -143,3 +143,26 @@ a{color:var(--saffron-deep)}
 .chip.status.school_shortlisted{background:var(--saffron-soft);color:var(--saffron-deep)}
 .chip.status.district_selected,.chip.status.state_selected{background:var(--green-soft);color:var(--green)}
 .chip.ok{background:var(--green-soft);color:var(--green)}
+
+/* evaluation desk */
+.stats{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
+.scoreform{display:grid;gap:10px;padding-top:10px;border-top:1px dashed var(--line)}
+.score-grid{display:grid;gap:6px}
+.score-row{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px;font-weight:600;color:var(--ink-2)}
+.score-row small{color:var(--muted);font-weight:500}
+.score-row .input{width:76px;padding:6px 8px;text-align:right;font-variant-numeric:tabular-nums}
+.scoreform textarea{font-size:14px}
+.statusctl{display:grid;gap:4px;padding-top:8px}
+.statusctl select{padding:8px 10px;font-size:14px}
+.remarks{font-size:13px;color:var(--ink-2)}
+.remarks summary{cursor:pointer;font-weight:700;color:var(--navy)}
+.remarks p{margin:6px 0 0}
+.report{display:grid;gap:18px}
+.tablewrap{overflow-x:auto}
+.tbl{width:100%;border-collapse:collapse;font-size:14px}
+.tbl th,.tbl td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl th{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);background:var(--surface-2)}
+.tbl td:nth-child(n+3){font-variant-numeric:tabular-nums}
+.pad{padding:18px}
+.pad h3{font-size:17px;margin-bottom:8px}
+.chip.status.submitted{background:var(--line);color:var(--ink-2)}

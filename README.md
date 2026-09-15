@@ -52,6 +52,24 @@ data/db.json       Schools + entries (created on first run)
 | PUT    | /api/videos/:id   | same fields, any subset; new `video` file replaces the old |
 | DELETE | /api/videos/:id   |                                                           |
 
+## Evaluation Desk (`/staff`)
+
+Officials log in at `/staff` (no self-registration). Roles:
+- **State Admin** — everything: create/remove officials, participation report, CSV export, final "Selected for Grand Showcase".
+  First run seeds `admin / admin123` (override with env `ADMIN_USER` / `ADMIN_PASS`; change it from the Officials tab).
+- **District Nodal Officer** — sees their district's reels, moves them Submitted → Shortlisted → Selected for State/UT.
+- **Judge** — district-level judges score their district's reels; state-level judges score district-selected reels.
+  Rubric lives in `config/settings.json` (`rubric`), totals to 100; averages shown per level.
+
+| Method | Path | Notes |
+|---|---|---|
+| POST | /api/staff/login · GET /api/staff/me · PUT /api/staff/me/password | official session |
+| GET/POST/DELETE | /api/staff/users | admin: manage officials |
+| GET | /api/eval/reels?zone=&status=&q= | reels visible to this official, with score summaries |
+| POST | /api/eval/reels/:id/score | judge/admin: `{criteria:{...}, remarks}` |
+| POST | /api/eval/reels/:id/status | district/admin: `{status}` (history kept in `statusHistory`) |
+| GET | /api/admin/stats · /api/admin/export.csv | admin/district: participation report + CSV |
+
 ## Config
 
 Copy `.env.example` → `.env` (or set env vars): `PORT`, `SESSION_SECRET`, `MAX_UPLOAD_MB` (default 200).

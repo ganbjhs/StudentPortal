@@ -5,7 +5,7 @@
 **Campaign:** Seva Sankalp Abhiyan, 17 Sep 2026 → 17 Oct 2026 (Grand Showcase: Jansevak Mahakumbh, 17 Oct 2026, Chhatarsal Stadium)
 **Source:** RFP "Selection of Event Management/Production Agency for Seva Sankalp Abhiyan" (issued 07.09.2026)
 **Repo:** github.com/ganbjhs/StudentPortal · **Live:** studentportal-production-9d28.up.railway.app
-**Status:** v1 (school registration + reel submission) delivered 15 Sep 2026
+**Status:** v1 (school registration + reel submission + evaluation desk) delivered 15 Sep 2026
 
 ---
 
@@ -84,13 +84,13 @@ Rename & re-brand to the RFP, keep everything optional, no new heavy modules.
 - "All entries" tab → **District view** with district filter + search (title, description, theme, student, school, district)
 - Guidelines/hint text: 9:16 vertical, ≤ 90 sec, MP4, original audio
 
-### Phase 2 — Evaluation pipeline (target: 18–22 Sep)
-- Roles & logins: District Nodal Officer, Judge, State Admin (seeded by agency)
-- Judge scoring form with rubric, remarks, per-reel score sheet; average across judges
-- District dashboard: reels by school, scores, "Select for State" (with cap per district, configurable)
-- State dashboard: consolidated scores, curation list, "Approve for Grand Showcase"
-- Status transitions logged (who/when) for evaluation records
-- Downloadable consent/declaration template PDF; guidelines page
+### ✅ Phase 2 — Evaluation pipeline (started 15 Sep — core delivered)
+- ✅ Roles & logins: State Admin (seeded), District Nodal Officer, Judge (district / state level) — created by admin at `/staff`
+- ✅ Judge scoring form with rubric (5 criteria = 100), remarks; average + judge count per level
+- ✅ District desk: own district's reels, status control Submitted → Shortlisted → Selected for State/UT
+- ✅ State admin: all reels, "Selected for Grand Showcase", officials management, participation report, CSV export
+- ✅ Status transitions logged (who / role / when) in `statusHistory`
+- ⏳ Per-district selection cap (configurable), downloadable consent template PDF, guidelines page
 
 ### Phase 3 — Reporting & documentation (target: 23–27 Sep)
 - Admin reports: schools registered, district-wise & state-wise participation, reels received per day, shortlisted/selected counts

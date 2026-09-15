@@ -114,7 +114,7 @@ app.post("/api/login", async (req, res) => {
   const school = store.findSchoolByUserId(userId);
   if (!school || !(await bcrypt.compare(password, school.passwordHash)))
     return res.status(401).json({ error: "Incorrect User ID or password." });
-  req.session.schoolId = school.id;
+  req.session.schoolId = school.id; req.session.userId = null;
   res.json({ school: publicSchool(school) });
 });
 
@@ -226,6 +226,148 @@ function removeFile(videoFile) {
   fs.unlink(p, () => {});
 }
 
+// =====================================================================
+//  OFFICIALS: State Admin · District Nodal Officer · Judge
+// =====================================================================
+// First run: seed an admin login (change via env ADMIN_USER / ADMIN_PASS, then change the password in the UI).
+(async () => {
+  if (store.listUsers().length === 0) {
+    const u = process.env.ADMIN_USER || "admin", pw = process.env.ADMIN_PASS || "admin123";
+    store.createUser({ userId: u, passwordHash: await bcrypt.hash(pw, 10), role: "admin", name: "State Admin", zoneId: "", zoneName: "", level: "state" });
+    console.log(`Seeded admin login: ${u} / ${pw}`);
+  }
+})();
+
+const publicUser = (u) => { const { passwordHash, ...rest } = u; return rest; };
+function requireStaff(...roles) {
+  return (req, res, next) => {
+    if (!req.session.userId) return res.status(401).json({ error: "Please log in as an official." });
+    const user = store.findUserById(req.session.userId);
+    if (!user) { req.session.destroy(() => {}); return res.status(401).json({ error: "Session expired." }); }
+    if (roles.length && !roles.includes(user.role)) return res.status(403).json({ error: "Not allowed for your role." });
+    req.user = user; next();
+  };
+}
+// Which reels can this official see? admin: all · district officer/judge: their district · state judge: reels selected by districts
+function visibleReels(user) {
+  let list = store.listAllVideos().map(withSchool);
+  if (user.role === "admin") return list;
+  if (user.role === "district" || (user.role === "judge" && user.level !== "state")) return list.filter((v) => v.zoneId === user.zoneId);
+  return list.filter((v) => ["district_selected", "state_selected"].includes(v.status)); // state-level judge
+}
+function withScores(v) {
+  const scores = store.listScores({ reelId: v.id });
+  const byLevel = {};
+  for (const sc of scores) {
+    const b = byLevel[sc.level] || (byLevel[sc.level] = { count: 0, sum: 0, judges: [] });
+    b.count++; b.sum += sc.total; b.judges.push({ judgeName: sc.judgeName, total: sc.total, remarks: sc.remarks, criteria: sc.criteria, judgeId: sc.judgeId });
+  }
+  for (const b of Object.values(byLevel)) b.avg = Math.round((b.sum / b.count) * 10) / 10;
+  return { ...v, scores: byLevel };
+}
+
+app.post("/api/staff/login", async (req, res) => {
+  const userId = clean(req.body?.userId, 40).toLowerCase();
+  const password = String(req.body?.password || "");
+  const user = store.findUserByUserId(userId);
+  if (!user || !(await bcrypt.compare(password, user.passwordHash))) return res.status(401).json({ error: "Incorrect User ID or password." });
+  req.session.schoolId = null; req.session.userId = user.id;
+  res.json({ user: publicUser(user) });
+});
+app.get("/api/staff/me", requireStaff(), (req, res) => res.json({ user: publicUser(req.user) }));
+app.put("/api/staff/me/password", requireStaff(), async (req, res) => {
+  const pw = String(req.body?.password || ""); if (pw.length < 4) return res.status(400).json({ error: "Password must be at least 4 characters." });
+  store.updateUser(req.user.id, { passwordHash: await bcrypt.hash(pw, 10) }); res.json({ ok: true });
+});
+
+// ---- admin: manage officials ----
+app.get("/api/staff/users", requireStaff("admin"), (req, res) => res.json({ users: store.listUsers().map(publicUser) }));
+app.post("/api/staff/users", requireStaff("admin"), async (req, res) => {
+  const b = req.body || {};
+  const userId = clean(b.userId, 40).toLowerCase(), role = clean(b.role, 20), pw = String(b.password || "");
+  if (!/^[a-z0-9._-]{3,40}$/.test(userId)) return res.status(400).json({ error: "User ID: 3–40 chars, lowercase letters, digits, . _ -" });
+  if (!["admin", "district", "judge"].includes(role)) return res.status(400).json({ error: "Role must be admin, district or judge." });
+  if (pw.length < 4) return res.status(400).json({ error: "Password must be at least 4 characters." });
+  if (store.findUserByUserId(userId) || store.findSchoolByUserId(userId)) return res.status(409).json({ error: "This User ID is already taken." });
+  const zone = store.findZone(clean(b.zoneId, 40));
+  const level = clean(b.level, 20) === "state" ? "state" : "district";
+  if (role !== "admin" && level === "district" && !zone) return res.status(400).json({ error: "Select a district for this official." });
+  const u = store.createUser({ userId, passwordHash: await bcrypt.hash(pw, 10), role, name: clean(b.name, 120), email: clean(b.email, 120), phone: clean(b.phone, 20),
+    zoneId: zone ? zone.id : "", zoneName: zone ? zone.name : "", level: role === "admin" ? "state" : level });
+  res.status(201).json({ user: publicUser(u) });
+});
+app.delete("/api/staff/users/:id", requireStaff("admin"), (req, res) => {
+  if (req.params.id === req.user.id) return res.status(400).json({ error: "You cannot delete your own login." });
+  store.deleteUser(req.params.id); res.json({ ok: true });
+});
+
+// ---- reels for evaluation (with scores) ----
+app.get("/api/eval/reels", requireStaff(), (req, res) => {
+  const zone = clean(req.query.zone, 40), status = clean(req.query.status, 40), q = clean(req.query.q, 100).toLowerCase();
+  let list = visibleReels(req.user);
+  if (zone) list = list.filter((v) => v.zoneId === zone);
+  if (status) list = list.filter((v) => (v.status || "submitted") === status);
+  if (q) list = list.filter((v) => [v.caption, v.description, v.theme, v.studentName, v.rollNo, v.class, v.schoolName, v.zoneName].join(" ").toLowerCase().includes(q));
+  res.json({ reels: list.map(withScores), me: publicUser(req.user) });
+});
+
+// ---- judge: submit / update a score sheet ----
+app.post("/api/eval/reels/:id/score", requireStaff("judge", "admin"), (req, res) => {
+  const v = store.findVideo(req.params.id);
+  if (!v || !visibleReels(req.user).some((x) => x.id === v.id)) return res.status(404).json({ error: "Reel not found." });
+  const rubric = store.getSettings().rubric || [];
+  const criteria = {}; let total = 0;
+  for (const c of rubric) {
+    const n = Math.max(0, Math.min(c.max, Number(req.body?.criteria?.[c.id]) || 0));
+    criteria[c.id] = n; total += n;
+  }
+  const level = req.user.role === "admin" ? (clean(req.body?.level, 20) === "state" ? "state" : "district") : req.user.level;
+  const sc = store.upsertScore({ reelId: v.id, judgeId: req.user.id, judgeName: req.user.name || req.user.userId, level, criteria, total, remarks: clean(req.body?.remarks, 1000) });
+  res.json({ score: sc });
+});
+
+// ---- district officer / admin: move a reel along the pipeline ----
+app.post("/api/eval/reels/:id/status", requireStaff("district", "admin"), (req, res) => {
+  const v = store.findVideo(req.params.id);
+  if (!v || !visibleReels(req.user).some((x) => x.id === v.id)) return res.status(404).json({ error: "Reel not found." });
+  const status = clean(req.body?.status, 40);
+  if (!STATUS_IDS().includes(status)) return res.status(400).json({ error: "Unknown status." });
+  if (req.user.role === "district" && status === "state_selected") return res.status(403).json({ error: "Only the State Admin can select for the Grand Showcase." });
+  const hist = Array.isArray(v.statusHistory) ? v.statusHistory : [];
+  hist.push({ status, by: req.user.name || req.user.userId, role: req.user.role, at: new Date().toISOString() });
+  res.json({ video: store.updateVideo(v.id, { status, statusHistory: hist }) });
+});
+
+// ---- admin: participation stats + CSV export (RFP section F) ----
+app.get("/api/admin/stats", requireStaff("admin", "district"), (req, res) => {
+  const reels = visibleReels(req.user), schools = store.listAllSchools();
+  const zones = store.listZones();
+  const byDistrict = zones.map((z) => ({
+    zoneId: z.id, district: z.name, state: z.state,
+    schools: schools.filter((s) => s.zoneId === z.id).length,
+    reels: reels.filter((v) => v.zoneId === z.id).length,
+    shortlisted: reels.filter((v) => v.zoneId === z.id && v.status === "school_shortlisted").length,
+    districtSelected: reels.filter((v) => v.zoneId === z.id && v.status === "district_selected").length,
+    stateSelected: reels.filter((v) => v.zoneId === z.id && v.status === "state_selected").length,
+  })).filter((r) => r.schools || r.reels);
+  const byStatus = {}; for (const st of STATUS_IDS()) byStatus[st] = reels.filter((v) => (v.status || "submitted") === st).length;
+  const byTheme = {}; for (const v of reels) { const t = v.theme || "(none)"; byTheme[t] = (byTheme[t] || 0) + 1; }
+  const byDay = {}; for (const v of reels) { const d = (v.createdAt || "").slice(0, 10); byDay[d] = (byDay[d] || 0) + 1; }
+  res.json({ totals: { schools: req.user.role === "admin" ? schools.length : schools.filter((s) => s.zoneId === req.user.zoneId).length, reels: reels.length, districts: byDistrict.filter((r) => r.reels).length, consented: reels.filter((v) => v.consentOriginal && v.consentParental && v.consentMusic).length },
+    byDistrict, byStatus, byTheme, byDay });
+});
+app.get("/api/admin/export.csv", requireStaff("admin", "district"), (req, res) => {
+  const rows = visibleReels(req.user).map(withScores);
+  const cols = ["id", "zoneName", "schoolName", "studentName", "rollNo", "class", "section", "theme", "language", "durationSec", "caption", "description", "status", "consentOriginal", "consentParental", "consentMusic", "videoFile", "videoUrl", "createdAt"];
+  const esc = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
+  const lines = [[...cols, "districtAvg", "districtJudges", "stateAvg", "stateJudges"].join(",")];
+  for (const r of rows) lines.push([...cols.map((c) => esc(r[c])), r.scores.district?.avg ?? "", r.scores.district?.count ?? 0, r.scores.state?.avg ?? "", r.scores.state?.count ?? 0].join(","));
+  res.setHeader("Content-Type", "text/csv; charset=utf-8");
+  res.setHeader("Content-Disposition", `attachment; filename="reels-${new Date().toISOString().slice(0, 10)}.csv"`);
+  res.send("\ufeff" + lines.join("\n"));
+});
+
+app.get("/staff", (req, res) => res.sendFile(path.join(__dirname, "public", "staff.html")));
 // Fallback → frontend
 app.get("*", (req, res) => res.sendFile(path.join(__dirname, "public", "index.html")));
 

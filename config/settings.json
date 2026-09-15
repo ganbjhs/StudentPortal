@@ -45,5 +45,46 @@
     "orientation": "9:16 vertical",
     "formats": "MP4 / MOV / WebM",
     "maxUploadMB": 200
-  }
+  },
+  "rubric": [
+    {
+      "id": "theme",
+      "label": "Relevance to theme",
+      "max": 25
+    },
+    {
+      "id": "creativity",
+      "label": "Creativity & storytelling",
+      "max": 25
+    },
+    {
+      "id": "message",
+      "label": "Message clarity & impact",
+      "max": 20
+    },
+    {
+      "id": "technical",
+      "label": "Technical quality",
+      "max": 15
+    },
+    {
+      "id": "originality",
+      "label": "Originality & authenticity",
+      "max": 15
+    }
+  ],
+  "roles": [
+    {
+      "id": "admin",
+      "label": "State Admin (Directorate / Agency)"
+    },
+    {
+      "id": "district",
+      "label": "District Nodal Officer"
+    },
+    {
+      "id": "judge",
+      "label": "Judge / Jury member"
+    }
+  ]
 }

@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evaluation Desk — Meri Seva, Mera Sankalp</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Mukta:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="tri"></div>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="/staff">
+      <span class="mark" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 2l2.6 6.6L22 11l-6.4 2.4L13 20l-2.6-6.6L4 11l6.4-2.4L13 2z" fill="#E8711A"/><circle cx="13" cy="11" r="2.2" fill="#fff"/></svg>
+      </span>
+      <span>
+        <span class="brand-name">Meri Seva, Mera Sankalp</span><br>
+        <span class="brand-sub">Evaluation Desk · District / State / Admin</span>
+      </span>
+    </a>
+    <div class="who" id="who" hidden>
+      <span><span class="sname" id="whoName"></span><br><span class="scity" id="whoRole"></span></span>
+      <a class="btn btn-ghost" href="/">School portal</a>
+      <button class="btn btn-ghost" id="logoutBtn" type="button">Logout</button>
+    </div>
+  </header>
+
+  <!-- LOGIN -->
+  <section class="auth" id="authView" hidden>
+    <div class="hero">
+      <h1>Evaluate reels at <em>District &amp; State</em> level</h1>
+      <p>For District Nodal Officers, jury members and the Directorate / agency admin. Schools log in on the <a href="/">school portal</a>.</p>
+      <div class="steps">
+        <div class="step"><span class="n">1</span><div><b>District Nodal Officer</b><span>See your district's reels, forward the best to State/UT</span></div></div>
+        <div class="step"><span class="n">2</span><div><b>Judge / Jury</b><span>Score each reel on the rubric, add remarks</span></div></div>
+        <div class="step"><span class="n">3</span><div><b>State Admin</b><span>Dashboards, officials, final Grand Showcase list, CSV export</span></div></div>
+      </div>
+    </div>
+    <div class="card auth-card">
+      <h2 style="margin-bottom:16px">Official login</h2>
+      <form class="form" id="loginForm">
+        <div class="field"><label for="lUser">User ID</label><input class="input" id="lUser" required autocomplete="username"></div>
+        <div class="field"><label for="lPass">Password</label><input class="input" id="lPass" type="password" required autocomplete="current-password"></div>
+        <div class="msg err" id="loginMsg" hidden></div>
+        <button class="btn btn-primary btn-block" id="loginBtn" type="submit">Login</button>
+        <p class="hint">Logins are issued by the State Admin. No self-registration for officials.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- DASHBOARD -->
+  <section class="dash" id="dashView" hidden>
+    <div class="stats" id="stats">
+      <div class="card stat accent"><span class="v" id="stReels">0</span><span class="l">Reels</span></div>
+      <div class="card stat"><span class="v" id="stSchools">0</span><span class="l">Schools</span></div>
+      <div class="card stat"><span class="v" id="stDistricts">0</span><span class="l">Districts participating</span></div>
+      <div class="card stat"><span class="v" id="stSelected">0</span><span class="l">Selected for State/UT</span></div>
+    </div>
+
+    <div class="section-head">
+      <div class="tabs view-tabs" role="tablist">
+        <button class="tab" role="tab" aria-selected="true" data-view="reels" type="button">Reels</button>
+        <button class="tab" role="tab" aria-selected="false" data-view="report" type="button" id="tabReport">Participation report</button>
+        <button class="tab" role="tab" aria-selected="false" data-view="users" type="button" id="tabUsers" hidden>Officials</button>
+      </div>
+      <div class="filters" id="reelFilters">
+        <select class="input" id="zoneFilter"><option value="">All districts</option></select>
+        <select class="input" id="statusFilter"><option value="">All statuses</option></select>
+        <input class="input" id="search" placeholder="Search title, theme, student, school…">
+      </div>
+    </div>
+
+    <!-- REELS -->
+    <div id="reelsView">
+      <p class="hint" id="rubricHint"></p>
+      <div class="grid" id="grid"></div>
+      <div class="card empty" id="empty" hidden><b id="emptyTitle">No reels to show</b><span>Nothing matches these filters.</span></div>
+    </div>
+
+    <!-- REPORT -->
+    <div id="reportView" hidden class="report">
+      <div class="section-head"><h2>District-wise participation</h2><a class="btn btn-navy btn-sm" id="csvBtn" href="/api/admin/export.csv">Download CSV (all reels + scores)</a></div>
+      <div class="card tablewrap"><table class="tbl" id="districtTable"><thead><tr><th>District</th><th>State/UT</th><th>Schools</th><th>Reels</th><th>Shortlisted</th><th>Selected for State</th><th>Grand Showcase</th></tr></thead><tbody></tbody></table></div>
+      <div class="row-2">
+        <div class="card pad"><h3>By status</h3><dl class="meta" id="byStatus"></dl></div>
+        <div class="card pad"><h3>By theme</h3><dl class="meta" id="byTheme"></dl></div>
+      </div>
+      <div class="card pad"><h3>Reels received per day</h3><dl class="meta" id="byDay"></dl></div>
+    </div>
+
+    <!-- USERS (admin) -->
+    <div id="usersView" hidden class="report">
+      <div class="card add-card">
+        <h2>Add an official</h2>
+        <p class="hint">Create logins for District Nodal Officers and judges. Share the User ID + password with them directly.</p>
+        <form class="form" id="userForm">
+          <div class="row-2">
+            <div class="field"><label for="uName">Name</label><input class="input" id="uName" placeholder="Dr. R. K. Sharma"></div>
+            <div class="field"><label for="uRole">Role</label><select class="input" id="uRole"><option value="district">District Nodal Officer</option><option value="judge">Judge / Jury</option><option value="admin">State Admin</option></select></div>
+          </div>
+          <div class="row-2">
+            <div class="field" id="uLevelField"><label for="uLevel">Judging level</label><select class="input" id="uLevel"><option value="district">District level</option><option value="state">State/UT level (sees district-selected reels)</option></select></div>
+            <div class="field" id="uZoneField"><label for="uZone">District</label><select class="input" id="uZone"><option value="">Select district</option></select></div>
+          </div>
+          <div class="row-2">
+            <div class="field"><label for="uEmail">Email</label><input class="input" id="uEmail" type="email"></div>
+            <div class="field"><label for="uPhone">Mobile</label><input class="input" id="uPhone" inputmode="tel"></div>
+          </div>
+          <div class="row-2">
+            <div class="field"><label for="uUser">User ID</label><input class="input" id="uUser" required pattern="[a-z0-9._-]{3,40}" placeholder="e.g. dno-north"></div>
+            <div class="field"><label for="uPass">Password</label><input class="input" id="uPass" required minlength="4"></div>
+          </div>
+          <div class="msg err" id="userMsg" hidden></div>
+          <div class="actions"><button class="btn btn-primary" type="submit">Create login</button></div>
+        </form>
+      </div>
+      <div class="card tablewrap"><table class="tbl" id="userTable"><thead><tr><th>Name</th><th>Role</th><th>Level</th><th>District</th><th>User ID</th><th>Contact</th><th></th></tr></thead><tbody></tbody></table></div>
+      <div class="card pad">
+        <h3>Change my password</h3>
+        <form class="form" id="pwForm" style="max-width:360px"><div class="field"><label for="pwNew">New password</label><input class="input" id="pwNew" type="password" minlength="4" required></div><div class="actions"><button class="btn btn-ghost" type="submit">Update password</button></div></form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">Meri Seva, Mera Sankalp · Seva Sankalp Abhiyan 2026 · Directorate of Education, Govt. of NCT of Delhi · Evaluation Desk v1</footer>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script src="/staff.js"></script>
+</body>
+</html>
