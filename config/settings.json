@@ -1,0 +1,49 @@
+{
+  "campaign": {
+    "name": "Meri Seva, Mera Sankalp",
+    "programme": "Seva Sankalp Abhiyan",
+    "organiser": "Directorate of Education, Govt. of NCT of Delhi",
+    "start": "2026-09-17",
+    "end": "2026-10-17",
+    "showcase": "2026-10-17"
+  },
+  "themes": [
+    "Seva",
+    "Jan Bhagidari",
+    "Social Responsibility",
+    "Public Service",
+    "Nation Building",
+    "Viksit Bharat @2047"
+  ],
+  "languages": [
+    "Hindi",
+    "English",
+    "Punjabi",
+    "Urdu",
+    "Other"
+  ],
+  "statuses": [
+    {
+      "id": "submitted",
+      "label": "Submitted (school level)"
+    },
+    {
+      "id": "school_shortlisted",
+      "label": "Shortlisted for District"
+    },
+    {
+      "id": "district_selected",
+      "label": "Selected for State/UT"
+    },
+    {
+      "id": "state_selected",
+      "label": "Selected for Grand Showcase"
+    }
+  ],
+  "reelRules": {
+    "maxSeconds": 90,
+    "orientation": "9:16 vertical",
+    "formats": "MP4 / MOV / WebM",
+    "maxUploadMB": 200
+  }
+}

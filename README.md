@@ -1,7 +1,10 @@
-# Student Innovation Portal
+# Meri Seva, Mera Sankalp — Reel Competition Portal
 
-A simple portal where schools register / log in and upload their students' invention videos
-(student name, roll no., class, section, caption, description). Pilot build — judges & scoring come next.
+Online registration & submission portal for the **"Meri Seva, Mera Sankalp"** student reel-making
+competition under **Seva Sankalp Abhiyan** (Directorate of Education, Govt. of NCT of Delhi, 17 Sep – 17 Oct 2026).
+Schools register (State/UT → District → School), submit student reels (theme, title, message, consent,
+video), and mark school-level shortlists. District/State evaluation, judges and reports are next —
+see **BLUEPRINT.md** for the full phase-wise plan mapped to the RFP.
 
 ## Run locally
 
@@ -23,18 +26,20 @@ uploads/           Uploaded video files (served at /uploads/<file>, supports see
 data/db.json       Schools + entries (created on first run)
 ```
 
-## Zones & schools
+## Districts, schools & campaign settings
 
-`config/zones.json` is the master list: each zone (Delhi districts, NCR cities, nearby states) with the
-schools in it. On registration a school picks **Zone -> School**; if the school isn't listed it types its
-name, and that name is added to the zone's dropdown for everyone after (kept in `data/db.json`).
-To bulk-load schools from the client's Excel, paste the names into the matching zone's `schools` array.
+- `config/zones.json` — master list of districts (Delhi's 13 DoE education districts + one entry per other
+  State/UT) with the schools in each. On registration a school picks **District -> School**; if not listed it
+  types its name, which is then added to that district's dropdown (kept in `data/db.json`). To bulk-load
+  schools from the DoE list, paste names into the matching district's `schools` array.
+- `config/settings.json` — campaign name/dates, **themes**, languages, **status pipeline**
+  (submitted → school_shortlisted → district_selected → state_selected) and reel rules. Edit without code changes.
 
 ## API
 
 | Method | Path              | Body / notes                                              |
 |--------|-------------------|-----------------------------------------------------------|
-| POST   | /api/register     | `{userId, password, name, city, state, phone, email, udise}` — only userId + password required |
+| POST   | /api/register     | `{userId, password, name, zoneId, city, state, nodalOfficer, phone, email, udise}` — only userId + password required |
 | POST   | /api/login        | `{userId, password}`                                      |
 | POST   | /api/logout       |                                                           |
 | GET    | /api/me           | logged-in school                                          |
@@ -42,7 +47,8 @@ To bulk-load schools from the client's Excel, paste the names into the matching 
 | GET    | /api/zones        | zones with their school lists (public)                    |
 | GET    | /api/videos       | entries of the logged-in school                           |
 | GET    | /api/videos/all   | every school's entries; `?zone=<zoneId>&q=<text>` filters (text searches title/caption, description, student, roll no., class, school, zone) |
-| POST   | /api/videos       | multipart: `studentName, rollNo, class, section, caption, description, videoUrl, video(file)` — all optional |
+| GET    | /api/settings     | campaign settings: themes, languages, statuses, reel rules (public) |
+| POST   | /api/videos       | multipart: `studentName, rollNo, class, section, caption (title), description, theme, language, durationSec, status, consentOriginal, consentParental, consentMusic, videoUrl, video(file)` — all optional |
 | PUT    | /api/videos/:id   | same fields, any subset; new `video` file replaces the old |
 | DELETE | /api/videos/:id   |                                                           |
 

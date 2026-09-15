@@ -1,5 +1,5 @@
 /**
- * Student Innovation Portal — API + static frontend.
+ * Meri Seva, Mera Sankalp — Reel Competition Portal (API + static frontend).
  *
  *   npm install
  *   npm start          → http://localhost:3000
@@ -95,6 +95,7 @@ app.post("/api/register", async (req, res) => {
     city: clean(b.city, 100) || (zone ? zone.city : ""),
     state: clean(b.state, 100) || (zone ? zone.state : ""),
     udise: clean(b.udise, 20),
+    nodalOfficer: clean(b.nodalOfficer, 120),
     phone: clean(b.phone, 20),
     email: clean(b.email, 120),
   });
@@ -103,8 +104,9 @@ app.post("/api/register", async (req, res) => {
   res.status(201).json({ school: publicSchool(school) });
 });
 
-// ---------- Zones (public: needed on the registration form) ----------
+// ---------- Districts & campaign settings (public: needed on the registration form) ----------
 app.get("/api/zones", (req, res) => res.json({ zones: store.listZones() }));
+app.get("/api/settings", (req, res) => res.json(store.getSettings()));
 
 app.post("/api/login", async (req, res) => {
   const userId = clean(req.body?.userId, 40).toLowerCase();
@@ -123,7 +125,7 @@ app.get("/api/me", requireLogin, (req, res) => res.json({ school: publicSchool(r
 app.put("/api/me", requireLogin, (req, res) => {
   const b = req.body || {};
   const patch = {};
-  for (const k of ["name", "city", "state", "udise", "phone", "email"]) if (k in b) patch[k] = clean(b[k], 200);
+  for (const k of ["name", "city", "state", "udise", "nodalOfficer", "phone", "email"]) if (k in b) patch[k] = clean(b[k], 200);
   if ("zoneId" in b) { const z = store.findZone(clean(b.zoneId, 40)); patch.zoneId = z ? z.id : ""; patch.zoneName = z ? z.name : ""; }
   res.json({ school: publicSchool(store.updateSchool(req.school.id, patch)) });
 });
@@ -152,14 +154,24 @@ function withSchool(v) {
   return { ...v, schoolName: s ? s.name || s.userId : "", zoneId: s ? s.zoneId || "" : "", zoneName: s ? s.zoneName || "" : "" };
 }
 
+const STATUS_IDS = () => store.getSettings().statuses.map((s) => s.id);
+const yes = (v) => v === true || v === "true" || v === "1" || v === "on";
 function entryFields(b) {
+  const status = clean(b.status, 40);
   return {
     studentName: clean(b.studentName, 120),
     rollNo: clean(b.rollNo, 20),
     class: clean(b.class, 20),
     section: clean(b.section, 10),
-    caption: clean(b.caption, 200),
-    description: clean(b.description, 2000),
+    caption: clean(b.caption, 200),          // reel title
+    description: clean(b.description, 2000), // reel message / description
+    theme: clean(b.theme, 60),
+    language: clean(b.language, 40),
+    durationSec: Number(b.durationSec) > 0 ? Math.round(Number(b.durationSec)) : 0,
+    consentOriginal: yes(b.consentOriginal),
+    consentParental: yes(b.consentParental),
+    consentMusic: yes(b.consentMusic),
+    status: STATUS_IDS().includes(status) ? status : "submitted",
     videoUrl: clean(b.videoUrl, 500), // external link (YouTube / Drive) — optional
   };
 }
@@ -217,4 +229,4 @@ function removeFile(videoFile) {
 // Fallback → frontend
 app.get("*", (req, res) => res.sendFile(path.join(__dirname, "public", "index.html")));
 
-app.listen(PORT, () => console.log(`Student Innovation Portal running at http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Meri Seva, Mera Sankalp portal running at http://localhost:${PORT}`));

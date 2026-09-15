@@ -6,14 +6,24 @@
   CLASSES.forEach((c) => { const o = document.createElement("option"); o.value = c; $("classList").appendChild(o); });
 
   let school = null, entries = [], pendingFile = null, zones = [], view = "mine";
+  let settings = { themes: [], languages: [], statuses: [{ id: "submitted", label: "Submitted" }], reelRules: {} };
   const OTHER = "__other__";
+
+  // ---------- campaign settings → theme / language / status dropdowns ----------
+  async function loadSettings() {
+    try { settings = await api("GET", "/api/settings"); } catch (_) {}
+    (settings.themes || []).forEach((t) => $("aTheme").appendChild(new Option(t, t)));
+    (settings.languages || []).forEach((l) => $("aLang").appendChild(new Option(l, l)));
+    (settings.statuses || []).forEach((st) => $("aStatus").appendChild(new Option(st.label, st.id)));
+  }
+  const statusLabel = (id) => (settings.statuses.find((x) => x.id === id) || {}).label || "Submitted";
 
   // ---------- zones → school dropdown ----------
   async function loadZones() {
     try { zones = (await api("GET", "/api/zones")).zones; } catch (_) { zones = []; }
     const zSel = $("rZone"), zf = $("zoneFilter");
-    zSel.innerHTML = '<option value="">Select your zone</option>';
-    zf.innerHTML = '<option value="">All zones</option>';
+    zSel.innerHTML = '<option value="">Select your district</option>';
+    zf.innerHTML = '<option value="">All districts</option>';
     const byState = {};
     zones.forEach((z) => { (byState[z.state || "Other"] ||= []).push(z); });
     Object.entries(byState).forEach(([st, list]) => {
@@ -29,7 +39,7 @@
   function fillSchools(zoneId) {
     const sSel = $("rSchool"); const z = zones.find((x) => x.id === zoneId);
     sSel.innerHTML = "";
-    if (!z) { sSel.innerHTML = '<option value="">Select zone first</option>'; $("rNameField").hidden = true; return; }
+    if (!z) { sSel.innerHTML = '<option value="">Select district first</option>'; $("rNameField").hidden = true; return; }
     sSel.appendChild(new Option(z.schools.length ? "Select your school" : "No schools listed yet — add yours", ""));
     z.schools.forEach((n) => sSel.appendChild(new Option(n, n)));
     sSel.appendChild(new Option("My school is not listed (type name)", OTHER));
@@ -72,7 +82,7 @@
       const pick = $("rSchool").value;
       const { school: s } = await api("POST", "/api/register", {
         name: pick && pick !== OTHER ? pick : $("rName").value, zoneId: $("rZone").value,
-        city: $("rCity").value, state: $("rState").value, phone: $("rPhone").value,
+        city: $("rCity").value, state: $("rState").value, nodalOfficer: $("rNodal").value, phone: $("rPhone").value,
         email: $("rEmail").value, udise: $("rUdise").value, userId: $("rUser").value, password: $("rPass").value,
       });
       enter(s); toast("School registered 🎉");
@@ -96,7 +106,7 @@
     school = s;
     $("authView").hidden = true; $("dashView").hidden = false; $("who").hidden = false;
     $("whoName").textContent = s.name || s.userId;
-    $("whoCity").textContent = [s.zoneName, s.city, s.state].filter(Boolean).concat(s.userId).join(" · ");
+    $("whoCity").textContent = [...new Set([s.zoneName, s.city, s.state].filter(Boolean))].concat(s.userId).join(" · ");
     await loadEntries();
   }
   function leave() {
@@ -141,8 +151,9 @@
   function resetForm() {
     $("addForm").reset(); $("editId").value = ""; pendingFile = null;
     $("fname").textContent = "MP4 / MOV / WebM";
-    $("formTitle").textContent = "Add a student's invention";
-    $("addBtn").textContent = "Save entry"; $("cancelBtn").textContent = "Clear";
+    $("formTitle").textContent = "Submit a student reel";
+    $("addBtn").textContent = "Submit reel"; $("cancelBtn").textContent = "Clear";
+    $("aStatus").value = "submitted";
     showMsg("addMsg", "");
     document.querySelectorAll(".entry.editing").forEach((el) => el.classList.remove("editing"));
   }
@@ -159,10 +170,17 @@
     fd.append("section", $("aSec").value);
     fd.append("caption", $("aCaption").value);
     fd.append("description", $("aDesc").value);
+    fd.append("theme", $("aTheme").value);
+    fd.append("language", $("aLang").value);
+    fd.append("durationSec", $("aDur").value);
+    fd.append("status", $("aStatus").value);
+    fd.append("consentOriginal", $("cOriginal").checked);
+    fd.append("consentParental", $("cParental").checked);
+    fd.append("consentMusic", $("cMusic").checked);
     fd.append("videoUrl", $("aLink").value);
     if (pendingFile) fd.append("video", pendingFile);
 
-    const hasAnything = [...fd.values()].some((v) => (v instanceof File ? v.size > 0 : String(v).trim()));
+    const hasAnything = ["studentName", "rollNo", "class", "section", "caption", "description", "theme", "videoUrl"].some((k) => String(fd.get(k) || "").trim()) || !!pendingFile;
     if (!hasAnything) return showMsg("addMsg", "Fill in at least one field or add a video.");
 
     const prog = $("prog"), bar = prog.querySelector("i");
@@ -175,7 +193,7 @@
       $("addBtn").disabled = false;
       let data = {}; try { data = JSON.parse(xhr.responseText); } catch (_) {}
       if (xhr.status >= 200 && xhr.status < 300) {
-        toast(editId ? "Entry updated ✓" : "Entry saved ✓"); resetForm(); loadEntries();
+        toast(editId ? "Reel updated ✓" : "Reel submitted ✓"); resetForm(); loadEntries();
       } else showMsg("addMsg", data.error || "Could not save the entry.");
       setTimeout(() => { prog.hidden = true; bar.style.width = "0"; }, 500);
     };
@@ -190,15 +208,18 @@
     $("aName").value = en.studentName || ""; $("aRoll").value = en.rollNo || "";
     $("aClass").value = en.class || ""; $("aSec").value = en.section || "";
     $("aCaption").value = en.caption || ""; $("aDesc").value = en.description || "";
+    $("aTheme").value = en.theme || ""; $("aLang").value = en.language || "";
+    $("aDur").value = en.durationSec || ""; $("aStatus").value = en.status || "submitted";
+    $("cOriginal").checked = !!en.consentOriginal; $("cParental").checked = !!en.consentParental; $("cMusic").checked = !!en.consentMusic;
     $("aLink").value = en.videoUrl || "";
     if (en.videoFile) $("fname").textContent = `Current: ${en.originalName || "uploaded video"} (choose a file to replace)`;
-    $("formTitle").textContent = "Edit entry"; $("addBtn").textContent = "Update entry"; $("cancelBtn").textContent = "Cancel";
+    $("formTitle").textContent = "Edit reel"; $("addBtn").textContent = "Update reel"; $("cancelBtn").textContent = "Cancel";
     card.classList.add("editing");
     $("addCard").scrollIntoView({ behavior: "smooth", block: "start" });
   }
   async function del(en) {
-    if (!confirm(`Delete the entry for ${en.studentName || "this student"}?`)) return;
-    try { await api("DELETE", `/api/videos/${en.id}`); toast("Entry deleted"); loadEntries(); }
+    if (!confirm(`Delete the reel by ${en.studentName || "this student"}?`)) return;
+    try { await api("DELETE", `/api/videos/${en.id}`); toast("Reel deleted"); loadEntries(); }
     catch (err) { toast(err.message); }
   }
 
@@ -207,15 +228,15 @@
   function hostOf(u) { try { const h = new URL(u).hostname.replace(/^www\./, ""); return h.includes("youtu") ? "YouTube" : h.includes("google") ? "Google Drive" : h; } catch (_) { return "link"; } }
   function render() {
     const q = $("search").value.trim().toLowerCase();
-    const list = q ? entries.filter((e) => [e.caption, e.description, e.studentName, e.rollNo, e.class, e.section, e.schoolName, e.zoneName].join(" ").toLowerCase().includes(q)) : entries;
+    const list = q ? entries.filter((e) => [e.caption, e.description, e.theme, e.studentName, e.rollNo, e.class, e.section, e.schoolName, e.zoneName, statusLabel(e.status)].join(" ").toLowerCase().includes(q)) : entries;
     $("stTotal").textContent = entries.length;
     $("stStudents").textContent = new Set(entries.map((e) => `${e.schoolId}|${e.studentName}|${e.class}${e.section}|${e.rollNo}`.toLowerCase())).size;
-    $("stClasses").textContent = new Set(entries.map((e) => e.class).filter(Boolean)).size;
+    $("stShort").textContent = entries.filter((e) => e.status && e.status !== "submitted").length;
     const mine = view === "mine";
-    document.querySelector("#stTotal + .l").textContent = mine ? "Total entries" : "Entries (all schools)";
+    document.querySelector("#stTotal + .l").textContent = mine ? "Reels submitted" : "Reels (all schools)";
     const grid = $("grid"); grid.innerHTML = "";
     $("empty").hidden = list.length > 0;
-    $("emptyTitle").textContent = q ? "No matching entries" : "No entries yet";
+    $("emptyTitle").textContent = q ? "No matching reels" : "No reels yet";
 
     list.forEach((en) => {
       const card = document.createElement("article"); card.className = "card entry";
@@ -226,19 +247,23 @@
       const chips = [];
       if (en.class || en.section) chips.push(`<span class="chip">${esc([en.class && classLabel(en.class), en.section].filter(Boolean).join(" – "))}</span>`);
       if (en.rollNo) chips.push(`<span class="chip roll">Roll No. ${esc(en.rollNo)}</span>`);
+      if (en.theme) chips.push(`<span class="chip theme">${esc(en.theme)}</span>`);
       if (!mine && en.zoneName) chips.push(`<span class="chip zone">${esc(en.zoneName)}</span>`);
+      if (en.status && en.status !== "submitted") chips.push(`<span class="chip status ${esc(en.status)}">${esc(statusLabel(en.status))}</span>`);
       const own = school && en.schoolId === school.id;
       const when = en.createdAt ? new Date(en.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }) : "";
       card.innerHTML = `<div class="media">${media}</div>
         <div class="entry-body">
-          <h3>${esc(en.caption || "Untitled invention")}</h3>
+          <h3>${esc(en.caption || "Untitled reel")}</h3>
           ${!mine && en.schoolName ? `<div class="school">${esc(en.schoolName)}</div>` : ""}
           ${chips.length ? `<div class="chips">${chips.join("")}</div>` : ""}
           <dl class="meta">
             ${en.studentName ? `<dt>Student</dt><dd>${esc(en.studentName)}</dd>` : ""}
-            ${en.description ? `<dt>About</dt><dd class="desc">${esc(en.description)}</dd>` : ""}
+            ${en.description ? `<dt>Message</dt><dd class="desc">${esc(en.description)}</dd>` : ""}
+            ${en.language || en.durationSec ? `<dt>Reel</dt><dd class="desc">${esc([en.language, en.durationSec ? en.durationSec + " sec" : ""].filter(Boolean).join(" · "))}</dd>` : ""}
+            <dt>Consent</dt><dd class="desc">${en.consentOriginal && en.consentParental && en.consentMusic ? '<span class="chip ok">Declared ✓</span>' : [en.consentOriginal ? "original" : "", en.consentParental ? "parental" : "", en.consentMusic ? "music" : ""].filter(Boolean).join(", ") || "Pending"}</dd>
           </dl>
-          <div class="entry-foot"><span>Added ${esc(when)}</span>
+          <div class="entry-foot"><span>Submitted ${esc(when)}</span>
             ${own ? `<span class="links"><button class="link-btn" type="button" data-act="edit">Edit</button><button class="link-btn danger" type="button" data-act="del">Delete</button></span>` : ""}</div>
         </div>`;
       const vid = card.querySelector("video");
@@ -246,7 +271,7 @@
         if (vid.videoHeight >= vid.videoWidth) card.querySelector(".media").classList.add("portrait");
       });
       if (own) {
-        card.querySelector('[data-act="edit"]').addEventListener("click", () => { if (!mine) return toast("Switch to \"My school's entries\" to edit."); startEdit(en, card); });
+        card.querySelector('[data-act="edit"]').addEventListener("click", () => { if (!mine) return toast("Switch to \"My school's reels\" to edit."); startEdit(en, card); });
         card.querySelector('[data-act="del"]').addEventListener("click", () => del(en));
       }
       grid.appendChild(card);
@@ -255,7 +280,7 @@
 
   // ---------- boot: restore session ----------
   (async () => {
-    await loadZones();
+    await Promise.all([loadZones(), loadSettings()]);
     try { const { school: s } = await api("GET", "/api/me"); await enter(s); }
     catch (_) { $("authView").hidden = false; }
   })();

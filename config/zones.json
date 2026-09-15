@@ -1,30 +1,341 @@
 {
-  "_readme": "Master list of zones and the schools in each zone. Edit freely: add zones, rename them, paste school names from the client's Excel. Schools that register with a name not in this list are added automatically to their zone (stored in data/db.json, this file stays as the seed). Delhi zones follow its 11 revenue districts; NCR cities and nearby states are one zone each — split them later if needed.",
+  "_readme": "Master list of districts (used for School -> District -> State/UT flow of Meri Seva, Mera Sankalp). Delhi entries are the 13 DoE education districts; every other State/UT is one entry (schools type their district in the city field). Paste school names from the DoE list into the matching district's `schools` array; schools that register with a new name are added automatically (stored in data/db.json).",
   "zones": [
-    { "id": "dl-north",      "name": "North Delhi",        "state": "Delhi", "city": "New Delhi", "schools": [] },
-    { "id": "dl-northwest",  "name": "North West Delhi",   "state": "Delhi", "city": "New Delhi", "schools": [] },
-    { "id": "dl-northeast",  "name": "North East Delhi",   "state": "Delhi", "city": "New Delhi", "schools": [] },
-    { "id": "dl-east",       "name": "East Delhi",         "state": "Delhi", "city": "New Delhi", "schools": [] },
-    { "id": "dl-shahdara",   "name": "Shahdara",           "state": "Delhi", "city": "New Delhi", "schools": [] },
-    { "id": "dl-central",    "name": "Central Delhi",      "state": "Delhi", "city": "New Delhi", "schools": [] },
-    { "id": "dl-newdelhi",   "name": "New Delhi",          "state": "Delhi", "city": "New Delhi", "schools": [] },
-    { "id": "dl-west",       "name": "West Delhi",         "state": "Delhi", "city": "New Delhi", "schools": [] },
-    { "id": "dl-southwest",  "name": "South West Delhi",   "state": "Delhi", "city": "New Delhi", "schools": [] },
-    { "id": "dl-south",      "name": "South Delhi",        "state": "Delhi", "city": "New Delhi", "schools": [] },
-    { "id": "dl-southeast",  "name": "South East Delhi",   "state": "Delhi", "city": "New Delhi", "schools": [] },
-
-    { "id": "ncr-gurugram",  "name": "Gurugram",           "state": "Haryana",       "city": "Gurugram",  "schools": [] },
-    { "id": "ncr-faridabad", "name": "Faridabad",          "state": "Haryana",       "city": "Faridabad", "schools": [] },
-    { "id": "ncr-noida",     "name": "Noida / Greater Noida", "state": "Uttar Pradesh", "city": "Noida",  "schools": [] },
-    { "id": "ncr-ghaziabad", "name": "Ghaziabad",          "state": "Uttar Pradesh", "city": "Ghaziabad", "schools": [] },
-
-    { "id": "hr-other",      "name": "Haryana (other cities)",       "state": "Haryana",          "city": "", "schools": [] },
-    { "id": "up-other",      "name": "Uttar Pradesh (other cities)", "state": "Uttar Pradesh",    "city": "", "schools": [] },
-    { "id": "pb",            "name": "Punjab",                       "state": "Punjab",           "city": "", "schools": [] },
-    { "id": "ch",            "name": "Chandigarh",                   "state": "Chandigarh",       "city": "Chandigarh", "schools": [] },
-    { "id": "rj",            "name": "Rajasthan",                    "state": "Rajasthan",        "city": "", "schools": [] },
-    { "id": "uk",            "name": "Uttarakhand",                  "state": "Uttarakhand",      "city": "", "schools": [] },
-    { "id": "hp",            "name": "Himachal Pradesh",             "state": "Himachal Pradesh", "city": "", "schools": [] },
-    { "id": "other",         "name": "Other",                        "state": "",                 "city": "", "schools": [] }
+    {
+      "id": "dl-north",
+      "name": "North District",
+      "state": "Delhi",
+      "city": "Delhi",
+      "schools": []
+    },
+    {
+      "id": "dl-northwesta",
+      "name": "North West-A District",
+      "state": "Delhi",
+      "city": "Delhi",
+      "schools": []
+    },
+    {
+      "id": "dl-northwestb",
+      "name": "North West-B District",
+      "state": "Delhi",
+      "city": "Delhi",
+      "schools": []
+    },
+    {
+      "id": "dl-westa",
+      "name": "West-A District",
+      "state": "Delhi",
+      "city": "Delhi",
+      "schools": []
+    },
+    {
+      "id": "dl-westb",
+      "name": "West-B District",
+      "state": "Delhi",
+      "city": "Delhi",
+      "schools": []
+    },
+    {
+      "id": "dl-southwesta",
+      "name": "South West-A District",
+      "state": "Delhi",
+      "city": "Delhi",
+      "schools": []
+    },
+    {
+      "id": "dl-southwestb",
+      "name": "South West-B District",
+      "state": "Delhi",
+      "city": "Delhi",
+      "schools": []
+    },
+    {
+      "id": "dl-south",
+      "name": "South District",
+      "state": "Delhi",
+      "city": "Delhi",
+      "schools": []
+    },
+    {
+      "id": "dl-southeast",
+      "name": "South East District",
+      "state": "Delhi",
+      "city": "Delhi",
+      "schools": []
+    },
+    {
+      "id": "dl-central",
+      "name": "Central District",
+      "state": "Delhi",
+      "city": "Delhi",
+      "schools": []
+    },
+    {
+      "id": "dl-east",
+      "name": "East District",
+      "state": "Delhi",
+      "city": "Delhi",
+      "schools": []
+    },
+    {
+      "id": "dl-northeast",
+      "name": "North East District",
+      "state": "Delhi",
+      "city": "Delhi",
+      "schools": []
+    },
+    {
+      "id": "dl-newdelhi",
+      "name": "New Delhi District",
+      "state": "Delhi",
+      "city": "Delhi",
+      "schools": []
+    },
+    {
+      "id": "st-andhrapradesh",
+      "name": "Andhra Pradesh (all districts)",
+      "state": "Andhra Pradesh",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-arunachalpradesh",
+      "name": "Arunachal Pradesh (all districts)",
+      "state": "Arunachal Pradesh",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-assam",
+      "name": "Assam (all districts)",
+      "state": "Assam",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-bihar",
+      "name": "Bihar (all districts)",
+      "state": "Bihar",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-chhattisgarh",
+      "name": "Chhattisgarh (all districts)",
+      "state": "Chhattisgarh",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-goa",
+      "name": "Goa (all districts)",
+      "state": "Goa",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-gujarat",
+      "name": "Gujarat (all districts)",
+      "state": "Gujarat",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-haryana",
+      "name": "Haryana (all districts)",
+      "state": "Haryana",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-himachalpradesh",
+      "name": "Himachal Pradesh (all districts)",
+      "state": "Himachal Pradesh",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-jharkhand",
+      "name": "Jharkhand (all districts)",
+      "state": "Jharkhand",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-karnataka",
+      "name": "Karnataka (all districts)",
+      "state": "Karnataka",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-kerala",
+      "name": "Kerala (all districts)",
+      "state": "Kerala",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-madhyapradesh",
+      "name": "Madhya Pradesh (all districts)",
+      "state": "Madhya Pradesh",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-maharashtra",
+      "name": "Maharashtra (all districts)",
+      "state": "Maharashtra",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-manipur",
+      "name": "Manipur (all districts)",
+      "state": "Manipur",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-meghalaya",
+      "name": "Meghalaya (all districts)",
+      "state": "Meghalaya",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-mizoram",
+      "name": "Mizoram (all districts)",
+      "state": "Mizoram",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-nagaland",
+      "name": "Nagaland (all districts)",
+      "state": "Nagaland",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-odisha",
+      "name": "Odisha (all districts)",
+      "state": "Odisha",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-punjab",
+      "name": "Punjab (all districts)",
+      "state": "Punjab",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-rajasthan",
+      "name": "Rajasthan (all districts)",
+      "state": "Rajasthan",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-sikkim",
+      "name": "Sikkim (all districts)",
+      "state": "Sikkim",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-tamilnadu",
+      "name": "Tamil Nadu (all districts)",
+      "state": "Tamil Nadu",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-telangana",
+      "name": "Telangana (all districts)",
+      "state": "Telangana",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-tripura",
+      "name": "Tripura (all districts)",
+      "state": "Tripura",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-uttarpradesh",
+      "name": "Uttar Pradesh (all districts)",
+      "state": "Uttar Pradesh",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-uttarakhand",
+      "name": "Uttarakhand (all districts)",
+      "state": "Uttarakhand",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-westbengal",
+      "name": "West Bengal (all districts)",
+      "state": "West Bengal",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-andamannicobarisland",
+      "name": "Andaman & Nicobar Islands (all districts)",
+      "state": "Andaman & Nicobar Islands",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-chandigarh",
+      "name": "Chandigarh (all districts)",
+      "state": "Chandigarh",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-dadranagarhaveliandd",
+      "name": "Dadra & Nagar Haveli and Daman & Diu (all districts)",
+      "state": "Dadra & Nagar Haveli and Daman & Diu",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-jammukashmir",
+      "name": "Jammu & Kashmir (all districts)",
+      "state": "Jammu & Kashmir",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-ladakh",
+      "name": "Ladakh (all districts)",
+      "state": "Ladakh",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-lakshadweep",
+      "name": "Lakshadweep (all districts)",
+      "state": "Lakshadweep",
+      "city": "",
+      "schools": []
+    },
+    {
+      "id": "st-puducherry",
+      "name": "Puducherry (all districts)",
+      "state": "Puducherry",
+      "city": "",
+      "schools": []
+    }
   ]
 }

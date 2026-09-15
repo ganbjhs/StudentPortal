@@ -90,6 +90,13 @@ function addSchoolToZone(zoneId, name) {
   if (!exists) { list.push(name); save(); }
 }
 
+// ---------- Campaign settings (themes, statuses, rules) ----------
+const SETTINGS_FILE = path.join(__dirname, "..", "config", "settings.json");
+function getSettings() {
+  try { return JSON.parse(fs.readFileSync(SETTINGS_FILE, "utf8")); }
+  catch (e) { console.error("Could not read config/settings.json:", e.message); return { themes: [], languages: [], statuses: [{ id: "submitted", label: "Submitted" }], reelRules: {} }; }
+}
+
 // ---------- Videos / entries ----------
 function listVideosForSchool(schoolId) {
   return db.videos
@@ -126,6 +133,7 @@ function deleteVideo(videoId) {
 load();
 
 module.exports = {
+  getSettings,
   listZones,
   findZone,
   addSchoolToZone,

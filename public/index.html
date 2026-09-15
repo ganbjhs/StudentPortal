@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Student Innovation Portal</title>
+<title>Meri Seva, Mera Sankalp — Reel Competition Portal</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Mukta:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="/style.css">
 </head>
@@ -16,8 +16,8 @@
         <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 2l2.6 6.6L22 11l-6.4 2.4L13 20l-2.6-6.6L4 11l6.4-2.4L13 2z" fill="#E8711A"/><circle cx="13" cy="11" r="2.2" fill="#fff"/></svg>
       </span>
       <span>
-        <span class="brand-name">Student Innovation Portal</span><br>
-        <span class="brand-sub">Where schools showcase young inventors</span>
+        <span class="brand-name">Meri Seva, Mera Sankalp</span><br>
+        <span class="brand-sub">Seva Sankalp Abhiyan · Directorate of Education, GNCTD</span>
       </span>
     </a>
     <div class="who" id="who" hidden>
@@ -29,13 +29,14 @@
   <!-- AUTH -->
   <section class="auth" id="authView" hidden>
     <div class="hero">
-      <h1>Every school's <em>young inventors</em>, in one place.</h1>
-      <p>Register your school, add your students' inventions with a short video, and keep every entry safely stored — ready for judges and showcases later.</p>
+      <h1>Student Reel Making Competition on <em>Seva &amp; Jan Bhagidari</em></h1>
+      <p>Schools register here and submit their students' reels on Seva, Jan Bhagidari, Social Responsibility, Public Service and Viksit Bharat @2047. Entries move from School → District → State/UT → Grand Showcase.</p>
       <div class="steps">
-        <div class="step"><span class="n">1</span><div><b>Register your school</b><span>Pick your zone and school, choose a User ID + password</span></div></div>
-        <div class="step"><span class="n">2</span><div><b>Add a student's invention</b><span>Name, roll no., class, section, caption and a video</span></div></div>
-        <div class="step"><span class="n">3</span><div><b>Everything on one dashboard</b><span>Watch, edit or delete entries any time</span></div></div>
+        <div class="step"><span class="n">1</span><div><b>Register your school</b><span>Select State/UT, district and school; set a User ID + password</span></div></div>
+        <div class="step"><span class="n">2</span><div><b>Submit student reels</b><span>Student details, theme, reel title, consent and the video (9:16, up to 90 sec)</span></div></div>
+        <div class="step"><span class="n">3</span><div><b>Shortlist for district</b><span>Mark your best entries; district and state juries take it from there</span></div></div>
       </div>
+      <p class="hint" style="margin-top:18px">17 September – 17 October 2026 · Grand Showcase at Jansevak Mahakumbh, 17 October 2026</p>
     </div>
 
     <div class="card auth-card">
@@ -53,15 +54,16 @@
       </form>
 
       <form class="form" id="regForm" hidden>
-        <div class="field"><label for="rZone">Zone <small>(area / district)</small></label>
-          <select class="input" id="rZone"><option value="">Select your zone</option></select></div>
+        <div class="field"><label for="rZone">District <small>(State/UT → district)</small></label>
+          <select class="input" id="rZone"><option value="">Select your district</option></select></div>
         <div class="field"><label for="rSchool">School</label>
           <select class="input" id="rSchool"><option value="">Select zone first</option></select></div>
         <div class="field" id="rNameField" hidden><label for="rName">School name</label><input class="input" id="rName" placeholder="Type your school's full name"></div>
         <div class="row-2">
-          <div class="field"><label for="rCity">City</label><input class="input" id="rCity" placeholder="New Delhi"></div>
-          <div class="field"><label for="rState">State</label><select class="input" id="rState"><option value="">Select</option></select></div>
+          <div class="field"><label for="rCity">City / district name</label><input class="input" id="rCity" placeholder="e.g. Delhi"></div>
+          <div class="field"><label for="rState">State / UT</label><select class="input" id="rState"><option value="">Select</option></select></div>
         </div>
+        <div class="field"><label for="rNodal">Nodal officer / teacher in-charge</label><input class="input" id="rNodal" placeholder="Name of the teacher coordinating the competition"></div>
         <div class="row-2">
           <div class="field"><label for="rPhone">Contact mobile</label><input class="input" id="rPhone" inputmode="tel" placeholder="98xxxxxxxx"></div>
           <div class="field"><label for="rEmail">Email</label><input class="input" id="rEmail" type="email" placeholder="principal@school.edu.in"></div>
@@ -81,14 +83,14 @@
   <!-- DASHBOARD -->
   <section class="dash" id="dashView" hidden>
     <div class="stats">
-      <div class="card stat accent"><span class="v" id="stTotal">0</span><span class="l">Total entries</span></div>
+      <div class="card stat accent"><span class="v" id="stTotal">0</span><span class="l">Reels submitted</span></div>
       <div class="card stat"><span class="v" id="stStudents">0</span><span class="l">Students</span></div>
-      <div class="card stat"><span class="v" id="stClasses">0</span><span class="l">Classes covered</span></div>
+      <div class="card stat"><span class="v" id="stShort">0</span><span class="l">Shortlisted for district</span></div>
     </div>
 
     <div class="card add-card" id="addCard">
-      <h2 id="formTitle">Add a student's invention</h2>
-      <p class="hint">One invention = one entry. Upload a video file, or paste a YouTube / Google Drive link. All fields are optional.</p>
+      <h2 id="formTitle">Submit a student reel</h2>
+      <p class="hint">One reel = one entry. Vertical 9:16, up to 90 seconds, original audio. Upload the file or paste a YouTube / Drive link. All fields are optional.</p>
       <form class="form" id="addForm">
         <input type="hidden" id="editId" value="">
         <div class="row-2">
@@ -101,8 +103,16 @@
           <div class="field"><label for="aSec">Section</label>
             <input class="input" id="aSec" list="secList" placeholder="e.g. B"><datalist id="secList"><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></datalist></div>
         </div>
-        <div class="field"><label for="aCaption">Title / caption <small>(name of the invention, one line)</small></label><input class="input" id="aCaption" maxlength="200" placeholder="Solar-powered water purifier for village wells"></div>
-        <div class="field"><label for="aDesc">Description <small>(optional)</small></label><textarea class="input" id="aDesc" rows="2" maxlength="2000" placeholder="What problem it solves, how it was built…"></textarea></div>
+        <div class="row-2">
+          <div class="field"><label for="aTheme">Theme</label><select class="input" id="aTheme"><option value="">Select theme</option></select></div>
+          <div class="field"><label for="aLang">Language</label><select class="input" id="aLang"><option value="">Select</option></select></div>
+        </div>
+        <div class="field"><label for="aCaption">Reel title / caption</label><input class="input" id="aCaption" maxlength="200" placeholder="Ek Din Seva Ke Naam — cleaning our school park"></div>
+        <div class="field"><label for="aDesc">Message / description <small>(what the reel shows, in 2–3 lines)</small></label><textarea class="input" id="aDesc" rows="2" maxlength="2000" placeholder="Students of Class 8 organised a weekend cleanliness drive…"></textarea></div>
+        <div class="row-2">
+          <div class="field"><label for="aDur">Duration <small>(seconds)</small></label><input class="input" id="aDur" type="number" min="1" max="600" placeholder="e.g. 60"></div>
+          <div class="field"><label for="aStatus">Status</label><select class="input" id="aStatus"></select></div>
+        </div>
 
         <div class="field">
           <label>Video</label>
@@ -114,10 +124,16 @@
           <div class="or">or</div>
           <input class="input" id="aLink" type="url" placeholder="Paste a YouTube / Google Drive video link">
         </div>
+        <fieldset class="consent">
+          <legend>Consent &amp; declaration</legend>
+          <label class="check"><input type="checkbox" id="cOriginal"> The reel is original student work — no copied footage</label>
+          <label class="check"><input type="checkbox" id="cParental"> Parental / guardian consent obtained for participation and use of the reel</label>
+          <label class="check"><input type="checkbox" id="cMusic"> No copyrighted music or material used without permission</label>
+        </fieldset>
         <div class="progress" id="prog" hidden><i></i></div>
         <div class="msg err" id="addMsg" hidden></div>
         <div class="actions">
-          <button class="btn btn-primary" id="addBtn" type="submit">Save entry</button>
+          <button class="btn btn-primary" id="addBtn" type="submit">Submit reel</button>
           <button class="btn btn-ghost" type="button" id="cancelBtn">Clear</button>
         </div>
       </form>
@@ -125,23 +141,23 @@
 
     <div class="section-head">
       <div class="tabs view-tabs" role="tablist">
-        <button class="tab" role="tab" aria-selected="true" data-view="mine" type="button">My school's entries</button>
-        <button class="tab" role="tab" aria-selected="false" data-view="all" type="button">All entries</button>
+        <button class="tab" role="tab" aria-selected="true" data-view="mine" type="button">My school's reels</button>
+        <button class="tab" role="tab" aria-selected="false" data-view="all" type="button">All districts</button>
       </div>
       <div class="filters">
-        <select class="input" id="zoneFilter" hidden><option value="">All zones</option></select>
-        <input class="input" id="search" placeholder="Search title, caption, student, roll no., class…">
+        <select class="input" id="zoneFilter" hidden><option value="">All districts</option></select>
+        <input class="input" id="search" placeholder="Search title, theme, student, school, district…">
       </div>
     </div>
     <div class="grid" id="grid"></div>
     <div class="card empty" id="empty" hidden>
       <svg width="48" height="48" viewBox="0 0 26 26" fill="none"><path d="M13 2l2.6 6.6L22 11l-6.4 2.4L13 20l-2.6-6.6L4 11l6.4-2.4L13 2z" fill="#E8711A"/></svg>
-      <b id="emptyTitle">No entries yet</b>
-      <span>Add the first invention using the form above.</span>
+      <b id="emptyTitle">No reels yet</b>
+      <span>Submit the first reel using the form above.</span>
     </div>
   </section>
 
-  <footer class="foot">Student Innovation Portal · Pilot build · Judges &amp; scoring module coming next</footer>
+  <footer class="foot">Meri Seva, Mera Sankalp · Seva Sankalp Abhiyan 2026 · Directorate of Education, Govt. of NCT of Delhi · v1 — district &amp; state evaluation coming next</footer>
 </div>
 <div class="toast" id="toast" role="status"></div>
 <script src="/app.js"></script>
