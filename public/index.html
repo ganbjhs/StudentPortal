@@ -54,14 +54,16 @@
       </form>
 
       <form class="form" id="regForm" hidden>
-        <div class="field"><label for="rState">State / UT</label>
-          <select class="input" id="rState"><option value="">Select State / UT</option></select></div>
-        <div class="field" id="rZoneField" hidden><label for="rZone">District</label>
-          <select class="input" id="rZone"><option value="">Select district</option></select></div>
-        <div class="field" id="rCityField" hidden><label for="rCity">District / city name</label><input class="input" id="rCity" placeholder="Type your district or city"></div>
-        <div class="field" id="rSchoolField" hidden><label for="rSchool">School</label>
-          <select class="input" id="rSchool"><option value="">Select district first</option></select></div>
-        <div class="field" id="rNameField" hidden><label for="rName">School name</label><input class="input" id="rName" placeholder="Type your school's full name"></div>
+        <div class="row-2">
+          <div class="field"><label for="rState">State / UT</label>
+            <select class="input" id="rState"><option value="">Select State / UT</option></select></div>
+          <div class="field"><label for="rZone">District</label>
+            <select class="input" id="rZone" disabled><option value="">Select State / UT first</option></select></div>
+        </div>
+        <div class="field"><label for="rSchool">School <small>(from the district list)</small></label>
+          <select class="input" id="rSchool" disabled><option value="">Select district first</option></select></div>
+        <div class="field"><label for="rName">School name <small>(if your school is not in the list)</small></label><input class="input" id="rName" placeholder="Type your school's full name"></div>
+        <input type="hidden" id="rCity" value="">
         <div class="field"><label for="rNodal">Nodal officer / teacher in-charge</label><input class="input" id="rNodal" placeholder="Name of the teacher coordinating the competition"></div>
         <div class="row-2">
           <div class="field"><label for="rPhone">Contact mobile</label><input class="input" id="rPhone" inputmode="tel" placeholder="98xxxxxxxx"></div>

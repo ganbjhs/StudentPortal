@@ -27,32 +27,28 @@
     const zf = $("zoneFilter"); zf.innerHTML = '<option value="">All districts</option>';
     states.forEach((st) => { const g = document.createElement("optgroup"); g.label = st; zones.filter((z) => z.state === st).forEach((z) => g.appendChild(new Option(z.name, z.id))); zf.appendChild(g); });
   }
-  const setStep = () => {};
   function fillDistricts(state) {
-    const zSel = $("rZone"); zSel.innerHTML = '<option value="">Select district</option>';
+    const zSel = $("rZone"), sSel = $("rSchool");
     const list = zones.filter((z) => z.state === state);
-    $("rZoneField").hidden = !state; $("rSchoolField").hidden = true; $("rNameField").hidden = true; $("rCityField").hidden = true; setStep(state ? 2 : 1);
-    if (!state) return;
+    zSel.innerHTML = ""; zSel.disabled = !state;
+    zSel.appendChild(new Option(state ? "Select district" : "Select State / UT first", ""));
     list.forEach((z) => zSel.appendChild(new Option(z.name, z.id)));
-    if (list.length === 1) { zSel.value = list[0].id; fillSchools(list[0].id); } // single-entry states: skip straight to school
+    sSel.innerHTML = '<option value="">Select district first</option>'; sSel.disabled = true; $("rCity").value = "";
+    if (list.length === 1) { zSel.value = list[0].id; fillSchools(list[0].id); } // single-district UTs: skip a step
   }
   function fillSchools(zoneId) {
     const sSel = $("rSchool"); const z = zones.find((x) => x.id === zoneId);
-    sSel.innerHTML = "";
-    $("rSchoolField").hidden = !z; $("rNameField").hidden = true;
-    if (!z) { sSel.innerHTML = '<option value="">Select district first</option>'; $("rCityField").hidden = true; setStep(2); return; }
-    setStep(3);
-    // Delhi districts carry their own city; other states need the district/city typed
-    $("rCityField").hidden = !!z.city; if (z.city) $("rCity").value = z.city; else $("rCity").value = "";
-    sSel.appendChild(new Option(z.schools.length ? "Select your school" : "No schools listed yet — add yours", ""));
+    sSel.innerHTML = ""; sSel.disabled = !z;
+    if (!z) { sSel.appendChild(new Option("Select district first", "")); $("rCity").value = ""; return; }
+    $("rCity").value = z.city || "";
+    sSel.appendChild(new Option(z.schools.length ? "Select your school" : "No schools listed yet — type the name below", ""));
     z.schools.forEach((n) => sSel.appendChild(new Option(n, n)));
-    sSel.appendChild(new Option("My school is not listed (type name)", OTHER));
+    sSel.appendChild(new Option("My school is not listed (type name below)", OTHER));
     if (!z.schools.length) sSel.value = OTHER;
-    $("rNameField").hidden = sSel.value !== OTHER;
   }
   $("rState").addEventListener("change", (e) => fillDistricts(e.target.value));
   $("rZone").addEventListener("change", (e) => fillSchools(e.target.value));
-  $("rSchool").addEventListener("change", (e) => { $("rNameField").hidden = e.target.value !== OTHER; if (e.target.value === OTHER) $("rName").focus(); });
+  $("rSchool").addEventListener("change", (e) => { if (e.target.value === OTHER) $("rName").focus(); });
 
   // ---------- helpers ----------
   const toast = (t) => { const el = $("toast"); el.textContent = t; el.classList.add("show"); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove("show"), 2600); };
@@ -84,7 +80,7 @@
     try {
       const pick = $("rSchool").value;
       const { school: s } = await api("POST", "/api/register", {
-        name: pick && pick !== OTHER ? pick : $("rName").value, zoneId: $("rZone").value,
+        name: pick && pick !== OTHER ? pick : $("rName").value.trim(), zoneId: $("rZone").value,
         city: $("rCity").value, state: $("rState").value, nodalOfficer: $("rNodal").value, phone: $("rPhone").value,
         email: $("rEmail").value, udise: $("rUdise").value, userId: $("rUser").value, password: $("rPass").value,
       });
