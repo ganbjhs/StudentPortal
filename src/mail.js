@@ -1,38 +1,48 @@
 /**
- * Transactional email via Resend (https://resend.com) — plain HTTPS, no SDK.
+ * Transactional email — Brevo (preferred, free 300/day, only a verified SENDER EMAIL needed) or Resend.
+ * Plain HTTPS calls, no SDK. Provider is picked from env:
  *
- * Env:
- *   RESEND_API_KEY   re_xxxxxxxx (from resend.com → API Keys). If missing, emails are skipped (logged only).
- *   MAIL_FROM        "Meri Seva Mera Sankalp <noreply@yourdomain.in>"  — must be a verified domain in Resend.
- *                    Default "onboarding@resend.dev" works only for sending to the Resend account owner's own email (testing).
+ *   BREVO_API_KEY    xkeysib-...  (brevo.com → SMTP & API → API Keys). Sender must be verified in Brevo → Senders.
+ *   RESEND_API_KEY   re_...       used only if BREVO_API_KEY is not set (needs a verified domain for external recipients)
+ *   MAIL_FROM        "Meri Seva Mera Sankalp <you@gmail.com>"  — the verified sender
  *   PORTAL_URL       public URL used in emails (default: Railway URL or http://localhost:3000)
  *
- * Every function resolves without throwing; failures are logged so registration never blocks on email.
+ * If no key is set, emails are skipped (logged). Every function resolves without throwing, so registration never blocks.
  */
-const API_KEY = process.env.RESEND_API_KEY || "";
-const FROM = process.env.MAIL_FROM || "Meri Seva Mera Sankalp <onboarding@resend.dev>";
+const BREVO_KEY = process.env.BREVO_API_KEY || "";
+const RESEND_KEY = process.env.RESEND_API_KEY || "";
+const FROM_RAW = process.env.MAIL_FROM || "Meri Seva Mera Sankalp <onboarding@resend.dev>";
+const FROM = (() => { const m = FROM_RAW.match(/^\s*(?:"?([^"<]*)"?\s*)?<([^>]+)>\s*$/); return m ? { name: (m[1] || "").trim(), email: m[2].trim() } : { name: "", email: FROM_RAW.trim() }; })();
 const PORTAL_URL = (process.env.PORTAL_URL || (process.env.RAILWAY_PUBLIC_DOMAIN ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}` : "http://localhost:3000")).replace(/\/$/, "");
 
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
 async function send({ to, subject, html, text }) {
   if (!to) return { skipped: "no recipient" };
-  if (!API_KEY) { console.log(`[mail] RESEND_API_KEY not set — skipped "${subject}" to ${to}`); return { skipped: "no api key" }; }
+  if (!BREVO_KEY && !RESEND_KEY) { console.log(`[mail] no BREVO_API_KEY / RESEND_API_KEY — skipped "${subject}" to ${to}`); return { skipped: "no api key" }; }
+  const provider = BREVO_KEY ? "brevo" : "resend";
   try {
-    const r = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: { Authorization: `Bearer ${API_KEY}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ from: FROM, to: [to], subject, html, text }),
-    });
+    const r = provider === "brevo"
+      ? await fetch("https://api.brevo.com/v3/smtp/email", {
+          method: "POST",
+          headers: { "api-key": BREVO_KEY, "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({ sender: FROM, to: [{ email: to }], subject, htmlContent: html, textContent: text }),
+        })
+      : await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: { Authorization: `Bearer ${RESEND_KEY}`, "Content-Type": "application/json" },
+          body: JSON.stringify({ from: FROM_RAW, to: [to], subject, html, text }),
+        });
     const data = await r.json().catch(() => ({}));
-    if (!r.ok) { console.error(`[mail] Resend error ${r.status}:`, data); return { error: data }; }
-    console.log(`[mail] sent "${subject}" to ${to} (id ${data.id})`);
-    return { id: data.id };
+    if (!r.ok) { console.error(`[mail] ${provider} error ${r.status}:`, data); return { error: data }; }
+    console.log(`[mail] sent via ${provider}: "${subject}" to ${to} (id ${data.messageId || data.id || "?"})`);
+    return { id: data.messageId || data.id };
   } catch (e) {
-    console.error("[mail] failed:", e.message);
+    console.error(`[mail] ${provider} failed:`, e.message);
     return { error: e.message };
   }
 }
+const mailEnabled = () => !!(BREVO_KEY || RESEND_KEY);
 
 /** Sent right after a school registers. Never includes the password. */
 function registrationEmail(school) {
@@ -88,4 +98,4 @@ async function sendRegistrationEmail(school) {
   return send({ to: school.email, ...registrationEmail(school) });
 }
 
-module.exports = { send, sendRegistrationEmail, PORTAL_URL };
+module.exports = { send, sendRegistrationEmail, mailEnabled, PORTAL_URL };

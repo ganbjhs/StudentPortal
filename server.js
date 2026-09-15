@@ -10,8 +10,9 @@
  *   MAX_UPLOAD_MB   default 200
  *   DATA_DIR        folder for db.json   (default ./data)   — point both at a
  *   UPLOAD_DIR      folder for videos    (default ./uploads)  persistent disk when deployed
- *   RESEND_API_KEY  Resend key for registration emails (optional — skipped if unset)
- *   MAIL_FROM       sender, e.g. "Meri Seva Mera Sankalp <noreply@yourdomain.in>" (verified domain in Resend)
+ *   BREVO_API_KEY   Brevo key for registration emails (free 300/day; verify the sender email in Brevo) — optional
+ *   RESEND_API_KEY  alternative provider (needs verified domain); emails skipped if neither key is set
+ *   MAIL_FROM       sender, e.g. "Meri Seva Mera Sankalp <you@gmail.com>" (must be verified with the provider)
  *   PORTAL_URL      public URL used inside emails
  */
 const path = require("path");
@@ -105,7 +106,7 @@ app.post("/api/register", async (req, res) => {
   });
   if (zone && school.name) store.addSchoolToZone(zone.id, school.name);
   req.session.schoolId = school.id;
-  res.status(201).json({ school: publicSchool(school), emailSent: !!(school.email && process.env.RESEND_API_KEY) });
+  res.status(201).json({ school: publicSchool(school), emailSent: !!(school.email && mail.mailEnabled()) });
   mail.sendRegistrationEmail(school); // fire-and-forget: never blocks or fails the registration
 });
 
