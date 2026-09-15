@@ -27,10 +27,10 @@
   <!-- AUTH -->
   <section class="auth" id="authView" hidden>
     <div class="hero">
-      <h1>Student Reel Making Competition on <em>Seva &amp; Jan Bhagidari</em></h1>
+      <h1>Sewa Sankalp Utsav 2026 Competition</h1>
       <p>Schools register here and submit their students' reels on Seva, Jan Bhagidari, Social Responsibility, Public Service and Viksit Bharat @2047. Entries move from School → District → State/UT → Grand Showcase.</p>
       <div class="steps">
-        <div class="step"><span class="n">1</span><div><b>Register your school</b><span>Select State/UT, district and school; set a User ID + password</span></div></div>
+        <div class="step"><span class="n">1</span><div><b>Register your school</b><span>Select State/UT and district, add your School ID and name, set a User ID + password</span></div></div>
         <div class="step"><span class="n">2</span><div><b>Submit student reels</b><span>Student details, theme, reel title, consent and the video (9:16, up to 90 sec)</span></div></div>
         <div class="step"><span class="n">3</span><div><b>Shortlist for district</b><span>Mark your best entries; district and state juries take it from there</span></div></div>
       </div>
@@ -58,17 +58,20 @@
           <div class="field"><label for="rZone">District</label>
             <select class="input" id="rZone" disabled><option value="">Select State / UT first</option></select></div>
         </div>
-        <div class="field"><label for="rSchool">School <small>(from the district list)</small></label>
-          <select class="input" id="rSchool" disabled><option value="">Select district first</option></select></div>
-        <div class="field"><label for="rName">School name <small>(if your school is not in the list)</small></label><input class="input" id="rName" placeholder="Type your school's full name"></div>
+        <div class="row-2">
+          <div class="field"><label for="rCode">School ID</label><input class="input" id="rCode" placeholder="DoE school ID, e.g. 1001001"></div>
+          <div class="field"><label for="rUdise">UDISE code <small>(optional)</small></label><input class="input" id="rUdise" placeholder="11 digit" inputmode="numeric"></div>
+        </div>
+        <div class="field"><label for="rName">School name <small>(pick from the list or type your own)</small></label>
+          <input class="input" id="rName" list="schoolList" autocomplete="off" placeholder="Start typing your school's name">
+          <datalist id="schoolList"></datalist></div>
         <input type="hidden" id="rCity" value="">
         <div class="field"><label for="rNodal">Nodal officer / teacher in-charge</label><input class="input" id="rNodal" placeholder="Name of the teacher coordinating the competition"></div>
         <div class="row-2">
           <div class="field"><label for="rPhone">Contact mobile</label><input class="input" id="rPhone" inputmode="tel" placeholder="98xxxxxxxx"></div>
           <div class="field"><label for="rEmail">Email</label><input class="input" id="rEmail" type="email" placeholder="principal@school.edu.in"></div>
         </div>
-        <div class="field"><label for="rUdise">UDISE code <small>(optional)</small></label><input class="input" id="rUdise" placeholder="11 digit" inputmode="numeric"></div>
-        <div class="field"><label for="rUser">Choose a User ID</label><input class="input" id="rUser" required autocomplete="username" placeholder="lowercase, no spaces" pattern="[a-z0-9._-]{3,40}" title="3–40 characters: lowercase letters, digits, . _ -"></div>
+        <div class="field"><label for="rUser">Choose a User ID</label><input class="input" id="rUser" required autocomplete="username" placeholder="lowercase, no spaces" pattern="[a-z0-9._\-]{3,40}" title="3–40 characters: lowercase letters, digits, . _ -"></div>
         <div class="row-2">
           <div class="field"><label for="rPass">Password</label><input class="input" id="rPass" type="password" required minlength="4" autocomplete="new-password"></div>
           <div class="field"><label for="rPass2">Confirm password</label><input class="input" id="rPass2" type="password" required minlength="4" autocomplete="new-password"></div>
@@ -82,57 +85,59 @@
   <!-- DASHBOARD -->
   <section class="dash" id="dashView" hidden>
     <div class="stats">
-      <div class="card stat accent"><span class="v" id="stTotal">0</span><span class="l">Reels submitted</span></div>
-      <div class="card stat"><span class="v" id="stStudents">0</span><span class="l">Students</span></div>
+      <div class="card stat accent"><span class="v" id="stTotal">0</span><span class="l">Entries submitted</span></div>
+      <div class="card stat"><span class="v" id="stStudents">0</span><span class="l">Participants</span></div>
       <div class="card stat"><span class="v" id="stShort">0</span><span class="l">Shortlisted for district</span></div>
     </div>
 
     <div class="card add-card" id="addCard">
-      <h2 id="formTitle">Submit a student reel</h2>
-      <p class="hint">One reel = one entry. Vertical 9:16, up to 90 seconds, original audio. Upload the file or paste a YouTube / Drive link. All fields are optional.</p>
+      <h2 id="formTitle">Submit an entry</h2>
+      <p class="hint" id="formHint">One entry per submission. Choose who is entering and what the entry is, then upload the file or paste a YouTube / Drive link. All fields are optional.</p>
       <form class="form" id="addForm">
         <input type="hidden" id="editId" value="">
         <div class="row-2">
-          <div class="field"><label for="aName">Student name</label><input class="input" id="aName" placeholder="Aarav Sharma"></div>
-          <div class="field"><label for="aRoll">Roll No.</label><input class="input" id="aRoll" placeholder="17"></div>
+          <div class="field"><label for="aPart">Participant category</label><select class="input" id="aPart"></select></div>
+          <div class="field"><label for="aType">Entry category</label><select class="input" id="aType"></select></div>
         </div>
         <div class="row-2">
+          <div class="field"><label for="aName" id="lblName">Student name</label><input class="input" id="aName" placeholder="Aarav Sharma"></div>
+          <div class="field" id="fldRoll"><label for="aRoll">Roll No.</label><input class="input" id="aRoll" placeholder="17"></div>
+          <div class="field" id="fldDesig" hidden><label for="aDesig">Designation / subject</label><input class="input" id="aDesig" placeholder="e.g. TGT (Social Science) / Nodal Officer"></div>
+        </div>
+        <div class="row-2" id="fldClassRow">
           <div class="field"><label for="aClass">Class</label>
             <input class="input" id="aClass" list="classList" placeholder="e.g. 8"><datalist id="classList"></datalist></div>
           <div class="field"><label for="aSec">Section</label>
             <input class="input" id="aSec" list="secList" placeholder="e.g. B"><datalist id="secList"><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></datalist></div>
         </div>
+        <div class="field"><label for="aTheme">Theme</label><select class="input" id="aTheme"><option value="">Select theme</option></select></div>
+        <div class="field"><label for="aCaption" id="lblCaption">Reel title / caption</label><input class="input" id="aCaption" maxlength="200" placeholder="Ek Din Seva Ke Naam — cleaning our school park"></div>
+        <div class="field"><label for="aDesc">Message / description <small id="lblDescHint">(what the reel shows, in 2–3 lines)</small></label><textarea class="input" id="aDesc" rows="2" maxlength="2000" placeholder="Students of Class 8 organised a weekend cleanliness drive…"></textarea></div>
         <div class="row-2">
-          <div class="field"><label for="aTheme">Theme</label><select class="input" id="aTheme"><option value="">Select theme</option></select></div>
-          <div class="field"><label for="aLang">Language</label><select class="input" id="aLang"><option value="">Select</option></select></div>
-        </div>
-        <div class="field"><label for="aCaption">Reel title / caption</label><input class="input" id="aCaption" maxlength="200" placeholder="Ek Din Seva Ke Naam — cleaning our school park"></div>
-        <div class="field"><label for="aDesc">Message / description <small>(what the reel shows, in 2–3 lines)</small></label><textarea class="input" id="aDesc" rows="2" maxlength="2000" placeholder="Students of Class 8 organised a weekend cleanliness drive…"></textarea></div>
-        <div class="row-2">
-          <div class="field"><label for="aDur">Duration <small>(seconds)</small></label><input class="input" id="aDur" type="number" min="1" max="600" placeholder="e.g. 60"></div>
+          <div class="field" id="fldDur"><label for="aDur">Duration <small>(seconds)</small></label><input class="input" id="aDur" type="number" min="1" max="600" placeholder="e.g. 60"></div>
           <div class="field"><label for="aStatus">Status</label><select class="input" id="aStatus"></select></div>
         </div>
 
         <div class="field">
-          <label>Video</label>
+          <label id="lblMedia">Reel (video)</label>
           <label class="drop" id="drop" for="aFile">
             <input type="file" id="aFile" accept="video/*" hidden>
-            <b>Choose a video file</b> or drag &amp; drop here
+            <b id="dropText">Choose a video file</b> or drag &amp; drop here
             <span class="fname" id="fname">MP4 / MOV / WebM</span>
           </label>
           <div class="or">or</div>
-          <input class="input" id="aLink" type="url" placeholder="Paste a YouTube / Google Drive video link">
+          <input class="input" id="aLink" type="url" placeholder="Paste a YouTube / Google Drive link">
         </div>
         <fieldset class="consent">
           <legend>Consent &amp; declaration</legend>
-          <label class="check"><input type="checkbox" id="cOriginal"> The reel is original student work — no copied footage</label>
-          <label class="check"><input type="checkbox" id="cParental"> Parental / guardian consent obtained for participation and use of the reel</label>
+          <label class="check"><input type="checkbox" id="cOriginal"> The entry is original work of the participant — nothing copied</label>
+          <label class="check"><input type="checkbox" id="cParental"> Parental / guardian consent obtained for participation and use of the entry (for student entries)</label>
           <label class="check"><input type="checkbox" id="cMusic"> No copyrighted music or material used without permission</label>
         </fieldset>
         <div class="progress" id="prog" hidden><i></i></div>
         <div class="msg err" id="addMsg" hidden></div>
         <div class="actions">
-          <button class="btn btn-primary" id="addBtn" type="submit">Submit reel</button>
+          <button class="btn btn-primary" id="addBtn" type="submit">Submit</button>
           <button class="btn btn-ghost" type="button" id="cancelBtn">Clear</button>
         </div>
       </form>
@@ -140,18 +145,19 @@
 
     <div class="section-head">
       <div class="tabs view-tabs" role="tablist">
-        <button class="tab" role="tab" aria-selected="true" data-view="mine" type="button">My school's reels</button>
-        <button class="tab" role="tab" aria-selected="false" data-view="all" type="button">All districts</button>
+        <button class="tab" role="tab" aria-selected="true" data-view="mine" type="button">My school's entries</button>
       </div>
       <div class="filters">
-        <select class="input" id="zoneFilter" hidden><option value="">All districts</option></select>
-        <input class="input" id="search" placeholder="Search title, theme, student, school, district…">
+        <select class="input" id="typeFilter">
+          <option value="">All categories</option>
+        </select>
+        <input class="input" id="search" placeholder="Search title, category, theme, participant, school ID…">
       </div>
     </div>
     <div class="grid" id="grid"></div>
     <div class="card empty" id="empty" hidden>
-      <b id="emptyTitle">No reels yet</b>
-      <span>Submit the first reel using the form above.</span>
+      <b id="emptyTitle">No entries yet</b>
+      <span>Submit the first entry using the form above.</span>
     </div>
   </section>
 

@@ -48,10 +48,12 @@ The RFP has three initiatives; the portal serves mainly **A. Meri Seva, Mera San
 ## 3. Data model (target)
 
 ```
-schools      id, userId, passwordHash, name, udise, stateUT, districtId, districtName,
+schools      id, userId, passwordHash, name, schoolCode (School ID), udise, stateUT, districtId, districtName,
              city, nodalOfficerName, phone, email, createdAt
-reels        id, schoolId, studentName, rollNo, class, section, title, description,
-             theme, language, durationSec, videoFile | videoUrl, originalName, sizeBytes,
+reels        id, schoolId, participantType (student|teacher), entryType (reel|drawing),
+             designation, studentName, rollNo, class, section, title, description,
+             theme, durationSec, videoFile | videoUrl, mediaType (video|image),
+             originalName, sizeBytes,
              consentOriginal (bool), consentParental (bool),
              status: submitted | school_shortlisted | district_selected | state_selected | showcase,
              createdAt, updatedAt
@@ -76,7 +78,7 @@ Scoring rubric (proposed, editable by admin — to be confirmed with DoE): Relev
 Rename & re-brand to the RFP, keep everything optional, no new heavy modules.
 - Branding: "Meri Seva, Mera Sankalp" · Seva Sankalp Abhiyan · Directorate of Education, GNCTD
 - "Zone" → **District** (Delhi's 13 DoE education districts + other States/UTs); State/UT select
-- "Invention" → **Reel**: Reel title, message/description, **Theme** dropdown, language, duration
+- "Invention" → **Reel**: Reel title, message/description, **Theme** dropdown, duration
 - **Consent & declaration** checkboxes on every reel (original content · parental consent · no copyrighted music)
 - **Status pipeline** field (Submitted → Shortlisted for District → Selected for State → Grand Showcase); school can mark "Shortlisted for District"
 - Nodal officer name on school registration
@@ -91,6 +93,15 @@ Rename & re-brand to the RFP, keep everything optional, no new heavy modules.
 - ✅ State admin: all reels, "Selected for Grand Showcase", officials management, participation report, CSV export
 - ✅ Status transitions logged (who / role / when) in `statusHistory`
 - ⏳ Per-district selection cap (configurable), downloadable consent template PDF, guidelines page
+
+### ✅ Phase 2b — Participants & entry categories (15 Sep)
+- **Participant category** dropdown on every entry: `student` | `teacher` (Teacher / Faculty — the nodal officer submits their own work under this). Form follows the choice: student → Roll No. / Class / Section; teacher → Designation / subject.
+- **Entry category** dropdown: `reel` (video) | `drawing` (artwork). Drawing entries upload an image (JPG/PNG/WebP); reels upload video or a YouTube/Drive link. `mediaType` (`video` | `image`) is stored per entry so cards render an `<img>` or a `<video>`; the Evaluation Desk renders both too (scoring untouched).
+- **School ID** (`schoolCode`, DoE school code) captured at registration, shown in the header, under every card title, searchable, and exported as its own CSV column. Falls back to UDISE, then User ID, when blank.
+- **Schools see only their own entries** — the "All districts" tab and `/api/videos/all` are gone from the school portal. Cross-school views live in the Evaluation Desk (district officer / judge / admin). A category filter (All / Reel / Drawing) plus search over title, category, theme, participant, designation, school and School ID replaces it.
+- Both category lists are config-driven in `config/settings.json` (`participantTypes`, `entryTypes`) — new categories need no code change.
+- **Language field dropped** from the entry form, the data model, the cards and the CSV export.
+- Registration reordered: **School ID + UDISE sit above the school name**. The school-name select is gone — one free-text field with the district's known schools as type-ahead suggestions; whatever the school types is accepted and becomes a suggestion for the next school in that district.
 
 ### Phase 3 — Reporting & documentation (target: 23–27 Sep)
 - Admin reports: schools registered, district-wise & state-wise participation, reels received per day, shortlisted/selected counts
@@ -118,7 +129,7 @@ Rename & re-brand to the RFP, keep everything optional, no new heavy modules.
 
 ## 5. Open questions for the client (DoE / agency)
 1. Confirm district list: use DoE's 13 education districts, or the 11 revenue districts?
-2. Reel rules: max duration (60 / 90 sec?), orientation (9:16), language(s), max entries per school?
+2. Reel rules: max duration (60 / 90 sec?), orientation (9:16), max entries per school?
 3. Who evaluates at school level — the school itself (self-shortlist) or agency?
 4. District → State quota (e.g. top 10 per district?) and State → Showcase quota
 5. Scoring rubric and weights — accept the proposed 5 criteria?

@@ -29,10 +29,11 @@ data/db.json       Schools + entries (created on first run)
 ## Districts, schools & campaign settings
 
 - `config/zones.json` — master list of districts (Delhi's 13 DoE education districts + one entry per other
-  State/UT) with the schools in each. On registration a school picks **District -> School**; if not listed it
-  types its name, which is then added to that district's dropdown (kept in `data/db.json`). To bulk-load
+  State/UT) with the schools in each. On registration a school picks **State/UT -> District**, then types its
+  school name (the district's known schools are offered as suggestions); a new name is added to that
+  district's suggestion list (kept in `data/db.json`). To bulk-load
   schools from the DoE list, paste names into the matching district's `schools` array.
-- `config/settings.json` — campaign name/dates, **themes**, languages, **status pipeline**
+- `config/settings.json` — campaign name/dates, **themes**, **status pipeline**
   (submitted → school_shortlisted → district_selected → state_selected) and reel rules. Edit without code changes.
 
 ## API

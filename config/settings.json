@@ -7,6 +7,32 @@
     "end": "2026-10-17",
     "showcase": "2026-10-17"
   },
+  "participantTypes": [
+    {
+      "id": "student",
+      "label": "Student",
+      "nameLabel": "Student name"
+    },
+    {
+      "id": "teacher",
+      "label": "Teacher / Faculty",
+      "nameLabel": "Teacher's name"
+    }
+  ],
+  "entryTypes": [
+    {
+      "id": "reel",
+      "label": "Reel (video)",
+      "accept": "video/*",
+      "hint": "Vertical 9:16, up to 90 seconds, original audio. MP4 / MOV / WebM."
+    },
+    {
+      "id": "drawing",
+      "label": "Drawing (artwork)",
+      "accept": "image/*",
+      "hint": "Photo or scan of the artwork. JPG / PNG / WebP, clear and well lit."
+    }
+  ],
   "themes": [
     "Seva",
     "Jan Bhagidari",
@@ -14,13 +40,6 @@
     "Public Service",
     "Nation Building",
     "Viksit Bharat @2047"
-  ],
-  "languages": [
-    "Hindi",
-    "English",
-    "Punjabi",
-    "Urdu",
-    "Other"
   ],
   "statuses": [
     {

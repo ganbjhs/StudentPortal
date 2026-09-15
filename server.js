@@ -74,10 +74,12 @@ const upload = multer({
   }),
   limits: { fileSize: MAX_UPLOAD_MB * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
-    if (file.mimetype.startsWith("video/")) return cb(null, true);
-    cb(new Error("Only video files are allowed."));
+    // Reels = video, Drawings = image
+    if (file.mimetype.startsWith("video/") || file.mimetype.startsWith("image/")) return cb(null, true);
+    cb(new Error("Only video files (reel) or image files (drawing) are allowed."));
   },
 });
+const mediaKind = (file) => (file && file.mimetype.startsWith("image/") ? "image" : "video");
 
 // ---------- Auth ----------
 app.post("/api/register", async (req, res) => {
@@ -99,6 +101,7 @@ app.post("/api/register", async (req, res) => {
     zoneName: zone ? zone.name : "",
     city: clean(b.city, 100) || (zone ? zone.city : ""),
     state: clean(b.state, 100) || (zone ? zone.state : ""),
+    schoolCode: clean(b.schoolCode, 30),
     udise: clean(b.udise, 20),
     nodalOfficer: clean(b.nodalOfficer, 120),
     phone: clean(b.phone, 20),
@@ -131,7 +134,7 @@ app.get("/api/me", requireLogin, (req, res) => res.json({ school: publicSchool(r
 app.put("/api/me", requireLogin, (req, res) => {
   const b = req.body || {};
   const patch = {};
-  for (const k of ["name", "city", "state", "udise", "nodalOfficer", "phone", "email"]) if (k in b) patch[k] = clean(b[k], 200);
+  for (const k of ["name", "city", "state", "schoolCode", "udise", "nodalOfficer", "phone", "email"]) if (k in b) patch[k] = clean(b[k], 200);
   if ("zoneId" in b) { const z = store.findZone(clean(b.zoneId, 40)); patch.zoneId = z ? z.id : ""; patch.zoneName = z ? z.name : ""; }
   res.json({ school: publicSchool(store.updateSchool(req.school.id, patch)) });
 });
@@ -141,38 +144,42 @@ app.get("/api/videos", requireLogin, (req, res) => {
   res.json({ videos: store.listVideosForSchool(req.school.id).map(withSchool) });
 });
 
-// Every school's entries, filterable — ?zone=<zoneId>&q=<text>. Text search covers
-// caption/title, description, student, roll no., class, section, school and zone.
-app.get("/api/videos/all", requireLogin, (req, res) => {
-  const zone = clean(req.query.zone, 40);
-  const q = clean(req.query.q, 100).toLowerCase();
-  let list = store.listAllVideos().map(withSchool);
-  if (zone) list = list.filter((v) => v.zoneId === zone);
-  if (q) list = list.filter((v) =>
-    [v.caption, v.description, v.studentName, v.rollNo, v.class, v.section, v.schoolName, v.zoneName]
-      .join(" ").toLowerCase().includes(q));
-  res.json({ videos: list });
-});
+// (A school only ever sees its own entries. District-wide / all-district views live in
+// the Evaluation Desk for officials — see /api/eval/reels below.)
 
 // Attach the owning school's name/zone to an entry for display and search.
 function withSchool(v) {
   const s = store.findSchoolById(v.schoolId);
-  return { ...v, schoolName: s ? s.name || s.userId : "", zoneId: s ? s.zoneId || "" : "", zoneName: s ? s.zoneName || "" : "" };
+  return {
+    ...v,
+    schoolName: s ? s.name || s.userId : "",
+    schoolCode: s ? s.schoolCode || s.udise || s.userId || "" : "", // School ID shown on every card
+    zoneId: s ? s.zoneId || "" : "",
+    zoneName: s ? s.zoneName || "" : "",
+  };
 }
 
 const STATUS_IDS = () => store.getSettings().statuses.map((s) => s.id);
+const PARTICIPANT_IDS = () => (store.getSettings().participantTypes || []).map((p) => p.id);
+const ENTRY_TYPE_IDS = () => (store.getSettings().entryTypes || []).map((e) => e.id);
 const yes = (v) => v === true || v === "true" || v === "1" || v === "on";
 function entryFields(b) {
   const status = clean(b.status, 40);
+  const participantType = clean(b.participantType, 20);
+  const entryType = clean(b.entryType, 20);
   return {
-    studentName: clean(b.studentName, 120),
+    // who is entering: student or teacher/faculty (nodal officer can enter their own work)
+    participantType: PARTICIPANT_IDS().includes(participantType) ? participantType : "student",
+    // what the entry is: reel (video) or drawing (artwork)
+    entryType: ENTRY_TYPE_IDS().includes(entryType) ? entryType : "reel",
+    designation: clean(b.designation, 120), // teacher entries: designation / subject
+    studentName: clean(b.studentName, 120), // participant name (student or teacher)
     rollNo: clean(b.rollNo, 20),
     class: clean(b.class, 20),
     section: clean(b.section, 10),
     caption: clean(b.caption, 200),          // reel title
     description: clean(b.description, 2000), // reel message / description
     theme: clean(b.theme, 60),
-    language: clean(b.language, 40),
     durationSec: Number(b.durationSec) > 0 ? Math.round(Number(b.durationSec)) : 0,
     consentOriginal: yes(b.consentOriginal),
     consentParental: yes(b.consentParental),
@@ -195,6 +202,7 @@ app.post("/api/videos", requireLogin, (req, res) => {
       schoolId: req.school.id,
       ...fields,
       videoFile: file ? `/uploads/${file.filename}` : "",
+      mediaType: file ? mediaKind(file) : "",
       originalName: file ? file.originalname : "",
       sizeBytes: file ? file.size : 0,
     });
@@ -208,9 +216,11 @@ app.put("/api/videos/:id", requireLogin, (req, res) => {
   upload.single("video")(req, res, (err) => {
     if (err) return res.status(400).json({ error: err.message });
     const patch = entryFields({ ...v, ...(req.body || {}) });
+    patch.mediaType = v.mediaType || "";
     if (req.file) {
       removeFile(v.videoFile);
       patch.videoFile = `/uploads/${req.file.filename}`;
+      patch.mediaType = mediaKind(req.file);
       patch.originalName = req.file.originalname;
       patch.sizeBytes = req.file.size;
     }
@@ -364,7 +374,7 @@ app.get("/api/admin/stats", requireStaff("admin", "district"), (req, res) => {
 });
 app.get("/api/admin/export.csv", requireStaff("admin", "district"), (req, res) => {
   const rows = visibleReels(req.user).map(withScores);
-  const cols = ["id", "zoneName", "schoolName", "studentName", "rollNo", "class", "section", "theme", "language", "durationSec", "caption", "description", "status", "consentOriginal", "consentParental", "consentMusic", "videoFile", "videoUrl", "createdAt"];
+  const cols = ["id", "zoneName", "schoolCode", "schoolName", "entryType", "participantType", "studentName", "designation", "rollNo", "class", "section", "theme", "durationSec", "caption", "description", "status", "consentOriginal", "consentParental", "consentMusic", "videoFile", "videoUrl", "createdAt"];
   const esc = (v) => `"${String(v ?? "").replace(/"/g, '""')}"`;
   const lines = [[...cols, "districtAvg", "districtJudges", "stateAvg", "stateJudges"].join(",")];
   for (const r of rows) lines.push([...cols.map((c) => esc(r[c])), r.scores.district?.avg ?? "", r.scores.district?.count ?? 0, r.scores.state?.avg ?? "", r.scores.state?.count ?? 0].join(","));

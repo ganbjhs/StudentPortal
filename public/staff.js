@@ -73,9 +73,11 @@
     reels.forEach((en) => {
       const card = document.createElement("article"); card.className = "card entry";
       let media;
-      if (en.videoFile) media = `<video controls preload="metadata" src="${esc(en.videoFile)}"></video>`;
-      else if (en.videoUrl) media = `<a class="ext" href="${esc(en.videoUrl)}" target="_blank" rel="noopener"><span class="play"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>Open video<small>external link</small></a>`;
-      else media = `<div class="novideo">No video</div>`;
+      const isImage = en.mediaType === "image" || ((en.entryType && en.entryType !== "reel") && !!en.videoFile);
+      if (en.videoFile && isImage) media = `<img src="${esc(en.videoFile)}" alt="${esc(en.caption || "Drawing")}" loading="lazy">`;
+      else if (en.videoFile) media = `<video controls preload="metadata" src="${esc(en.videoFile)}"></video>`;
+      else if (en.videoUrl) media = `<a class="ext" href="${esc(en.videoUrl)}" target="_blank" rel="noopener"><span class="play"><svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></span>Open entry<small>external link</small></a>`;
+      else media = `<div class="novideo">No media</div>`;
       const chips = [];
       if (en.class || en.section) chips.push(`<span class="chip">${esc([en.class && classLabel(en.class), en.section].filter(Boolean).join(" – "))}</span>`);
       if (en.theme) chips.push(`<span class="chip theme">${esc(en.theme)}</span>`);
@@ -92,7 +94,7 @@
           <dl class="meta">
             ${en.studentName ? `<dt>Student</dt><dd>${esc(en.studentName)}${en.rollNo ? ` (Roll ${esc(en.rollNo)})` : ""}</dd>` : ""}
             ${en.description ? `<dt>Message</dt><dd class="desc">${esc(en.description)}</dd>` : ""}
-            ${en.language || en.durationSec ? `<dt>Reel</dt><dd class="desc">${esc([en.language, en.durationSec ? en.durationSec + " sec" : ""].filter(Boolean).join(" · "))}</dd>` : ""}
+            ${en.durationSec ? `<dt>Duration</dt><dd class="desc">${esc(en.durationSec)} sec</dd>` : ""}
             <dt>Consent</dt><dd class="desc">${consent ? '<span class="chip ok">Declared ✓</span>' : '<span class="chip status">Pending</span>'}</dd>
             ${summary ? `<dt>Scores</dt><dd class="desc">${summary}</dd>` : ""}
           </dl>
@@ -100,6 +102,8 @@
           ${canScore ? `<form class="scoreform"><div class="score-grid">${scoreRows}</div><textarea class="input" rows="2" placeholder="Remarks (optional)" data-remarks>${esc(mine ? mine.remarks : "")}</textarea><div class="actions"><button class="btn btn-primary btn-sm" type="submit">${mine ? "Update score" : "Save score"}</button><span class="hint total">Total: <b>${mine ? mine.total : 0}</b> / 100</span></div></form>` : ""}
           ${canStatus ? `<div class="statusctl"><label class="hint">Move to</label><select class="input" data-status>${settings.statuses.map((s) => `<option value="${s.id}" ${(en.status || "submitted") === s.id ? "selected" : ""} ${me.role === "district" && s.id === "state_selected" ? "disabled" : ""}>${esc(s.label)}</option>`).join("")}</select></div>` : ""}
         </div>`;
+      const im = card.querySelector("img");
+      if (im) im.addEventListener("load", () => { if (im.naturalHeight > im.naturalWidth) card.querySelector(".media").classList.add("portrait"); });
       const vid = card.querySelector("video");
       if (vid) vid.addEventListener("loadedmetadata", () => { if (vid.videoHeight >= vid.videoWidth) card.querySelector(".media").classList.add("portrait"); });
       const form = card.querySelector(".scoreform");

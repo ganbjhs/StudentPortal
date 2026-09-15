@@ -103,6 +103,8 @@ a{color:var(--saffron-deep)}
 .entry.editing{outline:3px solid var(--saffron)}
 .media{background:#3A3F46;aspect-ratio:16/9;max-width:100%;display:grid;place-items:center;position:relative;overflow:hidden}
 .media video{width:100%;height:100%;object-fit:contain;background:#000}
+.media img{width:100%;height:100%;object-fit:contain;background:#fff}
+.media.portrait img{object-fit:contain}
 /* portrait / square videos: the box follows the video's own shape (capped) instead of a letterboxed 16:9 */
 .media.portrait{aspect-ratio:auto;height:420px}
 .media.portrait video{object-fit:contain}
@@ -168,3 +170,8 @@ a{color:var(--saffron-deep)}
 .pad h3{font-size:17px;margin-bottom:8px}
 .chip.status.submitted{background:var(--line);color:var(--ink-2)}
 
+
+.chip.type{background:#2F343B;color:#fff}
+.chip.type.drawing{background:#4A4F57}
+.chip.part{background:#ECEEF1;color:#3D424A}
+.chip.sid{background:var(--navy-soft);color:var(--navy);font-variant-numeric:tabular-nums}
