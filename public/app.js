@@ -27,7 +27,7 @@
     const zf = $("zoneFilter"); zf.innerHTML = '<option value="">All districts</option>';
     states.forEach((st) => { const g = document.createElement("optgroup"); g.label = st; zones.filter((z) => z.state === st).forEach((z) => g.appendChild(new Option(z.name, z.id))); zf.appendChild(g); });
   }
-  const setStep = (n) => { $("stepD").classList.toggle("on", n >= 2); $("stepS").classList.toggle("on", n >= 3); };
+  const setStep = () => {};
   function fillDistricts(state) {
     const zSel = $("rZone"); zSel.innerHTML = '<option value="">Select district</option>';
     const list = zones.filter((z) => z.state === state);
