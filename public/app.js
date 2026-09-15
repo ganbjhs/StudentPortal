@@ -1,8 +1,6 @@
 (function () {
   const $ = (id) => document.getElementById(id);
-  const STATES = ["Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh","Goa","Gujarat","Haryana","Himachal Pradesh","Jharkhand","Karnataka","Kerala","Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Pradesh","Uttarakhand","West Bengal","Andaman & Nicobar","Chandigarh","Dadra & Nagar Haveli and Daman & Diu","Delhi","Jammu & Kashmir","Ladakh","Lakshadweep","Puducherry"];
   const CLASSES = ["Nursery","LKG","UKG","1","2","3","4","5","6","7","8","9","10","11","12"];
-  STATES.forEach((s) => { const o = document.createElement("option"); o.textContent = s; $("rState").appendChild(o); });
   CLASSES.forEach((c) => { const o = document.createElement("option"); o.value = c; $("classList").appendChild(o); });
 
   let school = null, entries = [], pendingFile = null, zones = [], view = "mine";
@@ -18,36 +16,41 @@
   }
   const statusLabel = (id) => (settings.statuses.find((x) => x.id === id) || {}).label || "Submitted";
 
-  // ---------- zones → school dropdown ----------
+  // ---------- State/UT → District → School (hierarchical registration) ----------
   async function loadZones() {
     try { zones = (await api("GET", "/api/zones")).zones; } catch (_) { zones = []; }
-    const zSel = $("rZone"), zf = $("zoneFilter");
-    zSel.innerHTML = '<option value="">Select your district</option>';
-    zf.innerHTML = '<option value="">All districts</option>';
-    const byState = {};
-    zones.forEach((z) => { (byState[z.state || "Other"] ||= []).push(z); });
-    Object.entries(byState).forEach(([st, list]) => {
-      const g1 = document.createElement("optgroup"); g1.label = st;
-      const g2 = document.createElement("optgroup"); g2.label = st;
-      list.forEach((z) => {
-        const o = document.createElement("option"); o.value = z.id; o.textContent = z.name; g1.appendChild(o);
-        g2.appendChild(o.cloneNode(true));
-      });
-      zSel.appendChild(g1); zf.appendChild(g2);
-    });
+    // State list: Delhi first (host state), then the rest alphabetically
+    const states = [...new Set(zones.map((z) => z.state).filter(Boolean))].sort((a, b) => (a === "Delhi" ? -1 : b === "Delhi" ? 1 : a.localeCompare(b)));
+    const sSel = $("rState"); sSel.innerHTML = '<option value="">Select State / UT</option>';
+    states.forEach((st) => sSel.appendChild(new Option(st, st)));
+    // "All districts" filter on the dashboard, grouped by state
+    const zf = $("zoneFilter"); zf.innerHTML = '<option value="">All districts</option>';
+    states.forEach((st) => { const g = document.createElement("optgroup"); g.label = st; zones.filter((z) => z.state === st).forEach((z) => g.appendChild(new Option(z.name, z.id))); zf.appendChild(g); });
+  }
+  const setStep = (n) => { $("stepD").classList.toggle("on", n >= 2); $("stepS").classList.toggle("on", n >= 3); };
+  function fillDistricts(state) {
+    const zSel = $("rZone"); zSel.innerHTML = '<option value="">Select district</option>';
+    const list = zones.filter((z) => z.state === state);
+    $("rZoneField").hidden = !state; $("rSchoolField").hidden = true; $("rNameField").hidden = true; $("rCityField").hidden = true; setStep(state ? 2 : 1);
+    if (!state) return;
+    list.forEach((z) => zSel.appendChild(new Option(z.name.replace(" (all districts)", " — type your district below"), z.id)));
+    if (list.length === 1) { zSel.value = list[0].id; fillSchools(list[0].id); } // single-entry states: skip straight to school
   }
   function fillSchools(zoneId) {
     const sSel = $("rSchool"); const z = zones.find((x) => x.id === zoneId);
     sSel.innerHTML = "";
-    if (!z) { sSel.innerHTML = '<option value="">Select district first</option>'; $("rNameField").hidden = true; return; }
+    $("rSchoolField").hidden = !z; $("rNameField").hidden = true;
+    if (!z) { sSel.innerHTML = '<option value="">Select district first</option>'; $("rCityField").hidden = true; setStep(2); return; }
+    setStep(3);
+    // Delhi districts carry their own city; other states need the district/city typed
+    $("rCityField").hidden = !!z.city; if (z.city) $("rCity").value = z.city; else $("rCity").value = "";
     sSel.appendChild(new Option(z.schools.length ? "Select your school" : "No schools listed yet — add yours", ""));
     z.schools.forEach((n) => sSel.appendChild(new Option(n, n)));
     sSel.appendChild(new Option("My school is not listed (type name)", OTHER));
-    if (!z.schools.length) { sSel.value = OTHER; }
+    if (!z.schools.length) sSel.value = OTHER;
     $("rNameField").hidden = sSel.value !== OTHER;
-    if (z.city && !$("rCity").value) $("rCity").value = z.city;
-    if (z.state) $("rState").value = z.state;
   }
+  $("rState").addEventListener("change", (e) => fillDistricts(e.target.value));
   $("rZone").addEventListener("change", (e) => fillSchools(e.target.value));
   $("rSchool").addEventListener("change", (e) => { $("rNameField").hidden = e.target.value !== OTHER; if (e.target.value === OTHER) $("rName").focus(); });
 
@@ -112,7 +115,7 @@
   function leave() {
     school = null; entries = []; render();
     $("authView").hidden = false; $("dashView").hidden = true; $("who").hidden = true;
-    $("loginForm").reset(); $("regForm").reset();
+    $("loginForm").reset(); $("regForm").reset(); fillDistricts("");
   }
   async function loadEntries() {
     try {

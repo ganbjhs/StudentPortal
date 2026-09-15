@@ -166,3 +166,8 @@ a{color:var(--saffron-deep)}
 .pad{padding:18px}
 .pad h3{font-size:17px;margin-bottom:8px}
 .chip.status.submitted{background:var(--line);color:var(--ink-2)}
+
+/* hierarchical registration steps */
+.steps-row{display:flex;gap:6px;margin-bottom:-4px}
+.steps-row .s{flex:1;text-align:center;font-size:12px;font-weight:700;letter-spacing:.03em;padding:6px 4px;border-radius:8px;background:var(--surface-2);color:var(--muted);border:1px solid var(--line)}
+.steps-row .s.on{background:var(--navy);color:#fff;border-color:var(--navy)}
