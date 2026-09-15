@@ -79,12 +79,12 @@
     $("regBtn").disabled = true;
     try {
       const pick = $("rSchool").value;
-      const { school: s } = await api("POST", "/api/register", {
+      const { school: s, emailSent } = await api("POST", "/api/register", {
         name: pick && pick !== OTHER ? pick : $("rName").value.trim(), zoneId: $("rZone").value,
         city: $("rCity").value, state: $("rState").value, nodalOfficer: $("rNodal").value, phone: $("rPhone").value,
         email: $("rEmail").value, udise: $("rUdise").value, userId: $("rUser").value, password: $("rPass").value,
       });
-      enter(s); toast("School registered 🎉");
+      enter(s); toast(emailSent ? "School registered 🎉 Confirmation email sent" : "School registered 🎉");
     } catch (err) { showMsg("regMsg", err.message); }
     finally { $("regBtn").disabled = false; }
   });

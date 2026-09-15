@@ -70,6 +70,13 @@ Officials log in at `/staff` (no self-registration). Roles:
 | POST | /api/eval/reels/:id/status | district/admin: `{status}` (history kept in `statusHistory`) |
 | GET | /api/admin/stats · /api/admin/export.csv | admin/district: participation report + CSV |
 
+## Registration email (Resend)
+
+On registration the school's contact email gets a confirmation (portal link, User ID, next steps — never the password).
+Set `RESEND_API_KEY` (from resend.com → API Keys) and `MAIL_FROM` (a domain verified in Resend). Without a key, emails
+are skipped and registration still works. Resend's test sender `onboarding@resend.dev` only delivers to the Resend
+account owner's own address — verify your domain for real schools.
+
 ## Config
 
 Copy `.env.example` → `.env` (or set env vars): `PORT`, `SESSION_SECRET`, `MAX_UPLOAD_MB` (default 200).

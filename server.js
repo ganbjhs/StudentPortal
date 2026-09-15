@@ -10,6 +10,9 @@
  *   MAX_UPLOAD_MB   default 200
  *   DATA_DIR        folder for db.json   (default ./data)   — point both at a
  *   UPLOAD_DIR      folder for videos    (default ./uploads)  persistent disk when deployed
+ *   RESEND_API_KEY  Resend key for registration emails (optional — skipped if unset)
+ *   MAIL_FROM       sender, e.g. "Meri Seva Mera Sankalp <noreply@yourdomain.in>" (verified domain in Resend)
+ *   PORTAL_URL      public URL used inside emails
  */
 const path = require("path");
 const fs = require("fs");
@@ -18,6 +21,7 @@ const session = require("express-session");
 const multer = require("multer");
 const bcrypt = require("bcryptjs");
 const store = require("./src/store");
+const mail = require("./src/mail");
 
 const PORT = process.env.PORT || 3000;
 const SESSION_SECRET = process.env.SESSION_SECRET || "change-me-in-production";
@@ -101,7 +105,8 @@ app.post("/api/register", async (req, res) => {
   });
   if (zone && school.name) store.addSchoolToZone(zone.id, school.name);
   req.session.schoolId = school.id;
-  res.status(201).json({ school: publicSchool(school) });
+  res.status(201).json({ school: publicSchool(school), emailSent: !!(school.email && process.env.RESEND_API_KEY) });
+  mail.sendRegistrationEmail(school); // fire-and-forget: never blocks or fails the registration
 });
 
 // ---------- Districts & campaign settings (public: needed on the registration form) ----------
