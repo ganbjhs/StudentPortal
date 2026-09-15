@@ -33,7 +33,7 @@
     const list = zones.filter((z) => z.state === state);
     $("rZoneField").hidden = !state; $("rSchoolField").hidden = true; $("rNameField").hidden = true; $("rCityField").hidden = true; setStep(state ? 2 : 1);
     if (!state) return;
-    list.forEach((z) => zSel.appendChild(new Option(z.name.replace(" (all districts)", " — type your district below"), z.id)));
+    list.forEach((z) => zSel.appendChild(new Option(z.name, z.id)));
     if (list.length === 1) { zSel.value = list[0].id; fillSchools(list[0].id); } // single-entry states: skip straight to school
   }
   function fillSchools(zoneId) {
