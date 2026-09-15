@@ -23,6 +23,7 @@
     const states = [...new Set(zones.map((z) => z.state).filter(Boolean))].sort((a, b) => (a === "Delhi" ? -1 : b === "Delhi" ? 1 : a.localeCompare(b)));
     const sSel = $("rState"); sSel.innerHTML = '<option value="">Select State / UT</option>';
     states.forEach((st) => sSel.appendChild(new Option(st, st)));
+    if (states.length === 1) { sSel.value = states[0]; fillDistricts(states[0]); } // single-state campaign: State is pre-filled
     // "All districts" filter on the dashboard, grouped by state
     const zf = $("zoneFilter"); zf.innerHTML = '<option value="">All districts</option>';
     states.forEach((st) => { const g = document.createElement("optgroup"); g.label = st; zones.filter((z) => z.state === st).forEach((z) => g.appendChild(new Option(z.name, z.id))); zf.appendChild(g); });
@@ -111,7 +112,8 @@
   function leave() {
     school = null; entries = []; render();
     $("authView").hidden = false; $("dashView").hidden = true; $("who").hidden = true;
-    $("loginForm").reset(); $("regForm").reset(); fillDistricts("");
+    $("loginForm").reset(); $("regForm").reset();
+    const only = $("rState").options.length === 2 ? $("rState").options[1].value : ""; $("rState").value = only; fillDistricts(only);
   }
   async function loadEntries() {
     try {

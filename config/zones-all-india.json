@@ -1,0 +1,5094 @@
+{
+ "_readme": "Master list for School -> District -> State/UT registration. Delhi = the 13 DoE education districts (per RFP); every other State/UT lists its administrative districts. Edit freely: add/rename districts, paste school names into a district's `schools` array. Schools that register with a new name are added automatically (stored in data/db.json).",
+ "zones": [
+  {
+   "id": "dl-north",
+   "name": "North District",
+   "state": "Delhi",
+   "city": "Delhi",
+   "schools": []
+  },
+  {
+   "id": "dl-north-west-a",
+   "name": "North West-A District",
+   "state": "Delhi",
+   "city": "Delhi",
+   "schools": []
+  },
+  {
+   "id": "dl-north-west-b",
+   "name": "North West-B District",
+   "state": "Delhi",
+   "city": "Delhi",
+   "schools": []
+  },
+  {
+   "id": "dl-west-a",
+   "name": "West-A District",
+   "state": "Delhi",
+   "city": "Delhi",
+   "schools": []
+  },
+  {
+   "id": "dl-west-b",
+   "name": "West-B District",
+   "state": "Delhi",
+   "city": "Delhi",
+   "schools": []
+  },
+  {
+   "id": "dl-south-west-a",
+   "name": "South West-A District",
+   "state": "Delhi",
+   "city": "Delhi",
+   "schools": []
+  },
+  {
+   "id": "dl-south-west-b",
+   "name": "South West-B District",
+   "state": "Delhi",
+   "city": "Delhi",
+   "schools": []
+  },
+  {
+   "id": "dl-south",
+   "name": "South District",
+   "state": "Delhi",
+   "city": "Delhi",
+   "schools": []
+  },
+  {
+   "id": "dl-south-east",
+   "name": "South East District",
+   "state": "Delhi",
+   "city": "Delhi",
+   "schools": []
+  },
+  {
+   "id": "dl-central",
+   "name": "Central District",
+   "state": "Delhi",
+   "city": "Delhi",
+   "schools": []
+  },
+  {
+   "id": "dl-east",
+   "name": "East District",
+   "state": "Delhi",
+   "city": "Delhi",
+   "schools": []
+  },
+  {
+   "id": "dl-north-east",
+   "name": "North East District",
+   "state": "Delhi",
+   "city": "Delhi",
+   "schools": []
+  },
+  {
+   "id": "dl-new-delhi",
+   "name": "New Delhi District",
+   "state": "Delhi",
+   "city": "Delhi",
+   "schools": []
+  },
+  {
+   "id": "d-andaman-nico-nicobar",
+   "name": "Nicobar",
+   "state": "Andaman & Nicobar Islands",
+   "city": "Nicobar",
+   "schools": []
+  },
+  {
+   "id": "d-andaman-nico-north-and-middle-andaman",
+   "name": "North and Middle Andaman",
+   "state": "Andaman & Nicobar Islands",
+   "city": "North and Middle Andaman",
+   "schools": []
+  },
+  {
+   "id": "d-andaman-nico-south-andaman",
+   "name": "South Andaman",
+   "state": "Andaman & Nicobar Islands",
+   "city": "South Andaman",
+   "schools": []
+  },
+  {
+   "id": "d-andhra-prade-anantapur",
+   "name": "Anantapur",
+   "state": "Andhra Pradesh",
+   "city": "Anantapur",
+   "schools": []
+  },
+  {
+   "id": "d-andhra-prade-chittoor",
+   "name": "Chittoor",
+   "state": "Andhra Pradesh",
+   "city": "Chittoor",
+   "schools": []
+  },
+  {
+   "id": "d-andhra-prade-east-godavari",
+   "name": "East Godavari",
+   "state": "Andhra Pradesh",
+   "city": "East Godavari",
+   "schools": []
+  },
+  {
+   "id": "d-andhra-prade-guntur",
+   "name": "Guntur",
+   "state": "Andhra Pradesh",
+   "city": "Guntur",
+   "schools": []
+  },
+  {
+   "id": "d-andhra-prade-krishna",
+   "name": "Krishna",
+   "state": "Andhra Pradesh",
+   "city": "Krishna",
+   "schools": []
+  },
+  {
+   "id": "d-andhra-prade-kurnool",
+   "name": "Kurnool",
+   "state": "Andhra Pradesh",
+   "city": "Kurnool",
+   "schools": []
+  },
+  {
+   "id": "d-andhra-prade-nellore",
+   "name": "Nellore",
+   "state": "Andhra Pradesh",
+   "city": "Nellore",
+   "schools": []
+  },
+  {
+   "id": "d-andhra-prade-prakasam",
+   "name": "Prakasam",
+   "state": "Andhra Pradesh",
+   "city": "Prakasam",
+   "schools": []
+  },
+  {
+   "id": "d-andhra-prade-srikakulam",
+   "name": "Srikakulam",
+   "state": "Andhra Pradesh",
+   "city": "Srikakulam",
+   "schools": []
+  },
+  {
+   "id": "d-andhra-prade-visakhapatnam",
+   "name": "Visakhapatnam",
+   "state": "Andhra Pradesh",
+   "city": "Visakhapatnam",
+   "schools": []
+  },
+  {
+   "id": "d-andhra-prade-vizianagaram",
+   "name": "Vizianagaram",
+   "state": "Andhra Pradesh",
+   "city": "Vizianagaram",
+   "schools": []
+  },
+  {
+   "id": "d-andhra-prade-west-godavari",
+   "name": "West Godavari",
+   "state": "Andhra Pradesh",
+   "city": "West Godavari",
+   "schools": []
+  },
+  {
+   "id": "d-andhra-prade-ysr-kadapa",
+   "name": "YSR Kadapa",
+   "state": "Andhra Pradesh",
+   "city": "YSR Kadapa",
+   "schools": []
+  },
+  {
+   "id": "d-arunachal-pr-anjaw",
+   "name": "Anjaw",
+   "state": "Arunachal Pradesh",
+   "city": "Anjaw",
+   "schools": []
+  },
+  {
+   "id": "d-arunachal-pr-changlang",
+   "name": "Changlang",
+   "state": "Arunachal Pradesh",
+   "city": "Changlang",
+   "schools": []
+  },
+  {
+   "id": "d-arunachal-pr-dibang-valley",
+   "name": "Dibang Valley",
+   "state": "Arunachal Pradesh",
+   "city": "Dibang Valley",
+   "schools": []
+  },
+  {
+   "id": "d-arunachal-pr-east-kameng",
+   "name": "East Kameng",
+   "state": "Arunachal Pradesh",
+   "city": "East Kameng",
+   "schools": []
+  },
+  {
+   "id": "d-arunachal-pr-east-siang",
+   "name": "East Siang",
+   "state": "Arunachal Pradesh",
+   "city": "East Siang",
+   "schools": []
+  },
+  {
+   "id": "d-arunachal-pr-kra-daadi",
+   "name": "Kra Daadi",
+   "state": "Arunachal Pradesh",
+   "city": "Kra Daadi",
+   "schools": []
+  },
+  {
+   "id": "d-arunachal-pr-kurung-kumey",
+   "name": "Kurung Kumey",
+   "state": "Arunachal Pradesh",
+   "city": "Kurung Kumey",
+   "schools": []
+  },
+  {
+   "id": "d-arunachal-pr-lohit",
+   "name": "Lohit",
+   "state": "Arunachal Pradesh",
+   "city": "Lohit",
+   "schools": []
+  },
+  {
+   "id": "d-arunachal-pr-longding",
+   "name": "Longding",
+   "state": "Arunachal Pradesh",
+   "city": "Longding",
+   "schools": []
+  },
+  {
+   "id": "d-arunachal-pr-lower-dibang-valley",
+   "name": "Lower Dibang Valley",
+   "state": "Arunachal Pradesh",
+   "city": "Lower Dibang Valley",
+   "schools": []
+  },
+  {
+   "id": "d-arunachal-pr-lower-siang",
+   "name": "Lower Siang",
+   "state": "Arunachal Pradesh",
+   "city": "Lower Siang",
+   "schools": []
+  },
+  {
+   "id": "d-arunachal-pr-lower-subansiri",
+   "name": "Lower Subansiri",
+   "state": "Arunachal Pradesh",
+   "city": "Lower Subansiri",
+   "schools": []
+  },
+  {
+   "id": "d-arunachal-pr-namsai",
+   "name": "Namsai",
+   "state": "Arunachal Pradesh",
+   "city": "Namsai",
+   "schools": []
+  },
+  {
+   "id": "d-arunachal-pr-papum-pare",
+   "name": "Papum Pare",
+   "state": "Arunachal Pradesh",
+   "city": "Papum Pare",
+   "schools": []
+  },
+  {
+   "id": "d-arunachal-pr-siang",
+   "name": "Siang",
+   "state": "Arunachal Pradesh",
+   "city": "Siang",
+   "schools": []
+  },
+  {
+   "id": "d-arunachal-pr-tawang",
+   "name": "Tawang",
+   "state": "Arunachal Pradesh",
+   "city": "Tawang",
+   "schools": []
+  },
+  {
+   "id": "d-arunachal-pr-tirap",
+   "name": "Tirap",
+   "state": "Arunachal Pradesh",
+   "city": "Tirap",
+   "schools": []
+  },
+  {
+   "id": "d-arunachal-pr-upper-siang",
+   "name": "Upper Siang",
+   "state": "Arunachal Pradesh",
+   "city": "Upper Siang",
+   "schools": []
+  },
+  {
+   "id": "d-arunachal-pr-upper-subansiri",
+   "name": "Upper Subansiri",
+   "state": "Arunachal Pradesh",
+   "city": "Upper Subansiri",
+   "schools": []
+  },
+  {
+   "id": "d-arunachal-pr-west-kameng",
+   "name": "West Kameng",
+   "state": "Arunachal Pradesh",
+   "city": "West Kameng",
+   "schools": []
+  },
+  {
+   "id": "d-arunachal-pr-west-siang",
+   "name": "West Siang",
+   "state": "Arunachal Pradesh",
+   "city": "West Siang",
+   "schools": []
+  },
+  {
+   "id": "d-assam-baksa",
+   "name": "Baksa",
+   "state": "Assam",
+   "city": "Baksa",
+   "schools": []
+  },
+  {
+   "id": "d-assam-barpeta",
+   "name": "Barpeta",
+   "state": "Assam",
+   "city": "Barpeta",
+   "schools": []
+  },
+  {
+   "id": "d-assam-biswanath",
+   "name": "Biswanath",
+   "state": "Assam",
+   "city": "Biswanath",
+   "schools": []
+  },
+  {
+   "id": "d-assam-bongaigaon",
+   "name": "Bongaigaon",
+   "state": "Assam",
+   "city": "Bongaigaon",
+   "schools": []
+  },
+  {
+   "id": "d-assam-cachar",
+   "name": "Cachar",
+   "state": "Assam",
+   "city": "Cachar",
+   "schools": []
+  },
+  {
+   "id": "d-assam-charaideo",
+   "name": "Charaideo",
+   "state": "Assam",
+   "city": "Charaideo",
+   "schools": []
+  },
+  {
+   "id": "d-assam-chirang",
+   "name": "Chirang",
+   "state": "Assam",
+   "city": "Chirang",
+   "schools": []
+  },
+  {
+   "id": "d-assam-darrang",
+   "name": "Darrang",
+   "state": "Assam",
+   "city": "Darrang",
+   "schools": []
+  },
+  {
+   "id": "d-assam-dhemaji",
+   "name": "Dhemaji",
+   "state": "Assam",
+   "city": "Dhemaji",
+   "schools": []
+  },
+  {
+   "id": "d-assam-dhubri",
+   "name": "Dhubri",
+   "state": "Assam",
+   "city": "Dhubri",
+   "schools": []
+  },
+  {
+   "id": "d-assam-dibrugarh",
+   "name": "Dibrugarh",
+   "state": "Assam",
+   "city": "Dibrugarh",
+   "schools": []
+  },
+  {
+   "id": "d-assam-dima-hasao",
+   "name": "Dima Hasao",
+   "state": "Assam",
+   "city": "Dima Hasao",
+   "schools": []
+  },
+  {
+   "id": "d-assam-goalpara",
+   "name": "Goalpara",
+   "state": "Assam",
+   "city": "Goalpara",
+   "schools": []
+  },
+  {
+   "id": "d-assam-golaghat",
+   "name": "Golaghat",
+   "state": "Assam",
+   "city": "Golaghat",
+   "schools": []
+  },
+  {
+   "id": "d-assam-hailakandi",
+   "name": "Hailakandi",
+   "state": "Assam",
+   "city": "Hailakandi",
+   "schools": []
+  },
+  {
+   "id": "d-assam-hojai",
+   "name": "Hojai",
+   "state": "Assam",
+   "city": "Hojai",
+   "schools": []
+  },
+  {
+   "id": "d-assam-jorhat",
+   "name": "Jorhat",
+   "state": "Assam",
+   "city": "Jorhat",
+   "schools": []
+  },
+  {
+   "id": "d-assam-kamrup",
+   "name": "Kamrup",
+   "state": "Assam",
+   "city": "Kamrup",
+   "schools": []
+  },
+  {
+   "id": "d-assam-kamrup-metropolitan",
+   "name": "Kamrup Metropolitan",
+   "state": "Assam",
+   "city": "Kamrup Metropolitan",
+   "schools": []
+  },
+  {
+   "id": "d-assam-karbi-anglong",
+   "name": "Karbi Anglong",
+   "state": "Assam",
+   "city": "Karbi Anglong",
+   "schools": []
+  },
+  {
+   "id": "d-assam-karimganj",
+   "name": "Karimganj",
+   "state": "Assam",
+   "city": "Karimganj",
+   "schools": []
+  },
+  {
+   "id": "d-assam-kokrajhar",
+   "name": "Kokrajhar",
+   "state": "Assam",
+   "city": "Kokrajhar",
+   "schools": []
+  },
+  {
+   "id": "d-assam-lakhimpur",
+   "name": "Lakhimpur",
+   "state": "Assam",
+   "city": "Lakhimpur",
+   "schools": []
+  },
+  {
+   "id": "d-assam-majuli",
+   "name": "Majuli",
+   "state": "Assam",
+   "city": "Majuli",
+   "schools": []
+  },
+  {
+   "id": "d-assam-morigaon",
+   "name": "Morigaon",
+   "state": "Assam",
+   "city": "Morigaon",
+   "schools": []
+  },
+  {
+   "id": "d-assam-nagaon",
+   "name": "Nagaon",
+   "state": "Assam",
+   "city": "Nagaon",
+   "schools": []
+  },
+  {
+   "id": "d-assam-nalbari",
+   "name": "Nalbari",
+   "state": "Assam",
+   "city": "Nalbari",
+   "schools": []
+  },
+  {
+   "id": "d-assam-sivasagar",
+   "name": "Sivasagar",
+   "state": "Assam",
+   "city": "Sivasagar",
+   "schools": []
+  },
+  {
+   "id": "d-assam-sonitpur",
+   "name": "Sonitpur",
+   "state": "Assam",
+   "city": "Sonitpur",
+   "schools": []
+  },
+  {
+   "id": "d-assam-south-salmara-mankachar",
+   "name": "South Salmara-Mankachar",
+   "state": "Assam",
+   "city": "South Salmara-Mankachar",
+   "schools": []
+  },
+  {
+   "id": "d-assam-tinsukia",
+   "name": "Tinsukia",
+   "state": "Assam",
+   "city": "Tinsukia",
+   "schools": []
+  },
+  {
+   "id": "d-assam-udalguri",
+   "name": "Udalguri",
+   "state": "Assam",
+   "city": "Udalguri",
+   "schools": []
+  },
+  {
+   "id": "d-assam-west-karbi-anglong",
+   "name": "West Karbi Anglong",
+   "state": "Assam",
+   "city": "West Karbi Anglong",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-araria",
+   "name": "Araria",
+   "state": "Bihar",
+   "city": "Araria",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-arwal",
+   "name": "Arwal",
+   "state": "Bihar",
+   "city": "Arwal",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-aurangabad",
+   "name": "Aurangabad",
+   "state": "Bihar",
+   "city": "Aurangabad",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-banka",
+   "name": "Banka",
+   "state": "Bihar",
+   "city": "Banka",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-begusarai",
+   "name": "Begusarai",
+   "state": "Bihar",
+   "city": "Begusarai",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-bhagalpur",
+   "name": "Bhagalpur",
+   "state": "Bihar",
+   "city": "Bhagalpur",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-bhojpur",
+   "name": "Bhojpur",
+   "state": "Bihar",
+   "city": "Bhojpur",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-buxar",
+   "name": "Buxar",
+   "state": "Bihar",
+   "city": "Buxar",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-darbhanga",
+   "name": "Darbhanga",
+   "state": "Bihar",
+   "city": "Darbhanga",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-east-champaran-motihari",
+   "name": "East Champaran (Motihari)",
+   "state": "Bihar",
+   "city": "East Champaran (Motihari)",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-gaya",
+   "name": "Gaya",
+   "state": "Bihar",
+   "city": "Gaya",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-gopalganj",
+   "name": "Gopalganj",
+   "state": "Bihar",
+   "city": "Gopalganj",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-jamui",
+   "name": "Jamui",
+   "state": "Bihar",
+   "city": "Jamui",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-jehanabad",
+   "name": "Jehanabad",
+   "state": "Bihar",
+   "city": "Jehanabad",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-kaimur-bhabua",
+   "name": "Kaimur (Bhabua)",
+   "state": "Bihar",
+   "city": "Kaimur (Bhabua)",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-katihar",
+   "name": "Katihar",
+   "state": "Bihar",
+   "city": "Katihar",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-khagaria",
+   "name": "Khagaria",
+   "state": "Bihar",
+   "city": "Khagaria",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-kishanganj",
+   "name": "Kishanganj",
+   "state": "Bihar",
+   "city": "Kishanganj",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-lakhisarai",
+   "name": "Lakhisarai",
+   "state": "Bihar",
+   "city": "Lakhisarai",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-madhepura",
+   "name": "Madhepura",
+   "state": "Bihar",
+   "city": "Madhepura",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-madhubani",
+   "name": "Madhubani",
+   "state": "Bihar",
+   "city": "Madhubani",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-munger-monghyr",
+   "name": "Munger (Monghyr)",
+   "state": "Bihar",
+   "city": "Munger (Monghyr)",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-muzaffarpur",
+   "name": "Muzaffarpur",
+   "state": "Bihar",
+   "city": "Muzaffarpur",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-nalanda",
+   "name": "Nalanda",
+   "state": "Bihar",
+   "city": "Nalanda",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-nawada",
+   "name": "Nawada",
+   "state": "Bihar",
+   "city": "Nawada",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-patna",
+   "name": "Patna",
+   "state": "Bihar",
+   "city": "Patna",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-purnia-purnea",
+   "name": "Purnia (Purnea)",
+   "state": "Bihar",
+   "city": "Purnia (Purnea)",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-rohtas",
+   "name": "Rohtas",
+   "state": "Bihar",
+   "city": "Rohtas",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-saharsa",
+   "name": "Saharsa",
+   "state": "Bihar",
+   "city": "Saharsa",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-samastipur",
+   "name": "Samastipur",
+   "state": "Bihar",
+   "city": "Samastipur",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-saran",
+   "name": "Saran",
+   "state": "Bihar",
+   "city": "Saran",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-sheikhpura",
+   "name": "Sheikhpura",
+   "state": "Bihar",
+   "city": "Sheikhpura",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-sheohar",
+   "name": "Sheohar",
+   "state": "Bihar",
+   "city": "Sheohar",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-sitamarhi",
+   "name": "Sitamarhi",
+   "state": "Bihar",
+   "city": "Sitamarhi",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-siwan",
+   "name": "Siwan",
+   "state": "Bihar",
+   "city": "Siwan",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-supaul",
+   "name": "Supaul",
+   "state": "Bihar",
+   "city": "Supaul",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-vaishali",
+   "name": "Vaishali",
+   "state": "Bihar",
+   "city": "Vaishali",
+   "schools": []
+  },
+  {
+   "id": "d-bihar-west-champaran",
+   "name": "West Champaran",
+   "state": "Bihar",
+   "city": "West Champaran",
+   "schools": []
+  },
+  {
+   "id": "d-chandigarh-chandigarh",
+   "name": "Chandigarh",
+   "state": "Chandigarh",
+   "city": "Chandigarh",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-balod",
+   "name": "Balod",
+   "state": "Chhattisgarh",
+   "city": "Balod",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-baloda-bazar",
+   "name": "Baloda Bazar",
+   "state": "Chhattisgarh",
+   "city": "Baloda Bazar",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-balrampur",
+   "name": "Balrampur",
+   "state": "Chhattisgarh",
+   "city": "Balrampur",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-bastar",
+   "name": "Bastar",
+   "state": "Chhattisgarh",
+   "city": "Bastar",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-bemetara",
+   "name": "Bemetara",
+   "state": "Chhattisgarh",
+   "city": "Bemetara",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-bijapur",
+   "name": "Bijapur",
+   "state": "Chhattisgarh",
+   "city": "Bijapur",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-bilaspur",
+   "name": "Bilaspur",
+   "state": "Chhattisgarh",
+   "city": "Bilaspur",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-dantewada-south-bastar",
+   "name": "Dantewada (South Bastar)",
+   "state": "Chhattisgarh",
+   "city": "Dantewada (South Bastar)",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-dhamtari",
+   "name": "Dhamtari",
+   "state": "Chhattisgarh",
+   "city": "Dhamtari",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-durg",
+   "name": "Durg",
+   "state": "Chhattisgarh",
+   "city": "Durg",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-gariyaband",
+   "name": "Gariyaband",
+   "state": "Chhattisgarh",
+   "city": "Gariyaband",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-janjgir-champa",
+   "name": "Janjgir-Champa",
+   "state": "Chhattisgarh",
+   "city": "Janjgir-Champa",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-jashpur",
+   "name": "Jashpur",
+   "state": "Chhattisgarh",
+   "city": "Jashpur",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-kabirdham-kawardha",
+   "name": "Kabirdham (Kawardha)",
+   "state": "Chhattisgarh",
+   "city": "Kabirdham (Kawardha)",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-kanker-north-bastar",
+   "name": "Kanker (North Bastar)",
+   "state": "Chhattisgarh",
+   "city": "Kanker (North Bastar)",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-kondagaon",
+   "name": "Kondagaon",
+   "state": "Chhattisgarh",
+   "city": "Kondagaon",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-korba",
+   "name": "Korba",
+   "state": "Chhattisgarh",
+   "city": "Korba",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-korea-koriya",
+   "name": "Korea (Koriya)",
+   "state": "Chhattisgarh",
+   "city": "Korea (Koriya)",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-mahasamund",
+   "name": "Mahasamund",
+   "state": "Chhattisgarh",
+   "city": "Mahasamund",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-mungeli",
+   "name": "Mungeli",
+   "state": "Chhattisgarh",
+   "city": "Mungeli",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-narayanpur",
+   "name": "Narayanpur",
+   "state": "Chhattisgarh",
+   "city": "Narayanpur",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-raigarh",
+   "name": "Raigarh",
+   "state": "Chhattisgarh",
+   "city": "Raigarh",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-raipur",
+   "name": "Raipur",
+   "state": "Chhattisgarh",
+   "city": "Raipur",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-rajnandgaon",
+   "name": "Rajnandgaon",
+   "state": "Chhattisgarh",
+   "city": "Rajnandgaon",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-sukma",
+   "name": "Sukma",
+   "state": "Chhattisgarh",
+   "city": "Sukma",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-surajpur",
+   "name": "Surajpur  ",
+   "state": "Chhattisgarh",
+   "city": "Surajpur  ",
+   "schools": []
+  },
+  {
+   "id": "d-chhattisgarh-surguja",
+   "name": "Surguja",
+   "state": "Chhattisgarh",
+   "city": "Surguja",
+   "schools": []
+  },
+  {
+   "id": "d-dadra-nagar--dadra-nagar-haveli",
+   "name": "Dadra & Nagar Haveli",
+   "state": "Dadra & Nagar Haveli and Daman & Diu",
+   "city": "Dadra & Nagar Haveli",
+   "schools": []
+  },
+  {
+   "id": "d-dadra-nagar--daman",
+   "name": "Daman",
+   "state": "Dadra & Nagar Haveli and Daman & Diu",
+   "city": "Daman",
+   "schools": []
+  },
+  {
+   "id": "d-dadra-nagar--diu",
+   "name": "Diu",
+   "state": "Dadra & Nagar Haveli and Daman & Diu",
+   "city": "Diu",
+   "schools": []
+  },
+  {
+   "id": "d-goa-north-goa",
+   "name": "North Goa",
+   "state": "Goa",
+   "city": "North Goa",
+   "schools": []
+  },
+  {
+   "id": "d-goa-south-goa",
+   "name": "South Goa",
+   "state": "Goa",
+   "city": "South Goa",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-ahmedabad",
+   "name": "Ahmedabad",
+   "state": "Gujarat",
+   "city": "Ahmedabad",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-amreli",
+   "name": "Amreli",
+   "state": "Gujarat",
+   "city": "Amreli",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-anand",
+   "name": "Anand",
+   "state": "Gujarat",
+   "city": "Anand",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-aravalli",
+   "name": "Aravalli",
+   "state": "Gujarat",
+   "city": "Aravalli",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-banaskantha-palanpur",
+   "name": "Banaskantha (Palanpur)",
+   "state": "Gujarat",
+   "city": "Banaskantha (Palanpur)",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-bharuch",
+   "name": "Bharuch",
+   "state": "Gujarat",
+   "city": "Bharuch",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-bhavnagar",
+   "name": "Bhavnagar",
+   "state": "Gujarat",
+   "city": "Bhavnagar",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-botad",
+   "name": "Botad",
+   "state": "Gujarat",
+   "city": "Botad",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-chhota-udepur",
+   "name": "Chhota Udepur",
+   "state": "Gujarat",
+   "city": "Chhota Udepur",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-dahod",
+   "name": "Dahod",
+   "state": "Gujarat",
+   "city": "Dahod",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-dangs-ahwa",
+   "name": "Dangs (Ahwa)",
+   "state": "Gujarat",
+   "city": "Dangs (Ahwa)",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-devbhoomi-dwarka",
+   "name": "Devbhoomi Dwarka",
+   "state": "Gujarat",
+   "city": "Devbhoomi Dwarka",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-gandhinagar",
+   "name": "Gandhinagar",
+   "state": "Gujarat",
+   "city": "Gandhinagar",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-gir-somnath",
+   "name": "Gir Somnath",
+   "state": "Gujarat",
+   "city": "Gir Somnath",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-jamnagar",
+   "name": "Jamnagar",
+   "state": "Gujarat",
+   "city": "Jamnagar",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-junagadh",
+   "name": "Junagadh",
+   "state": "Gujarat",
+   "city": "Junagadh",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-kachchh",
+   "name": "Kachchh",
+   "state": "Gujarat",
+   "city": "Kachchh",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-kheda-nadiad",
+   "name": "Kheda (Nadiad)",
+   "state": "Gujarat",
+   "city": "Kheda (Nadiad)",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-mahisagar",
+   "name": "Mahisagar",
+   "state": "Gujarat",
+   "city": "Mahisagar",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-mehsana",
+   "name": "Mehsana",
+   "state": "Gujarat",
+   "city": "Mehsana",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-morbi",
+   "name": "Morbi",
+   "state": "Gujarat",
+   "city": "Morbi",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-narmada-rajpipla",
+   "name": "Narmada (Rajpipla)",
+   "state": "Gujarat",
+   "city": "Narmada (Rajpipla)",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-navsari",
+   "name": "Navsari",
+   "state": "Gujarat",
+   "city": "Navsari",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-panchmahal-godhra",
+   "name": "Panchmahal (Godhra)",
+   "state": "Gujarat",
+   "city": "Panchmahal (Godhra)",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-patan",
+   "name": "Patan",
+   "state": "Gujarat",
+   "city": "Patan",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-porbandar",
+   "name": "Porbandar",
+   "state": "Gujarat",
+   "city": "Porbandar",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-rajkot",
+   "name": "Rajkot",
+   "state": "Gujarat",
+   "city": "Rajkot",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-sabarkantha-himmatnagar",
+   "name": "Sabarkantha (Himmatnagar)",
+   "state": "Gujarat",
+   "city": "Sabarkantha (Himmatnagar)",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-surat",
+   "name": "Surat",
+   "state": "Gujarat",
+   "city": "Surat",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-surendranagar",
+   "name": "Surendranagar",
+   "state": "Gujarat",
+   "city": "Surendranagar",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-tapi-vyara",
+   "name": "Tapi (Vyara)",
+   "state": "Gujarat",
+   "city": "Tapi (Vyara)",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-vadodara",
+   "name": "Vadodara",
+   "state": "Gujarat",
+   "city": "Vadodara",
+   "schools": []
+  },
+  {
+   "id": "d-gujarat-valsad",
+   "name": "Valsad",
+   "state": "Gujarat",
+   "city": "Valsad",
+   "schools": []
+  },
+  {
+   "id": "d-haryana-ambala",
+   "name": "Ambala",
+   "state": "Haryana",
+   "city": "Ambala",
+   "schools": []
+  },
+  {
+   "id": "d-haryana-bhiwani",
+   "name": "Bhiwani",
+   "state": "Haryana",
+   "city": "Bhiwani",
+   "schools": []
+  },
+  {
+   "id": "d-haryana-charkhi-dadri",
+   "name": "Charkhi Dadri",
+   "state": "Haryana",
+   "city": "Charkhi Dadri",
+   "schools": []
+  },
+  {
+   "id": "d-haryana-faridabad",
+   "name": "Faridabad",
+   "state": "Haryana",
+   "city": "Faridabad",
+   "schools": []
+  },
+  {
+   "id": "d-haryana-fatehabad",
+   "name": "Fatehabad",
+   "state": "Haryana",
+   "city": "Fatehabad",
+   "schools": []
+  },
+  {
+   "id": "d-haryana-gurgaon",
+   "name": "Gurgaon",
+   "state": "Haryana",
+   "city": "Gurgaon",
+   "schools": []
+  },
+  {
+   "id": "d-haryana-hisar",
+   "name": "Hisar",
+   "state": "Haryana",
+   "city": "Hisar",
+   "schools": []
+  },
+  {
+   "id": "d-haryana-jhajjar",
+   "name": "Jhajjar",
+   "state": "Haryana",
+   "city": "Jhajjar",
+   "schools": []
+  },
+  {
+   "id": "d-haryana-jind",
+   "name": "Jind",
+   "state": "Haryana",
+   "city": "Jind",
+   "schools": []
+  },
+  {
+   "id": "d-haryana-kaithal",
+   "name": "Kaithal",
+   "state": "Haryana",
+   "city": "Kaithal",
+   "schools": []
+  },
+  {
+   "id": "d-haryana-karnal",
+   "name": "Karnal",
+   "state": "Haryana",
+   "city": "Karnal",
+   "schools": []
+  },
+  {
+   "id": "d-haryana-kurukshetra",
+   "name": "Kurukshetra",
+   "state": "Haryana",
+   "city": "Kurukshetra",
+   "schools": []
+  },
+  {
+   "id": "d-haryana-mahendragarh",
+   "name": "Mahendragarh",
+   "state": "Haryana",
+   "city": "Mahendragarh",
+   "schools": []
+  },
+  {
+   "id": "d-haryana-mewat",
+   "name": "Mewat",
+   "state": "Haryana",
+   "city": "Mewat",
+   "schools": []
+  },
+  {
+   "id": "d-haryana-palwal",
+   "name": "Palwal",
+   "state": "Haryana",
+   "city": "Palwal",
+   "schools": []
+  },
+  {
+   "id": "d-haryana-panchkula",
+   "name": "Panchkula",
+   "state": "Haryana",
+   "city": "Panchkula",
+   "schools": []
+  },
+  {
+   "id": "d-haryana-panipat",
+   "name": "Panipat",
+   "state": "Haryana",
+   "city": "Panipat",
+   "schools": []
+  },
+  {
+   "id": "d-haryana-rewari",
+   "name": "Rewari",
+   "state": "Haryana",
+   "city": "Rewari",
+   "schools": []
+  },
+  {
+   "id": "d-haryana-rohtak",
+   "name": "Rohtak",
+   "state": "Haryana",
+   "city": "Rohtak",
+   "schools": []
+  },
+  {
+   "id": "d-haryana-sirsa",
+   "name": "Sirsa",
+   "state": "Haryana",
+   "city": "Sirsa",
+   "schools": []
+  },
+  {
+   "id": "d-haryana-sonipat",
+   "name": "Sonipat",
+   "state": "Haryana",
+   "city": "Sonipat",
+   "schools": []
+  },
+  {
+   "id": "d-haryana-yamunanagar",
+   "name": "Yamunanagar",
+   "state": "Haryana",
+   "city": "Yamunanagar",
+   "schools": []
+  },
+  {
+   "id": "d-himachal-pra-bilaspur",
+   "name": "Bilaspur",
+   "state": "Himachal Pradesh",
+   "city": "Bilaspur",
+   "schools": []
+  },
+  {
+   "id": "d-himachal-pra-chamba",
+   "name": "Chamba",
+   "state": "Himachal Pradesh",
+   "city": "Chamba",
+   "schools": []
+  },
+  {
+   "id": "d-himachal-pra-hamirpur",
+   "name": "Hamirpur",
+   "state": "Himachal Pradesh",
+   "city": "Hamirpur",
+   "schools": []
+  },
+  {
+   "id": "d-himachal-pra-kangra",
+   "name": "Kangra",
+   "state": "Himachal Pradesh",
+   "city": "Kangra",
+   "schools": []
+  },
+  {
+   "id": "d-himachal-pra-kinnaur",
+   "name": "Kinnaur",
+   "state": "Himachal Pradesh",
+   "city": "Kinnaur",
+   "schools": []
+  },
+  {
+   "id": "d-himachal-pra-kullu",
+   "name": "Kullu",
+   "state": "Himachal Pradesh",
+   "city": "Kullu",
+   "schools": []
+  },
+  {
+   "id": "d-himachal-pra-lahaul-amp-spiti",
+   "name": "Lahaul &amp; Spiti",
+   "state": "Himachal Pradesh",
+   "city": "Lahaul &amp; Spiti",
+   "schools": []
+  },
+  {
+   "id": "d-himachal-pra-mandi",
+   "name": "Mandi",
+   "state": "Himachal Pradesh",
+   "city": "Mandi",
+   "schools": []
+  },
+  {
+   "id": "d-himachal-pra-shimla",
+   "name": "Shimla",
+   "state": "Himachal Pradesh",
+   "city": "Shimla",
+   "schools": []
+  },
+  {
+   "id": "d-himachal-pra-sirmaur-sirmour",
+   "name": "Sirmaur (Sirmour)",
+   "state": "Himachal Pradesh",
+   "city": "Sirmaur (Sirmour)",
+   "schools": []
+  },
+  {
+   "id": "d-himachal-pra-solan",
+   "name": "Solan",
+   "state": "Himachal Pradesh",
+   "city": "Solan",
+   "schools": []
+  },
+  {
+   "id": "d-himachal-pra-una",
+   "name": "Una",
+   "state": "Himachal Pradesh",
+   "city": "Una",
+   "schools": []
+  },
+  {
+   "id": "d-jammu-kashmi-anantnag",
+   "name": "Anantnag",
+   "state": "Jammu & Kashmir",
+   "city": "Anantnag",
+   "schools": []
+  },
+  {
+   "id": "d-jammu-kashmi-bandipore",
+   "name": "Bandipore",
+   "state": "Jammu & Kashmir",
+   "city": "Bandipore",
+   "schools": []
+  },
+  {
+   "id": "d-jammu-kashmi-baramulla",
+   "name": "Baramulla",
+   "state": "Jammu & Kashmir",
+   "city": "Baramulla",
+   "schools": []
+  },
+  {
+   "id": "d-jammu-kashmi-budgam",
+   "name": "Budgam",
+   "state": "Jammu & Kashmir",
+   "city": "Budgam",
+   "schools": []
+  },
+  {
+   "id": "d-jammu-kashmi-doda",
+   "name": "Doda",
+   "state": "Jammu & Kashmir",
+   "city": "Doda",
+   "schools": []
+  },
+  {
+   "id": "d-jammu-kashmi-ganderbal",
+   "name": "Ganderbal",
+   "state": "Jammu & Kashmir",
+   "city": "Ganderbal",
+   "schools": []
+  },
+  {
+   "id": "d-jammu-kashmi-jammu",
+   "name": "Jammu",
+   "state": "Jammu & Kashmir",
+   "city": "Jammu",
+   "schools": []
+  },
+  {
+   "id": "d-jammu-kashmi-kathua",
+   "name": "Kathua",
+   "state": "Jammu & Kashmir",
+   "city": "Kathua",
+   "schools": []
+  },
+  {
+   "id": "d-jammu-kashmi-kishtwar",
+   "name": "Kishtwar",
+   "state": "Jammu & Kashmir",
+   "city": "Kishtwar",
+   "schools": []
+  },
+  {
+   "id": "d-jammu-kashmi-kulgam",
+   "name": "Kulgam",
+   "state": "Jammu & Kashmir",
+   "city": "Kulgam",
+   "schools": []
+  },
+  {
+   "id": "d-jammu-kashmi-kupwara",
+   "name": "Kupwara",
+   "state": "Jammu & Kashmir",
+   "city": "Kupwara",
+   "schools": []
+  },
+  {
+   "id": "d-jammu-kashmi-poonch",
+   "name": "Poonch",
+   "state": "Jammu & Kashmir",
+   "city": "Poonch",
+   "schools": []
+  },
+  {
+   "id": "d-jammu-kashmi-pulwama",
+   "name": "Pulwama",
+   "state": "Jammu & Kashmir",
+   "city": "Pulwama",
+   "schools": []
+  },
+  {
+   "id": "d-jammu-kashmi-rajouri",
+   "name": "Rajouri",
+   "state": "Jammu & Kashmir",
+   "city": "Rajouri",
+   "schools": []
+  },
+  {
+   "id": "d-jammu-kashmi-ramban",
+   "name": "Ramban",
+   "state": "Jammu & Kashmir",
+   "city": "Ramban",
+   "schools": []
+  },
+  {
+   "id": "d-jammu-kashmi-reasi",
+   "name": "Reasi",
+   "state": "Jammu & Kashmir",
+   "city": "Reasi",
+   "schools": []
+  },
+  {
+   "id": "d-jammu-kashmi-samba",
+   "name": "Samba",
+   "state": "Jammu & Kashmir",
+   "city": "Samba",
+   "schools": []
+  },
+  {
+   "id": "d-jammu-kashmi-shopian",
+   "name": "Shopian",
+   "state": "Jammu & Kashmir",
+   "city": "Shopian",
+   "schools": []
+  },
+  {
+   "id": "d-jammu-kashmi-srinagar",
+   "name": "Srinagar",
+   "state": "Jammu & Kashmir",
+   "city": "Srinagar",
+   "schools": []
+  },
+  {
+   "id": "d-jammu-kashmi-udhampur",
+   "name": "Udhampur",
+   "state": "Jammu & Kashmir",
+   "city": "Udhampur",
+   "schools": []
+  },
+  {
+   "id": "d-jharkhand-bokaro",
+   "name": "Bokaro",
+   "state": "Jharkhand",
+   "city": "Bokaro",
+   "schools": []
+  },
+  {
+   "id": "d-jharkhand-chatra",
+   "name": "Chatra",
+   "state": "Jharkhand",
+   "city": "Chatra",
+   "schools": []
+  },
+  {
+   "id": "d-jharkhand-deoghar",
+   "name": "Deoghar",
+   "state": "Jharkhand",
+   "city": "Deoghar",
+   "schools": []
+  },
+  {
+   "id": "d-jharkhand-dhanbad",
+   "name": "Dhanbad",
+   "state": "Jharkhand",
+   "city": "Dhanbad",
+   "schools": []
+  },
+  {
+   "id": "d-jharkhand-dumka",
+   "name": "Dumka",
+   "state": "Jharkhand",
+   "city": "Dumka",
+   "schools": []
+  },
+  {
+   "id": "d-jharkhand-east-singhbhum",
+   "name": "East Singhbhum",
+   "state": "Jharkhand",
+   "city": "East Singhbhum",
+   "schools": []
+  },
+  {
+   "id": "d-jharkhand-garhwa",
+   "name": "Garhwa",
+   "state": "Jharkhand",
+   "city": "Garhwa",
+   "schools": []
+  },
+  {
+   "id": "d-jharkhand-giridih",
+   "name": "Giridih",
+   "state": "Jharkhand",
+   "city": "Giridih",
+   "schools": []
+  },
+  {
+   "id": "d-jharkhand-godda",
+   "name": "Godda",
+   "state": "Jharkhand",
+   "city": "Godda",
+   "schools": []
+  },
+  {
+   "id": "d-jharkhand-gumla",
+   "name": "Gumla",
+   "state": "Jharkhand",
+   "city": "Gumla",
+   "schools": []
+  },
+  {
+   "id": "d-jharkhand-hazaribag",
+   "name": "Hazaribag",
+   "state": "Jharkhand",
+   "city": "Hazaribag",
+   "schools": []
+  },
+  {
+   "id": "d-jharkhand-jamtara",
+   "name": "Jamtara",
+   "state": "Jharkhand",
+   "city": "Jamtara",
+   "schools": []
+  },
+  {
+   "id": "d-jharkhand-khunti",
+   "name": "Khunti",
+   "state": "Jharkhand",
+   "city": "Khunti",
+   "schools": []
+  },
+  {
+   "id": "d-jharkhand-koderma",
+   "name": "Koderma",
+   "state": "Jharkhand",
+   "city": "Koderma",
+   "schools": []
+  },
+  {
+   "id": "d-jharkhand-latehar",
+   "name": "Latehar",
+   "state": "Jharkhand",
+   "city": "Latehar",
+   "schools": []
+  },
+  {
+   "id": "d-jharkhand-lohardaga",
+   "name": "Lohardaga",
+   "state": "Jharkhand",
+   "city": "Lohardaga",
+   "schools": []
+  },
+  {
+   "id": "d-jharkhand-pakur",
+   "name": "Pakur",
+   "state": "Jharkhand",
+   "city": "Pakur",
+   "schools": []
+  },
+  {
+   "id": "d-jharkhand-palamu",
+   "name": "Palamu",
+   "state": "Jharkhand",
+   "city": "Palamu",
+   "schools": []
+  },
+  {
+   "id": "d-jharkhand-ramgarh",
+   "name": "Ramgarh",
+   "state": "Jharkhand",
+   "city": "Ramgarh",
+   "schools": []
+  },
+  {
+   "id": "d-jharkhand-ranchi",
+   "name": "Ranchi",
+   "state": "Jharkhand",
+   "city": "Ranchi",
+   "schools": []
+  },
+  {
+   "id": "d-jharkhand-sahibganj",
+   "name": "Sahibganj",
+   "state": "Jharkhand",
+   "city": "Sahibganj",
+   "schools": []
+  },
+  {
+   "id": "d-jharkhand-seraikela-kharsawan",
+   "name": "Seraikela-Kharsawan",
+   "state": "Jharkhand",
+   "city": "Seraikela-Kharsawan",
+   "schools": []
+  },
+  {
+   "id": "d-jharkhand-simdega",
+   "name": "Simdega",
+   "state": "Jharkhand",
+   "city": "Simdega",
+   "schools": []
+  },
+  {
+   "id": "d-jharkhand-west-singhbhum",
+   "name": "West Singhbhum",
+   "state": "Jharkhand",
+   "city": "West Singhbhum",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-bagalkot",
+   "name": "Bagalkot",
+   "state": "Karnataka",
+   "city": "Bagalkot",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-ballari-bellary",
+   "name": "Ballari (Bellary)",
+   "state": "Karnataka",
+   "city": "Ballari (Bellary)",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-belagavi-belgaum",
+   "name": "Belagavi (Belgaum)",
+   "state": "Karnataka",
+   "city": "Belagavi (Belgaum)",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-bengaluru-bangalore-rural",
+   "name": "Bengaluru (Bangalore) Rural",
+   "state": "Karnataka",
+   "city": "Bengaluru (Bangalore) Rural",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-bengaluru-bangalore-urban",
+   "name": "Bengaluru (Bangalore) Urban",
+   "state": "Karnataka",
+   "city": "Bengaluru (Bangalore) Urban",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-bidar",
+   "name": "Bidar",
+   "state": "Karnataka",
+   "city": "Bidar",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-chamarajanagar",
+   "name": "Chamarajanagar",
+   "state": "Karnataka",
+   "city": "Chamarajanagar",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-chikballapur",
+   "name": "Chikballapur",
+   "state": "Karnataka",
+   "city": "Chikballapur",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-chikkamagaluru-chikmagalur",
+   "name": "Chikkamagaluru (Chikmagalur)",
+   "state": "Karnataka",
+   "city": "Chikkamagaluru (Chikmagalur)",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-chitradurga",
+   "name": "Chitradurga",
+   "state": "Karnataka",
+   "city": "Chitradurga",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-dakshina-kannada",
+   "name": "Dakshina Kannada",
+   "state": "Karnataka",
+   "city": "Dakshina Kannada",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-davangere",
+   "name": "Davangere",
+   "state": "Karnataka",
+   "city": "Davangere",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-dharwad",
+   "name": "Dharwad",
+   "state": "Karnataka",
+   "city": "Dharwad",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-gadag",
+   "name": "Gadag",
+   "state": "Karnataka",
+   "city": "Gadag",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-hassan",
+   "name": "Hassan",
+   "state": "Karnataka",
+   "city": "Hassan",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-haveri",
+   "name": "Haveri",
+   "state": "Karnataka",
+   "city": "Haveri",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-kalaburagi-gulbarga",
+   "name": "Kalaburagi (Gulbarga)",
+   "state": "Karnataka",
+   "city": "Kalaburagi (Gulbarga)",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-kodagu",
+   "name": "Kodagu",
+   "state": "Karnataka",
+   "city": "Kodagu",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-kolar",
+   "name": "Kolar",
+   "state": "Karnataka",
+   "city": "Kolar",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-koppal",
+   "name": "Koppal",
+   "state": "Karnataka",
+   "city": "Koppal",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-mandya",
+   "name": "Mandya",
+   "state": "Karnataka",
+   "city": "Mandya",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-mysuru-mysore",
+   "name": "Mysuru (Mysore)",
+   "state": "Karnataka",
+   "city": "Mysuru (Mysore)",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-raichur",
+   "name": "Raichur",
+   "state": "Karnataka",
+   "city": "Raichur",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-ramanagara",
+   "name": "Ramanagara",
+   "state": "Karnataka",
+   "city": "Ramanagara",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-shivamogga-shimoga",
+   "name": "Shivamogga (Shimoga)",
+   "state": "Karnataka",
+   "city": "Shivamogga (Shimoga)",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-tumakuru-tumkur",
+   "name": "Tumakuru (Tumkur)",
+   "state": "Karnataka",
+   "city": "Tumakuru (Tumkur)",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-udupi",
+   "name": "Udupi",
+   "state": "Karnataka",
+   "city": "Udupi",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-uttara-kannada-karwar",
+   "name": "Uttara Kannada (Karwar)",
+   "state": "Karnataka",
+   "city": "Uttara Kannada (Karwar)",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-vijayapura-bijapur",
+   "name": "Vijayapura (Bijapur)",
+   "state": "Karnataka",
+   "city": "Vijayapura (Bijapur)",
+   "schools": []
+  },
+  {
+   "id": "d-karnataka-yadgir",
+   "name": "Yadgir",
+   "state": "Karnataka",
+   "city": "Yadgir",
+   "schools": []
+  },
+  {
+   "id": "d-kerala-alappuzha",
+   "name": "Alappuzha",
+   "state": "Kerala",
+   "city": "Alappuzha",
+   "schools": []
+  },
+  {
+   "id": "d-kerala-ernakulam",
+   "name": "Ernakulam",
+   "state": "Kerala",
+   "city": "Ernakulam",
+   "schools": []
+  },
+  {
+   "id": "d-kerala-idukki",
+   "name": "Idukki",
+   "state": "Kerala",
+   "city": "Idukki",
+   "schools": []
+  },
+  {
+   "id": "d-kerala-kannur",
+   "name": "Kannur",
+   "state": "Kerala",
+   "city": "Kannur",
+   "schools": []
+  },
+  {
+   "id": "d-kerala-kasaragod",
+   "name": "Kasaragod",
+   "state": "Kerala",
+   "city": "Kasaragod",
+   "schools": []
+  },
+  {
+   "id": "d-kerala-kollam",
+   "name": "Kollam",
+   "state": "Kerala",
+   "city": "Kollam",
+   "schools": []
+  },
+  {
+   "id": "d-kerala-kottayam",
+   "name": "Kottayam",
+   "state": "Kerala",
+   "city": "Kottayam",
+   "schools": []
+  },
+  {
+   "id": "d-kerala-kozhikode",
+   "name": "Kozhikode",
+   "state": "Kerala",
+   "city": "Kozhikode",
+   "schools": []
+  },
+  {
+   "id": "d-kerala-malappuram",
+   "name": "Malappuram",
+   "state": "Kerala",
+   "city": "Malappuram",
+   "schools": []
+  },
+  {
+   "id": "d-kerala-palakkad",
+   "name": "Palakkad",
+   "state": "Kerala",
+   "city": "Palakkad",
+   "schools": []
+  },
+  {
+   "id": "d-kerala-pathanamthitta",
+   "name": "Pathanamthitta",
+   "state": "Kerala",
+   "city": "Pathanamthitta",
+   "schools": []
+  },
+  {
+   "id": "d-kerala-thiruvananthapuram",
+   "name": "Thiruvananthapuram",
+   "state": "Kerala",
+   "city": "Thiruvananthapuram",
+   "schools": []
+  },
+  {
+   "id": "d-kerala-thrissur",
+   "name": "Thrissur",
+   "state": "Kerala",
+   "city": "Thrissur",
+   "schools": []
+  },
+  {
+   "id": "d-kerala-wayanad",
+   "name": "Wayanad",
+   "state": "Kerala",
+   "city": "Wayanad",
+   "schools": []
+  },
+  {
+   "id": "d-ladakh-kargil",
+   "name": "Kargil",
+   "state": "Ladakh",
+   "city": "Kargil",
+   "schools": []
+  },
+  {
+   "id": "d-ladakh-leh",
+   "name": "Leh",
+   "state": "Ladakh",
+   "city": "Leh",
+   "schools": []
+  },
+  {
+   "id": "d-lakshadweep-agatti",
+   "name": "Agatti",
+   "state": "Lakshadweep",
+   "city": "Agatti",
+   "schools": []
+  },
+  {
+   "id": "d-lakshadweep-amini",
+   "name": "Amini",
+   "state": "Lakshadweep",
+   "city": "Amini",
+   "schools": []
+  },
+  {
+   "id": "d-lakshadweep-androth",
+   "name": "Androth",
+   "state": "Lakshadweep",
+   "city": "Androth",
+   "schools": []
+  },
+  {
+   "id": "d-lakshadweep-bithra",
+   "name": "Bithra",
+   "state": "Lakshadweep",
+   "city": "Bithra",
+   "schools": []
+  },
+  {
+   "id": "d-lakshadweep-chethlath",
+   "name": "Chethlath",
+   "state": "Lakshadweep",
+   "city": "Chethlath",
+   "schools": []
+  },
+  {
+   "id": "d-lakshadweep-kadmath",
+   "name": "Kadmath",
+   "state": "Lakshadweep",
+   "city": "Kadmath",
+   "schools": []
+  },
+  {
+   "id": "d-lakshadweep-kalpeni",
+   "name": "Kalpeni",
+   "state": "Lakshadweep",
+   "city": "Kalpeni",
+   "schools": []
+  },
+  {
+   "id": "d-lakshadweep-kavaratti",
+   "name": "Kavaratti",
+   "state": "Lakshadweep",
+   "city": "Kavaratti",
+   "schools": []
+  },
+  {
+   "id": "d-lakshadweep-kilthan",
+   "name": "Kilthan",
+   "state": "Lakshadweep",
+   "city": "Kilthan",
+   "schools": []
+  },
+  {
+   "id": "d-lakshadweep-minicoy",
+   "name": "Minicoy",
+   "state": "Lakshadweep",
+   "city": "Minicoy",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-agar-malwa",
+   "name": "Agar Malwa",
+   "state": "Madhya Pradesh",
+   "city": "Agar Malwa",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-alirajpur",
+   "name": "Alirajpur",
+   "state": "Madhya Pradesh",
+   "city": "Alirajpur",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-anuppur",
+   "name": "Anuppur",
+   "state": "Madhya Pradesh",
+   "city": "Anuppur",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-ashoknagar",
+   "name": "Ashoknagar",
+   "state": "Madhya Pradesh",
+   "city": "Ashoknagar",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-balaghat",
+   "name": "Balaghat",
+   "state": "Madhya Pradesh",
+   "city": "Balaghat",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-barwani",
+   "name": "Barwani",
+   "state": "Madhya Pradesh",
+   "city": "Barwani",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-betul",
+   "name": "Betul",
+   "state": "Madhya Pradesh",
+   "city": "Betul",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-bhind",
+   "name": "Bhind",
+   "state": "Madhya Pradesh",
+   "city": "Bhind",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-bhopal",
+   "name": "Bhopal",
+   "state": "Madhya Pradesh",
+   "city": "Bhopal",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-burhanpur",
+   "name": "Burhanpur",
+   "state": "Madhya Pradesh",
+   "city": "Burhanpur",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-chhatarpur",
+   "name": "Chhatarpur",
+   "state": "Madhya Pradesh",
+   "city": "Chhatarpur",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-chhindwara",
+   "name": "Chhindwara",
+   "state": "Madhya Pradesh",
+   "city": "Chhindwara",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-damoh",
+   "name": "Damoh",
+   "state": "Madhya Pradesh",
+   "city": "Damoh",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-datia",
+   "name": "Datia",
+   "state": "Madhya Pradesh",
+   "city": "Datia",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-dewas",
+   "name": "Dewas",
+   "state": "Madhya Pradesh",
+   "city": "Dewas",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-dhar",
+   "name": "Dhar",
+   "state": "Madhya Pradesh",
+   "city": "Dhar",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-dindori",
+   "name": "Dindori",
+   "state": "Madhya Pradesh",
+   "city": "Dindori",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-guna",
+   "name": "Guna",
+   "state": "Madhya Pradesh",
+   "city": "Guna",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-gwalior",
+   "name": "Gwalior",
+   "state": "Madhya Pradesh",
+   "city": "Gwalior",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-harda",
+   "name": "Harda",
+   "state": "Madhya Pradesh",
+   "city": "Harda",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-hoshangabad",
+   "name": "Hoshangabad",
+   "state": "Madhya Pradesh",
+   "city": "Hoshangabad",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-indore",
+   "name": "Indore",
+   "state": "Madhya Pradesh",
+   "city": "Indore",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-jabalpur",
+   "name": "Jabalpur",
+   "state": "Madhya Pradesh",
+   "city": "Jabalpur",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-jhabua",
+   "name": "Jhabua",
+   "state": "Madhya Pradesh",
+   "city": "Jhabua",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-katni",
+   "name": "Katni",
+   "state": "Madhya Pradesh",
+   "city": "Katni",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-khandwa",
+   "name": "Khandwa",
+   "state": "Madhya Pradesh",
+   "city": "Khandwa",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-khargone",
+   "name": "Khargone",
+   "state": "Madhya Pradesh",
+   "city": "Khargone",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-mandla",
+   "name": "Mandla",
+   "state": "Madhya Pradesh",
+   "city": "Mandla",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-mandsaur",
+   "name": "Mandsaur",
+   "state": "Madhya Pradesh",
+   "city": "Mandsaur",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-morena",
+   "name": "Morena",
+   "state": "Madhya Pradesh",
+   "city": "Morena",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-narsinghpur",
+   "name": "Narsinghpur",
+   "state": "Madhya Pradesh",
+   "city": "Narsinghpur",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-neemuch",
+   "name": "Neemuch",
+   "state": "Madhya Pradesh",
+   "city": "Neemuch",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-panna",
+   "name": "Panna",
+   "state": "Madhya Pradesh",
+   "city": "Panna",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-raisen",
+   "name": "Raisen",
+   "state": "Madhya Pradesh",
+   "city": "Raisen",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-rajgarh",
+   "name": "Rajgarh",
+   "state": "Madhya Pradesh",
+   "city": "Rajgarh",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-ratlam",
+   "name": "Ratlam",
+   "state": "Madhya Pradesh",
+   "city": "Ratlam",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-rewa",
+   "name": "Rewa",
+   "state": "Madhya Pradesh",
+   "city": "Rewa",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-sagar",
+   "name": "Sagar",
+   "state": "Madhya Pradesh",
+   "city": "Sagar",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-satna",
+   "name": "Satna",
+   "state": "Madhya Pradesh",
+   "city": "Satna",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-sehore",
+   "name": "Sehore",
+   "state": "Madhya Pradesh",
+   "city": "Sehore",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-seoni",
+   "name": "Seoni",
+   "state": "Madhya Pradesh",
+   "city": "Seoni",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-shahdol",
+   "name": "Shahdol",
+   "state": "Madhya Pradesh",
+   "city": "Shahdol",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-shajapur",
+   "name": "Shajapur",
+   "state": "Madhya Pradesh",
+   "city": "Shajapur",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-sheopur",
+   "name": "Sheopur",
+   "state": "Madhya Pradesh",
+   "city": "Sheopur",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-shivpuri",
+   "name": "Shivpuri",
+   "state": "Madhya Pradesh",
+   "city": "Shivpuri",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-sidhi",
+   "name": "Sidhi",
+   "state": "Madhya Pradesh",
+   "city": "Sidhi",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-singrauli",
+   "name": "Singrauli",
+   "state": "Madhya Pradesh",
+   "city": "Singrauli",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-tikamgarh",
+   "name": "Tikamgarh",
+   "state": "Madhya Pradesh",
+   "city": "Tikamgarh",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-ujjain",
+   "name": "Ujjain",
+   "state": "Madhya Pradesh",
+   "city": "Ujjain",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-umaria",
+   "name": "Umaria",
+   "state": "Madhya Pradesh",
+   "city": "Umaria",
+   "schools": []
+  },
+  {
+   "id": "d-madhya-prade-vidisha",
+   "name": "Vidisha",
+   "state": "Madhya Pradesh",
+   "city": "Vidisha",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-ahmednagar",
+   "name": "Ahmednagar",
+   "state": "Maharashtra",
+   "city": "Ahmednagar",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-akola",
+   "name": "Akola",
+   "state": "Maharashtra",
+   "city": "Akola",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-amravati",
+   "name": "Amravati",
+   "state": "Maharashtra",
+   "city": "Amravati",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-aurangabad",
+   "name": "Aurangabad",
+   "state": "Maharashtra",
+   "city": "Aurangabad",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-beed",
+   "name": "Beed",
+   "state": "Maharashtra",
+   "city": "Beed",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-bhandara",
+   "name": "Bhandara",
+   "state": "Maharashtra",
+   "city": "Bhandara",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-buldhana",
+   "name": "Buldhana",
+   "state": "Maharashtra",
+   "city": "Buldhana",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-chandrapur",
+   "name": "Chandrapur",
+   "state": "Maharashtra",
+   "city": "Chandrapur",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-dhule",
+   "name": "Dhule",
+   "state": "Maharashtra",
+   "city": "Dhule",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-gadchiroli",
+   "name": "Gadchiroli",
+   "state": "Maharashtra",
+   "city": "Gadchiroli",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-gondia",
+   "name": "Gondia",
+   "state": "Maharashtra",
+   "city": "Gondia",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-hingoli",
+   "name": "Hingoli",
+   "state": "Maharashtra",
+   "city": "Hingoli",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-jalgaon",
+   "name": "Jalgaon",
+   "state": "Maharashtra",
+   "city": "Jalgaon",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-jalna",
+   "name": "Jalna",
+   "state": "Maharashtra",
+   "city": "Jalna",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-kolhapur",
+   "name": "Kolhapur",
+   "state": "Maharashtra",
+   "city": "Kolhapur",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-latur",
+   "name": "Latur",
+   "state": "Maharashtra",
+   "city": "Latur",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-mumbai-city",
+   "name": "Mumbai City",
+   "state": "Maharashtra",
+   "city": "Mumbai City",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-mumbai-suburban",
+   "name": "Mumbai Suburban",
+   "state": "Maharashtra",
+   "city": "Mumbai Suburban",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-nagpur",
+   "name": "Nagpur",
+   "state": "Maharashtra",
+   "city": "Nagpur",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-nanded",
+   "name": "Nanded",
+   "state": "Maharashtra",
+   "city": "Nanded",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-nandurbar",
+   "name": "Nandurbar",
+   "state": "Maharashtra",
+   "city": "Nandurbar",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-nashik",
+   "name": "Nashik",
+   "state": "Maharashtra",
+   "city": "Nashik",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-osmanabad",
+   "name": "Osmanabad",
+   "state": "Maharashtra",
+   "city": "Osmanabad",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-palghar",
+   "name": "Palghar",
+   "state": "Maharashtra",
+   "city": "Palghar",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-parbhani",
+   "name": "Parbhani",
+   "state": "Maharashtra",
+   "city": "Parbhani",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-pune",
+   "name": "Pune",
+   "state": "Maharashtra",
+   "city": "Pune",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-raigad",
+   "name": "Raigad",
+   "state": "Maharashtra",
+   "city": "Raigad",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-ratnagiri",
+   "name": "Ratnagiri",
+   "state": "Maharashtra",
+   "city": "Ratnagiri",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-sangli",
+   "name": "Sangli",
+   "state": "Maharashtra",
+   "city": "Sangli",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-satara",
+   "name": "Satara",
+   "state": "Maharashtra",
+   "city": "Satara",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-sindhudurg",
+   "name": "Sindhudurg",
+   "state": "Maharashtra",
+   "city": "Sindhudurg",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-solapur",
+   "name": "Solapur",
+   "state": "Maharashtra",
+   "city": "Solapur",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-thane",
+   "name": "Thane",
+   "state": "Maharashtra",
+   "city": "Thane",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-wardha",
+   "name": "Wardha",
+   "state": "Maharashtra",
+   "city": "Wardha",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-washim",
+   "name": "Washim",
+   "state": "Maharashtra",
+   "city": "Washim",
+   "schools": []
+  },
+  {
+   "id": "d-maharashtra-yavatmal",
+   "name": "Yavatmal",
+   "state": "Maharashtra",
+   "city": "Yavatmal",
+   "schools": []
+  },
+  {
+   "id": "d-manipur-bishnupur",
+   "name": "Bishnupur",
+   "state": "Manipur",
+   "city": "Bishnupur",
+   "schools": []
+  },
+  {
+   "id": "d-manipur-chandel",
+   "name": "Chandel",
+   "state": "Manipur",
+   "city": "Chandel",
+   "schools": []
+  },
+  {
+   "id": "d-manipur-churachandpur",
+   "name": "Churachandpur",
+   "state": "Manipur",
+   "city": "Churachandpur",
+   "schools": []
+  },
+  {
+   "id": "d-manipur-imphal-east",
+   "name": "Imphal East",
+   "state": "Manipur",
+   "city": "Imphal East",
+   "schools": []
+  },
+  {
+   "id": "d-manipur-imphal-west",
+   "name": "Imphal West",
+   "state": "Manipur",
+   "city": "Imphal West",
+   "schools": []
+  },
+  {
+   "id": "d-manipur-jiribam",
+   "name": "Jiribam",
+   "state": "Manipur",
+   "city": "Jiribam",
+   "schools": []
+  },
+  {
+   "id": "d-manipur-kakching",
+   "name": "Kakching",
+   "state": "Manipur",
+   "city": "Kakching",
+   "schools": []
+  },
+  {
+   "id": "d-manipur-kamjong",
+   "name": "Kamjong",
+   "state": "Manipur",
+   "city": "Kamjong",
+   "schools": []
+  },
+  {
+   "id": "d-manipur-kangpokpi",
+   "name": "Kangpokpi",
+   "state": "Manipur",
+   "city": "Kangpokpi",
+   "schools": []
+  },
+  {
+   "id": "d-manipur-noney",
+   "name": "Noney",
+   "state": "Manipur",
+   "city": "Noney",
+   "schools": []
+  },
+  {
+   "id": "d-manipur-pherzawl",
+   "name": "Pherzawl",
+   "state": "Manipur",
+   "city": "Pherzawl",
+   "schools": []
+  },
+  {
+   "id": "d-manipur-senapati",
+   "name": "Senapati",
+   "state": "Manipur",
+   "city": "Senapati",
+   "schools": []
+  },
+  {
+   "id": "d-manipur-tamenglong",
+   "name": "Tamenglong",
+   "state": "Manipur",
+   "city": "Tamenglong",
+   "schools": []
+  },
+  {
+   "id": "d-manipur-tengnoupal",
+   "name": "Tengnoupal",
+   "state": "Manipur",
+   "city": "Tengnoupal",
+   "schools": []
+  },
+  {
+   "id": "d-manipur-thoubal",
+   "name": "Thoubal",
+   "state": "Manipur",
+   "city": "Thoubal",
+   "schools": []
+  },
+  {
+   "id": "d-manipur-ukhrul",
+   "name": "Ukhrul",
+   "state": "Manipur",
+   "city": "Ukhrul",
+   "schools": []
+  },
+  {
+   "id": "d-meghalaya-east-garo-hills",
+   "name": "East Garo Hills",
+   "state": "Meghalaya",
+   "city": "East Garo Hills",
+   "schools": []
+  },
+  {
+   "id": "d-meghalaya-east-jaintia-hills",
+   "name": "East Jaintia Hills",
+   "state": "Meghalaya",
+   "city": "East Jaintia Hills",
+   "schools": []
+  },
+  {
+   "id": "d-meghalaya-east-khasi-hills",
+   "name": "East Khasi Hills",
+   "state": "Meghalaya",
+   "city": "East Khasi Hills",
+   "schools": []
+  },
+  {
+   "id": "d-meghalaya-north-garo-hills",
+   "name": "North Garo Hills",
+   "state": "Meghalaya",
+   "city": "North Garo Hills",
+   "schools": []
+  },
+  {
+   "id": "d-meghalaya-ri-bhoi",
+   "name": "Ri Bhoi",
+   "state": "Meghalaya",
+   "city": "Ri Bhoi",
+   "schools": []
+  },
+  {
+   "id": "d-meghalaya-south-garo-hills",
+   "name": "South Garo Hills",
+   "state": "Meghalaya",
+   "city": "South Garo Hills",
+   "schools": []
+  },
+  {
+   "id": "d-meghalaya-south-west-garo-hills",
+   "name": "South West Garo Hills ",
+   "state": "Meghalaya",
+   "city": "South West Garo Hills ",
+   "schools": []
+  },
+  {
+   "id": "d-meghalaya-south-west-khasi-hills",
+   "name": "South West Khasi Hills",
+   "state": "Meghalaya",
+   "city": "South West Khasi Hills",
+   "schools": []
+  },
+  {
+   "id": "d-meghalaya-west-garo-hills",
+   "name": "West Garo Hills",
+   "state": "Meghalaya",
+   "city": "West Garo Hills",
+   "schools": []
+  },
+  {
+   "id": "d-meghalaya-west-jaintia-hills",
+   "name": "West Jaintia Hills",
+   "state": "Meghalaya",
+   "city": "West Jaintia Hills",
+   "schools": []
+  },
+  {
+   "id": "d-meghalaya-west-khasi-hills",
+   "name": "West Khasi Hills",
+   "state": "Meghalaya",
+   "city": "West Khasi Hills",
+   "schools": []
+  },
+  {
+   "id": "d-mizoram-aizawl",
+   "name": "Aizawl",
+   "state": "Mizoram",
+   "city": "Aizawl",
+   "schools": []
+  },
+  {
+   "id": "d-mizoram-champhai",
+   "name": "Champhai",
+   "state": "Mizoram",
+   "city": "Champhai",
+   "schools": []
+  },
+  {
+   "id": "d-mizoram-kolasib",
+   "name": "Kolasib",
+   "state": "Mizoram",
+   "city": "Kolasib",
+   "schools": []
+  },
+  {
+   "id": "d-mizoram-lawngtlai",
+   "name": "Lawngtlai",
+   "state": "Mizoram",
+   "city": "Lawngtlai",
+   "schools": []
+  },
+  {
+   "id": "d-mizoram-lunglei",
+   "name": "Lunglei",
+   "state": "Mizoram",
+   "city": "Lunglei",
+   "schools": []
+  },
+  {
+   "id": "d-mizoram-mamit",
+   "name": "Mamit",
+   "state": "Mizoram",
+   "city": "Mamit",
+   "schools": []
+  },
+  {
+   "id": "d-mizoram-saiha",
+   "name": "Saiha",
+   "state": "Mizoram",
+   "city": "Saiha",
+   "schools": []
+  },
+  {
+   "id": "d-mizoram-serchhip",
+   "name": "Serchhip",
+   "state": "Mizoram",
+   "city": "Serchhip",
+   "schools": []
+  },
+  {
+   "id": "d-nagaland-dimapur",
+   "name": "Dimapur",
+   "state": "Nagaland",
+   "city": "Dimapur",
+   "schools": []
+  },
+  {
+   "id": "d-nagaland-kiphire",
+   "name": "Kiphire",
+   "state": "Nagaland",
+   "city": "Kiphire",
+   "schools": []
+  },
+  {
+   "id": "d-nagaland-kohima",
+   "name": "Kohima",
+   "state": "Nagaland",
+   "city": "Kohima",
+   "schools": []
+  },
+  {
+   "id": "d-nagaland-longleng",
+   "name": "Longleng",
+   "state": "Nagaland",
+   "city": "Longleng",
+   "schools": []
+  },
+  {
+   "id": "d-nagaland-mokokchung",
+   "name": "Mokokchung",
+   "state": "Nagaland",
+   "city": "Mokokchung",
+   "schools": []
+  },
+  {
+   "id": "d-nagaland-mon",
+   "name": "Mon",
+   "state": "Nagaland",
+   "city": "Mon",
+   "schools": []
+  },
+  {
+   "id": "d-nagaland-peren",
+   "name": "Peren",
+   "state": "Nagaland",
+   "city": "Peren",
+   "schools": []
+  },
+  {
+   "id": "d-nagaland-phek",
+   "name": "Phek",
+   "state": "Nagaland",
+   "city": "Phek",
+   "schools": []
+  },
+  {
+   "id": "d-nagaland-tuensang",
+   "name": "Tuensang",
+   "state": "Nagaland",
+   "city": "Tuensang",
+   "schools": []
+  },
+  {
+   "id": "d-nagaland-wokha",
+   "name": "Wokha",
+   "state": "Nagaland",
+   "city": "Wokha",
+   "schools": []
+  },
+  {
+   "id": "d-nagaland-zunheboto",
+   "name": "Zunheboto",
+   "state": "Nagaland",
+   "city": "Zunheboto",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-angul",
+   "name": "Angul",
+   "state": "Odisha",
+   "city": "Angul",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-balangir",
+   "name": "Balangir",
+   "state": "Odisha",
+   "city": "Balangir",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-balasore",
+   "name": "Balasore",
+   "state": "Odisha",
+   "city": "Balasore",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-bargarh",
+   "name": "Bargarh",
+   "state": "Odisha",
+   "city": "Bargarh",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-bhadrak",
+   "name": "Bhadrak",
+   "state": "Odisha",
+   "city": "Bhadrak",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-boudh",
+   "name": "Boudh",
+   "state": "Odisha",
+   "city": "Boudh",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-cuttack",
+   "name": "Cuttack",
+   "state": "Odisha",
+   "city": "Cuttack",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-deogarh",
+   "name": "Deogarh",
+   "state": "Odisha",
+   "city": "Deogarh",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-dhenkanal",
+   "name": "Dhenkanal",
+   "state": "Odisha",
+   "city": "Dhenkanal",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-gajapati",
+   "name": "Gajapati",
+   "state": "Odisha",
+   "city": "Gajapati",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-ganjam",
+   "name": "Ganjam",
+   "state": "Odisha",
+   "city": "Ganjam",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-jagatsinghapur",
+   "name": "Jagatsinghapur",
+   "state": "Odisha",
+   "city": "Jagatsinghapur",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-jajpur",
+   "name": "Jajpur",
+   "state": "Odisha",
+   "city": "Jajpur",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-jharsuguda",
+   "name": "Jharsuguda",
+   "state": "Odisha",
+   "city": "Jharsuguda",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-kalahandi",
+   "name": "Kalahandi",
+   "state": "Odisha",
+   "city": "Kalahandi",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-kandhamal",
+   "name": "Kandhamal",
+   "state": "Odisha",
+   "city": "Kandhamal",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-kendrapara",
+   "name": "Kendrapara",
+   "state": "Odisha",
+   "city": "Kendrapara",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-kendujhar-keonjhar",
+   "name": "Kendujhar (Keonjhar)",
+   "state": "Odisha",
+   "city": "Kendujhar (Keonjhar)",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-khordha",
+   "name": "Khordha",
+   "state": "Odisha",
+   "city": "Khordha",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-koraput",
+   "name": "Koraput",
+   "state": "Odisha",
+   "city": "Koraput",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-malkangiri",
+   "name": "Malkangiri",
+   "state": "Odisha",
+   "city": "Malkangiri",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-mayurbhanj",
+   "name": "Mayurbhanj",
+   "state": "Odisha",
+   "city": "Mayurbhanj",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-nabarangpur",
+   "name": "Nabarangpur",
+   "state": "Odisha",
+   "city": "Nabarangpur",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-nayagarh",
+   "name": "Nayagarh",
+   "state": "Odisha",
+   "city": "Nayagarh",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-nuapada",
+   "name": "Nuapada",
+   "state": "Odisha",
+   "city": "Nuapada",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-puri",
+   "name": "Puri",
+   "state": "Odisha",
+   "city": "Puri",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-rayagada",
+   "name": "Rayagada",
+   "state": "Odisha",
+   "city": "Rayagada",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-sambalpur",
+   "name": "Sambalpur",
+   "state": "Odisha",
+   "city": "Sambalpur",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-sonepur",
+   "name": "Sonepur",
+   "state": "Odisha",
+   "city": "Sonepur",
+   "schools": []
+  },
+  {
+   "id": "d-odisha-sundargarh",
+   "name": "Sundargarh",
+   "state": "Odisha",
+   "city": "Sundargarh",
+   "schools": []
+  },
+  {
+   "id": "d-puducherry-karaikal",
+   "name": "Karaikal",
+   "state": "Puducherry",
+   "city": "Karaikal",
+   "schools": []
+  },
+  {
+   "id": "d-puducherry-mahe",
+   "name": "Mahe",
+   "state": "Puducherry",
+   "city": "Mahe",
+   "schools": []
+  },
+  {
+   "id": "d-puducherry-pondicherry",
+   "name": "Pondicherry",
+   "state": "Puducherry",
+   "city": "Pondicherry",
+   "schools": []
+  },
+  {
+   "id": "d-puducherry-yanam",
+   "name": "Yanam",
+   "state": "Puducherry",
+   "city": "Yanam",
+   "schools": []
+  },
+  {
+   "id": "d-punjab-amritsar",
+   "name": "Amritsar",
+   "state": "Punjab",
+   "city": "Amritsar",
+   "schools": []
+  },
+  {
+   "id": "d-punjab-barnala",
+   "name": "Barnala",
+   "state": "Punjab",
+   "city": "Barnala",
+   "schools": []
+  },
+  {
+   "id": "d-punjab-bathinda",
+   "name": "Bathinda",
+   "state": "Punjab",
+   "city": "Bathinda",
+   "schools": []
+  },
+  {
+   "id": "d-punjab-faridkot",
+   "name": "Faridkot",
+   "state": "Punjab",
+   "city": "Faridkot",
+   "schools": []
+  },
+  {
+   "id": "d-punjab-fatehgarh-sahib",
+   "name": "Fatehgarh Sahib",
+   "state": "Punjab",
+   "city": "Fatehgarh Sahib",
+   "schools": []
+  },
+  {
+   "id": "d-punjab-fazilka",
+   "name": "Fazilka",
+   "state": "Punjab",
+   "city": "Fazilka",
+   "schools": []
+  },
+  {
+   "id": "d-punjab-ferozepur",
+   "name": "Ferozepur",
+   "state": "Punjab",
+   "city": "Ferozepur",
+   "schools": []
+  },
+  {
+   "id": "d-punjab-gurdaspur",
+   "name": "Gurdaspur",
+   "state": "Punjab",
+   "city": "Gurdaspur",
+   "schools": []
+  },
+  {
+   "id": "d-punjab-hoshiarpur",
+   "name": "Hoshiarpur",
+   "state": "Punjab",
+   "city": "Hoshiarpur",
+   "schools": []
+  },
+  {
+   "id": "d-punjab-jalandhar",
+   "name": "Jalandhar",
+   "state": "Punjab",
+   "city": "Jalandhar",
+   "schools": []
+  },
+  {
+   "id": "d-punjab-kapurthala",
+   "name": "Kapurthala",
+   "state": "Punjab",
+   "city": "Kapurthala",
+   "schools": []
+  },
+  {
+   "id": "d-punjab-ludhiana",
+   "name": "Ludhiana",
+   "state": "Punjab",
+   "city": "Ludhiana",
+   "schools": []
+  },
+  {
+   "id": "d-punjab-mansa",
+   "name": "Mansa",
+   "state": "Punjab",
+   "city": "Mansa",
+   "schools": []
+  },
+  {
+   "id": "d-punjab-moga",
+   "name": "Moga",
+   "state": "Punjab",
+   "city": "Moga",
+   "schools": []
+  },
+  {
+   "id": "d-punjab-muktsar",
+   "name": "Muktsar",
+   "state": "Punjab",
+   "city": "Muktsar",
+   "schools": []
+  },
+  {
+   "id": "d-punjab-nawanshahr-shahid-bhagat-singh-nagar",
+   "name": "Nawanshahr (Shahid Bhagat Singh Nagar)",
+   "state": "Punjab",
+   "city": "Nawanshahr (Shahid Bhagat Singh Nagar)",
+   "schools": []
+  },
+  {
+   "id": "d-punjab-pathankot",
+   "name": "Pathankot",
+   "state": "Punjab",
+   "city": "Pathankot",
+   "schools": []
+  },
+  {
+   "id": "d-punjab-patiala",
+   "name": "Patiala",
+   "state": "Punjab",
+   "city": "Patiala",
+   "schools": []
+  },
+  {
+   "id": "d-punjab-rupnagar",
+   "name": "Rupnagar",
+   "state": "Punjab",
+   "city": "Rupnagar",
+   "schools": []
+  },
+  {
+   "id": "d-punjab-sahibzada-ajit-singh-nagar-mohali",
+   "name": "Sahibzada Ajit Singh Nagar (Mohali)",
+   "state": "Punjab",
+   "city": "Sahibzada Ajit Singh Nagar (Mohali)",
+   "schools": []
+  },
+  {
+   "id": "d-punjab-sangrur",
+   "name": "Sangrur",
+   "state": "Punjab",
+   "city": "Sangrur",
+   "schools": []
+  },
+  {
+   "id": "d-punjab-tarn-taran",
+   "name": "Tarn Taran",
+   "state": "Punjab",
+   "city": "Tarn Taran",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-ajmer",
+   "name": "Ajmer",
+   "state": "Rajasthan",
+   "city": "Ajmer",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-alwar",
+   "name": "Alwar",
+   "state": "Rajasthan",
+   "city": "Alwar",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-banswara",
+   "name": "Banswara",
+   "state": "Rajasthan",
+   "city": "Banswara",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-baran",
+   "name": "Baran",
+   "state": "Rajasthan",
+   "city": "Baran",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-barmer",
+   "name": "Barmer",
+   "state": "Rajasthan",
+   "city": "Barmer",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-bharatpur",
+   "name": "Bharatpur",
+   "state": "Rajasthan",
+   "city": "Bharatpur",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-bhilwara",
+   "name": "Bhilwara",
+   "state": "Rajasthan",
+   "city": "Bhilwara",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-bikaner",
+   "name": "Bikaner",
+   "state": "Rajasthan",
+   "city": "Bikaner",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-bundi",
+   "name": "Bundi",
+   "state": "Rajasthan",
+   "city": "Bundi",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-chittorgarh",
+   "name": "Chittorgarh",
+   "state": "Rajasthan",
+   "city": "Chittorgarh",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-churu",
+   "name": "Churu",
+   "state": "Rajasthan",
+   "city": "Churu",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-dausa",
+   "name": "Dausa",
+   "state": "Rajasthan",
+   "city": "Dausa",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-dholpur",
+   "name": "Dholpur",
+   "state": "Rajasthan",
+   "city": "Dholpur",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-dungarpur",
+   "name": "Dungarpur",
+   "state": "Rajasthan",
+   "city": "Dungarpur",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-hanumangarh",
+   "name": "Hanumangarh",
+   "state": "Rajasthan",
+   "city": "Hanumangarh",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-jaipur",
+   "name": "Jaipur",
+   "state": "Rajasthan",
+   "city": "Jaipur",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-jaisalmer",
+   "name": "Jaisalmer",
+   "state": "Rajasthan",
+   "city": "Jaisalmer",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-jalore",
+   "name": "Jalore",
+   "state": "Rajasthan",
+   "city": "Jalore",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-jhalawar",
+   "name": "Jhalawar",
+   "state": "Rajasthan",
+   "city": "Jhalawar",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-jhunjhunu",
+   "name": "Jhunjhunu",
+   "state": "Rajasthan",
+   "city": "Jhunjhunu",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-jodhpur",
+   "name": "Jodhpur",
+   "state": "Rajasthan",
+   "city": "Jodhpur",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-karauli",
+   "name": "Karauli",
+   "state": "Rajasthan",
+   "city": "Karauli",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-kota",
+   "name": "Kota",
+   "state": "Rajasthan",
+   "city": "Kota",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-nagaur",
+   "name": "Nagaur",
+   "state": "Rajasthan",
+   "city": "Nagaur",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-pali",
+   "name": "Pali",
+   "state": "Rajasthan",
+   "city": "Pali",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-pratapgarh",
+   "name": "Pratapgarh",
+   "state": "Rajasthan",
+   "city": "Pratapgarh",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-rajsamand",
+   "name": "Rajsamand",
+   "state": "Rajasthan",
+   "city": "Rajsamand",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-sawai-madhopur",
+   "name": "Sawai Madhopur",
+   "state": "Rajasthan",
+   "city": "Sawai Madhopur",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-sikar",
+   "name": "Sikar",
+   "state": "Rajasthan",
+   "city": "Sikar",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-sirohi",
+   "name": "Sirohi",
+   "state": "Rajasthan",
+   "city": "Sirohi",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-sri-ganganagar",
+   "name": "Sri Ganganagar",
+   "state": "Rajasthan",
+   "city": "Sri Ganganagar",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-tonk",
+   "name": "Tonk",
+   "state": "Rajasthan",
+   "city": "Tonk",
+   "schools": []
+  },
+  {
+   "id": "d-rajasthan-udaipur",
+   "name": "Udaipur",
+   "state": "Rajasthan",
+   "city": "Udaipur",
+   "schools": []
+  },
+  {
+   "id": "d-sikkim-east-sikkim",
+   "name": "East Sikkim",
+   "state": "Sikkim",
+   "city": "East Sikkim",
+   "schools": []
+  },
+  {
+   "id": "d-sikkim-north-sikkim",
+   "name": "North Sikkim",
+   "state": "Sikkim",
+   "city": "North Sikkim",
+   "schools": []
+  },
+  {
+   "id": "d-sikkim-south-sikkim",
+   "name": "South Sikkim",
+   "state": "Sikkim",
+   "city": "South Sikkim",
+   "schools": []
+  },
+  {
+   "id": "d-sikkim-west-sikkim",
+   "name": "West Sikkim",
+   "state": "Sikkim",
+   "city": "West Sikkim",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-ariyalur",
+   "name": "Ariyalur",
+   "state": "Tamil Nadu",
+   "city": "Ariyalur",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-chennai",
+   "name": "Chennai",
+   "state": "Tamil Nadu",
+   "city": "Chennai",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-coimbatore",
+   "name": "Coimbatore",
+   "state": "Tamil Nadu",
+   "city": "Coimbatore",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-cuddalore",
+   "name": "Cuddalore",
+   "state": "Tamil Nadu",
+   "city": "Cuddalore",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-dharmapuri",
+   "name": "Dharmapuri",
+   "state": "Tamil Nadu",
+   "city": "Dharmapuri",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-dindigul",
+   "name": "Dindigul",
+   "state": "Tamil Nadu",
+   "city": "Dindigul",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-erode",
+   "name": "Erode",
+   "state": "Tamil Nadu",
+   "city": "Erode",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-kanchipuram",
+   "name": "Kanchipuram",
+   "state": "Tamil Nadu",
+   "city": "Kanchipuram",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-kanyakumari",
+   "name": "Kanyakumari",
+   "state": "Tamil Nadu",
+   "city": "Kanyakumari",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-karur",
+   "name": "Karur",
+   "state": "Tamil Nadu",
+   "city": "Karur",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-krishnagiri",
+   "name": "Krishnagiri",
+   "state": "Tamil Nadu",
+   "city": "Krishnagiri",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-madurai",
+   "name": "Madurai",
+   "state": "Tamil Nadu",
+   "city": "Madurai",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-nagapattinam",
+   "name": "Nagapattinam",
+   "state": "Tamil Nadu",
+   "city": "Nagapattinam",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-namakkal",
+   "name": "Namakkal",
+   "state": "Tamil Nadu",
+   "city": "Namakkal",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-nilgiris",
+   "name": "Nilgiris",
+   "state": "Tamil Nadu",
+   "city": "Nilgiris",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-perambalur",
+   "name": "Perambalur",
+   "state": "Tamil Nadu",
+   "city": "Perambalur",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-pudukkottai",
+   "name": "Pudukkottai",
+   "state": "Tamil Nadu",
+   "city": "Pudukkottai",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-ramanathapuram",
+   "name": "Ramanathapuram",
+   "state": "Tamil Nadu",
+   "city": "Ramanathapuram",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-salem",
+   "name": "Salem",
+   "state": "Tamil Nadu",
+   "city": "Salem",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-sivaganga",
+   "name": "Sivaganga",
+   "state": "Tamil Nadu",
+   "city": "Sivaganga",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-thanjavur",
+   "name": "Thanjavur",
+   "state": "Tamil Nadu",
+   "city": "Thanjavur",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-theni",
+   "name": "Theni",
+   "state": "Tamil Nadu",
+   "city": "Theni",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-thoothukudi-tuticorin",
+   "name": "Thoothukudi (Tuticorin)",
+   "state": "Tamil Nadu",
+   "city": "Thoothukudi (Tuticorin)",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-tiruchirappalli",
+   "name": "Tiruchirappalli",
+   "state": "Tamil Nadu",
+   "city": "Tiruchirappalli",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-tirunelveli",
+   "name": "Tirunelveli",
+   "state": "Tamil Nadu",
+   "city": "Tirunelveli",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-tiruppur",
+   "name": "Tiruppur",
+   "state": "Tamil Nadu",
+   "city": "Tiruppur",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-tiruvallur",
+   "name": "Tiruvallur",
+   "state": "Tamil Nadu",
+   "city": "Tiruvallur",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-tiruvannamalai",
+   "name": "Tiruvannamalai",
+   "state": "Tamil Nadu",
+   "city": "Tiruvannamalai",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-tiruvarur",
+   "name": "Tiruvarur",
+   "state": "Tamil Nadu",
+   "city": "Tiruvarur",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-vellore",
+   "name": "Vellore",
+   "state": "Tamil Nadu",
+   "city": "Vellore",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-viluppuram",
+   "name": "Viluppuram",
+   "state": "Tamil Nadu",
+   "city": "Viluppuram",
+   "schools": []
+  },
+  {
+   "id": "d-tamil-nadu-virudhunagar",
+   "name": "Virudhunagar",
+   "state": "Tamil Nadu",
+   "city": "Virudhunagar",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-adilabad",
+   "name": "Adilabad",
+   "state": "Telangana",
+   "city": "Adilabad",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-bhadradri-kothagudem",
+   "name": "Bhadradri Kothagudem",
+   "state": "Telangana",
+   "city": "Bhadradri Kothagudem",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-hyderabad",
+   "name": "Hyderabad",
+   "state": "Telangana",
+   "city": "Hyderabad",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-jagtial",
+   "name": "Jagtial",
+   "state": "Telangana",
+   "city": "Jagtial",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-jangaon",
+   "name": "Jangaon",
+   "state": "Telangana",
+   "city": "Jangaon",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-jayashankar-bhoopalpally",
+   "name": "Jayashankar Bhoopalpally",
+   "state": "Telangana",
+   "city": "Jayashankar Bhoopalpally",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-jogulamba-gadwal",
+   "name": "Jogulamba Gadwal",
+   "state": "Telangana",
+   "city": "Jogulamba Gadwal",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-kamareddy",
+   "name": "Kamareddy",
+   "state": "Telangana",
+   "city": "Kamareddy",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-karimnagar",
+   "name": "Karimnagar",
+   "state": "Telangana",
+   "city": "Karimnagar",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-khammam",
+   "name": "Khammam",
+   "state": "Telangana",
+   "city": "Khammam",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-komaram-bheem-asifabad",
+   "name": "Komaram Bheem Asifabad",
+   "state": "Telangana",
+   "city": "Komaram Bheem Asifabad",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-mahabubabad",
+   "name": "Mahabubabad",
+   "state": "Telangana",
+   "city": "Mahabubabad",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-mahabubnagar",
+   "name": "Mahabubnagar",
+   "state": "Telangana",
+   "city": "Mahabubnagar",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-mancherial",
+   "name": "Mancherial",
+   "state": "Telangana",
+   "city": "Mancherial",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-medak",
+   "name": "Medak",
+   "state": "Telangana",
+   "city": "Medak",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-medchal",
+   "name": "Medchal",
+   "state": "Telangana",
+   "city": "Medchal",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-nagarkurnool",
+   "name": "Nagarkurnool",
+   "state": "Telangana",
+   "city": "Nagarkurnool",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-nalgonda",
+   "name": "Nalgonda",
+   "state": "Telangana",
+   "city": "Nalgonda",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-nirmal",
+   "name": "Nirmal",
+   "state": "Telangana",
+   "city": "Nirmal",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-nizamabad",
+   "name": "Nizamabad",
+   "state": "Telangana",
+   "city": "Nizamabad",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-peddapalli",
+   "name": "Peddapalli",
+   "state": "Telangana",
+   "city": "Peddapalli",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-rajanna-sircilla",
+   "name": "Rajanna Sircilla",
+   "state": "Telangana",
+   "city": "Rajanna Sircilla",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-rangareddy",
+   "name": "Rangareddy",
+   "state": "Telangana",
+   "city": "Rangareddy",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-sangareddy",
+   "name": "Sangareddy",
+   "state": "Telangana",
+   "city": "Sangareddy",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-siddipet",
+   "name": "Siddipet",
+   "state": "Telangana",
+   "city": "Siddipet",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-suryapet",
+   "name": "Suryapet",
+   "state": "Telangana",
+   "city": "Suryapet",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-vikarabad",
+   "name": "Vikarabad",
+   "state": "Telangana",
+   "city": "Vikarabad",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-wanaparthy",
+   "name": "Wanaparthy",
+   "state": "Telangana",
+   "city": "Wanaparthy",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-warangal-rural",
+   "name": "Warangal (Rural)",
+   "state": "Telangana",
+   "city": "Warangal (Rural)",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-warangal-urban",
+   "name": "Warangal (Urban)",
+   "state": "Telangana",
+   "city": "Warangal (Urban)",
+   "schools": []
+  },
+  {
+   "id": "d-telangana-yadadri-bhuvanagiri",
+   "name": "Yadadri Bhuvanagiri",
+   "state": "Telangana",
+   "city": "Yadadri Bhuvanagiri",
+   "schools": []
+  },
+  {
+   "id": "d-tripura-dhalai",
+   "name": "Dhalai",
+   "state": "Tripura",
+   "city": "Dhalai",
+   "schools": []
+  },
+  {
+   "id": "d-tripura-gomati",
+   "name": "Gomati",
+   "state": "Tripura",
+   "city": "Gomati",
+   "schools": []
+  },
+  {
+   "id": "d-tripura-khowai",
+   "name": "Khowai",
+   "state": "Tripura",
+   "city": "Khowai",
+   "schools": []
+  },
+  {
+   "id": "d-tripura-north-tripura",
+   "name": "North Tripura",
+   "state": "Tripura",
+   "city": "North Tripura",
+   "schools": []
+  },
+  {
+   "id": "d-tripura-sepahijala",
+   "name": "Sepahijala",
+   "state": "Tripura",
+   "city": "Sepahijala",
+   "schools": []
+  },
+  {
+   "id": "d-tripura-south-tripura",
+   "name": "South Tripura",
+   "state": "Tripura",
+   "city": "South Tripura",
+   "schools": []
+  },
+  {
+   "id": "d-tripura-unakoti",
+   "name": "Unakoti",
+   "state": "Tripura",
+   "city": "Unakoti",
+   "schools": []
+  },
+  {
+   "id": "d-tripura-west-tripura",
+   "name": "West Tripura",
+   "state": "Tripura",
+   "city": "West Tripura",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-agra",
+   "name": "Agra",
+   "state": "Uttar Pradesh",
+   "city": "Agra",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-aligarh",
+   "name": "Aligarh",
+   "state": "Uttar Pradesh",
+   "city": "Aligarh",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-allahabad",
+   "name": "Allahabad",
+   "state": "Uttar Pradesh",
+   "city": "Allahabad",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-ambedkar-nagar",
+   "name": "Ambedkar Nagar",
+   "state": "Uttar Pradesh",
+   "city": "Ambedkar Nagar",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-amethi-chatrapati-sahuji-mahraj-nagar",
+   "name": "Amethi (Chatrapati Sahuji Mahraj Nagar)",
+   "state": "Uttar Pradesh",
+   "city": "Amethi (Chatrapati Sahuji Mahraj Nagar)",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-amroha-j-p-nagar",
+   "name": "Amroha (J.P. Nagar)",
+   "state": "Uttar Pradesh",
+   "city": "Amroha (J.P. Nagar)",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-auraiya",
+   "name": "Auraiya",
+   "state": "Uttar Pradesh",
+   "city": "Auraiya",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-azamgarh",
+   "name": "Azamgarh",
+   "state": "Uttar Pradesh",
+   "city": "Azamgarh",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-baghpat",
+   "name": "Baghpat",
+   "state": "Uttar Pradesh",
+   "city": "Baghpat",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-bahraich",
+   "name": "Bahraich",
+   "state": "Uttar Pradesh",
+   "city": "Bahraich",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-ballia",
+   "name": "Ballia",
+   "state": "Uttar Pradesh",
+   "city": "Ballia",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-balrampur",
+   "name": "Balrampur",
+   "state": "Uttar Pradesh",
+   "city": "Balrampur",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-banda",
+   "name": "Banda",
+   "state": "Uttar Pradesh",
+   "city": "Banda",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-barabanki",
+   "name": "Barabanki",
+   "state": "Uttar Pradesh",
+   "city": "Barabanki",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-bareilly",
+   "name": "Bareilly",
+   "state": "Uttar Pradesh",
+   "city": "Bareilly",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-basti",
+   "name": "Basti",
+   "state": "Uttar Pradesh",
+   "city": "Basti",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-bhadohi",
+   "name": "Bhadohi",
+   "state": "Uttar Pradesh",
+   "city": "Bhadohi",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-bijnor",
+   "name": "Bijnor",
+   "state": "Uttar Pradesh",
+   "city": "Bijnor",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-budaun",
+   "name": "Budaun",
+   "state": "Uttar Pradesh",
+   "city": "Budaun",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-bulandshahr",
+   "name": "Bulandshahr",
+   "state": "Uttar Pradesh",
+   "city": "Bulandshahr",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-chandauli",
+   "name": "Chandauli",
+   "state": "Uttar Pradesh",
+   "city": "Chandauli",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-chitrakoot",
+   "name": "Chitrakoot",
+   "state": "Uttar Pradesh",
+   "city": "Chitrakoot",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-deoria",
+   "name": "Deoria",
+   "state": "Uttar Pradesh",
+   "city": "Deoria",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-etah",
+   "name": "Etah",
+   "state": "Uttar Pradesh",
+   "city": "Etah",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-etawah",
+   "name": "Etawah",
+   "state": "Uttar Pradesh",
+   "city": "Etawah",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-faizabad",
+   "name": "Faizabad",
+   "state": "Uttar Pradesh",
+   "city": "Faizabad",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-farrukhabad",
+   "name": "Farrukhabad",
+   "state": "Uttar Pradesh",
+   "city": "Farrukhabad",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-fatehpur",
+   "name": "Fatehpur",
+   "state": "Uttar Pradesh",
+   "city": "Fatehpur",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-firozabad",
+   "name": "Firozabad",
+   "state": "Uttar Pradesh",
+   "city": "Firozabad",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-gautam-buddha-nagar",
+   "name": "Gautam Buddha Nagar",
+   "state": "Uttar Pradesh",
+   "city": "Gautam Buddha Nagar",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-ghaziabad",
+   "name": "Ghaziabad",
+   "state": "Uttar Pradesh",
+   "city": "Ghaziabad",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-ghazipur",
+   "name": "Ghazipur",
+   "state": "Uttar Pradesh",
+   "city": "Ghazipur",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-gonda",
+   "name": "Gonda",
+   "state": "Uttar Pradesh",
+   "city": "Gonda",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-gorakhpur",
+   "name": "Gorakhpur",
+   "state": "Uttar Pradesh",
+   "city": "Gorakhpur",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-hamirpur",
+   "name": "Hamirpur",
+   "state": "Uttar Pradesh",
+   "city": "Hamirpur",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-hapur-panchsheel-nagar",
+   "name": "Hapur (Panchsheel Nagar)",
+   "state": "Uttar Pradesh",
+   "city": "Hapur (Panchsheel Nagar)",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-hardoi",
+   "name": "Hardoi",
+   "state": "Uttar Pradesh",
+   "city": "Hardoi",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-hathras",
+   "name": "Hathras",
+   "state": "Uttar Pradesh",
+   "city": "Hathras",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-jalaun",
+   "name": "Jalaun",
+   "state": "Uttar Pradesh",
+   "city": "Jalaun",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-jaunpur",
+   "name": "Jaunpur",
+   "state": "Uttar Pradesh",
+   "city": "Jaunpur",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-jhansi",
+   "name": "Jhansi",
+   "state": "Uttar Pradesh",
+   "city": "Jhansi",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-kannauj",
+   "name": "Kannauj",
+   "state": "Uttar Pradesh",
+   "city": "Kannauj",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-kanpur-dehat",
+   "name": "Kanpur Dehat",
+   "state": "Uttar Pradesh",
+   "city": "Kanpur Dehat",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-kanpur-nagar",
+   "name": "Kanpur Nagar",
+   "state": "Uttar Pradesh",
+   "city": "Kanpur Nagar",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-kanshiram-nagar-kasganj",
+   "name": "Kanshiram Nagar (Kasganj)",
+   "state": "Uttar Pradesh",
+   "city": "Kanshiram Nagar (Kasganj)",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-kaushambi",
+   "name": "Kaushambi",
+   "state": "Uttar Pradesh",
+   "city": "Kaushambi",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-kushinagar-padrauna",
+   "name": "Kushinagar (Padrauna)",
+   "state": "Uttar Pradesh",
+   "city": "Kushinagar (Padrauna)",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-lakhimpur-kheri",
+   "name": "Lakhimpur - Kheri",
+   "state": "Uttar Pradesh",
+   "city": "Lakhimpur - Kheri",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-lalitpur",
+   "name": "Lalitpur",
+   "state": "Uttar Pradesh",
+   "city": "Lalitpur",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-lucknow",
+   "name": "Lucknow",
+   "state": "Uttar Pradesh",
+   "city": "Lucknow",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-maharajganj",
+   "name": "Maharajganj",
+   "state": "Uttar Pradesh",
+   "city": "Maharajganj",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-mahoba",
+   "name": "Mahoba",
+   "state": "Uttar Pradesh",
+   "city": "Mahoba",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-mainpuri",
+   "name": "Mainpuri",
+   "state": "Uttar Pradesh",
+   "city": "Mainpuri",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-mathura",
+   "name": "Mathura",
+   "state": "Uttar Pradesh",
+   "city": "Mathura",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-mau",
+   "name": "Mau",
+   "state": "Uttar Pradesh",
+   "city": "Mau",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-meerut",
+   "name": "Meerut",
+   "state": "Uttar Pradesh",
+   "city": "Meerut",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-mirzapur",
+   "name": "Mirzapur",
+   "state": "Uttar Pradesh",
+   "city": "Mirzapur",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-moradabad",
+   "name": "Moradabad",
+   "state": "Uttar Pradesh",
+   "city": "Moradabad",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-muzaffarnagar",
+   "name": "Muzaffarnagar",
+   "state": "Uttar Pradesh",
+   "city": "Muzaffarnagar",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-pilibhit",
+   "name": "Pilibhit",
+   "state": "Uttar Pradesh",
+   "city": "Pilibhit",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-pratapgarh",
+   "name": "Pratapgarh",
+   "state": "Uttar Pradesh",
+   "city": "Pratapgarh",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-raebareli",
+   "name": "RaeBareli",
+   "state": "Uttar Pradesh",
+   "city": "RaeBareli",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-rampur",
+   "name": "Rampur",
+   "state": "Uttar Pradesh",
+   "city": "Rampur",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-saharanpur",
+   "name": "Saharanpur",
+   "state": "Uttar Pradesh",
+   "city": "Saharanpur",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-sambhal-bhim-nagar",
+   "name": "Sambhal (Bhim Nagar)",
+   "state": "Uttar Pradesh",
+   "city": "Sambhal (Bhim Nagar)",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-sant-kabir-nagar",
+   "name": "Sant Kabir Nagar",
+   "state": "Uttar Pradesh",
+   "city": "Sant Kabir Nagar",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-shahjahanpur",
+   "name": "Shahjahanpur",
+   "state": "Uttar Pradesh",
+   "city": "Shahjahanpur",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-shamali-prabuddh-nagar",
+   "name": "Shamali (Prabuddh Nagar)",
+   "state": "Uttar Pradesh",
+   "city": "Shamali (Prabuddh Nagar)",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-shravasti",
+   "name": "Shravasti",
+   "state": "Uttar Pradesh",
+   "city": "Shravasti",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-siddharth-nagar",
+   "name": "Siddharth Nagar",
+   "state": "Uttar Pradesh",
+   "city": "Siddharth Nagar",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-sitapur",
+   "name": "Sitapur",
+   "state": "Uttar Pradesh",
+   "city": "Sitapur",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-sonbhadra",
+   "name": "Sonbhadra",
+   "state": "Uttar Pradesh",
+   "city": "Sonbhadra",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-sultanpur",
+   "name": "Sultanpur",
+   "state": "Uttar Pradesh",
+   "city": "Sultanpur",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-unnao",
+   "name": "Unnao",
+   "state": "Uttar Pradesh",
+   "city": "Unnao",
+   "schools": []
+  },
+  {
+   "id": "d-uttar-prades-varanasi",
+   "name": "Varanasi",
+   "state": "Uttar Pradesh",
+   "city": "Varanasi",
+   "schools": []
+  },
+  {
+   "id": "d-uttarakhand-almora",
+   "name": "Almora",
+   "state": "Uttarakhand",
+   "city": "Almora",
+   "schools": []
+  },
+  {
+   "id": "d-uttarakhand-bageshwar",
+   "name": "Bageshwar",
+   "state": "Uttarakhand",
+   "city": "Bageshwar",
+   "schools": []
+  },
+  {
+   "id": "d-uttarakhand-chamoli",
+   "name": "Chamoli",
+   "state": "Uttarakhand",
+   "city": "Chamoli",
+   "schools": []
+  },
+  {
+   "id": "d-uttarakhand-champawat",
+   "name": "Champawat",
+   "state": "Uttarakhand",
+   "city": "Champawat",
+   "schools": []
+  },
+  {
+   "id": "d-uttarakhand-dehradun",
+   "name": "Dehradun",
+   "state": "Uttarakhand",
+   "city": "Dehradun",
+   "schools": []
+  },
+  {
+   "id": "d-uttarakhand-haridwar",
+   "name": "Haridwar",
+   "state": "Uttarakhand",
+   "city": "Haridwar",
+   "schools": []
+  },
+  {
+   "id": "d-uttarakhand-nainital",
+   "name": "Nainital",
+   "state": "Uttarakhand",
+   "city": "Nainital",
+   "schools": []
+  },
+  {
+   "id": "d-uttarakhand-pauri-garhwal",
+   "name": "Pauri Garhwal",
+   "state": "Uttarakhand",
+   "city": "Pauri Garhwal",
+   "schools": []
+  },
+  {
+   "id": "d-uttarakhand-pithoragarh",
+   "name": "Pithoragarh",
+   "state": "Uttarakhand",
+   "city": "Pithoragarh",
+   "schools": []
+  },
+  {
+   "id": "d-uttarakhand-rudraprayag",
+   "name": "Rudraprayag",
+   "state": "Uttarakhand",
+   "city": "Rudraprayag",
+   "schools": []
+  },
+  {
+   "id": "d-uttarakhand-tehri-garhwal",
+   "name": "Tehri Garhwal",
+   "state": "Uttarakhand",
+   "city": "Tehri Garhwal",
+   "schools": []
+  },
+  {
+   "id": "d-uttarakhand-udham-singh-nagar",
+   "name": "Udham Singh Nagar",
+   "state": "Uttarakhand",
+   "city": "Udham Singh Nagar",
+   "schools": []
+  },
+  {
+   "id": "d-uttarakhand-uttarkashi",
+   "name": "Uttarkashi",
+   "state": "Uttarakhand",
+   "city": "Uttarkashi",
+   "schools": []
+  },
+  {
+   "id": "d-west-bengal-alipurduar",
+   "name": "Alipurduar",
+   "state": "West Bengal",
+   "city": "Alipurduar",
+   "schools": []
+  },
+  {
+   "id": "d-west-bengal-bankura",
+   "name": "Bankura",
+   "state": "West Bengal",
+   "city": "Bankura",
+   "schools": []
+  },
+  {
+   "id": "d-west-bengal-birbhum",
+   "name": "Birbhum",
+   "state": "West Bengal",
+   "city": "Birbhum",
+   "schools": []
+  },
+  {
+   "id": "d-west-bengal-burdwan-bardhaman",
+   "name": "Burdwan (Bardhaman)",
+   "state": "West Bengal",
+   "city": "Burdwan (Bardhaman)",
+   "schools": []
+  },
+  {
+   "id": "d-west-bengal-cooch-behar",
+   "name": "Cooch Behar",
+   "state": "West Bengal",
+   "city": "Cooch Behar",
+   "schools": []
+  },
+  {
+   "id": "d-west-bengal-dakshin-dinajpur-south-dinajpur",
+   "name": "Dakshin Dinajpur (South Dinajpur)",
+   "state": "West Bengal",
+   "city": "Dakshin Dinajpur (South Dinajpur)",
+   "schools": []
+  },
+  {
+   "id": "d-west-bengal-darjeeling",
+   "name": "Darjeeling",
+   "state": "West Bengal",
+   "city": "Darjeeling",
+   "schools": []
+  },
+  {
+   "id": "d-west-bengal-hooghly",
+   "name": "Hooghly",
+   "state": "West Bengal",
+   "city": "Hooghly",
+   "schools": []
+  },
+  {
+   "id": "d-west-bengal-howrah",
+   "name": "Howrah",
+   "state": "West Bengal",
+   "city": "Howrah",
+   "schools": []
+  },
+  {
+   "id": "d-west-bengal-jalpaiguri",
+   "name": "Jalpaiguri",
+   "state": "West Bengal",
+   "city": "Jalpaiguri",
+   "schools": []
+  },
+  {
+   "id": "d-west-bengal-kalimpong",
+   "name": "Kalimpong",
+   "state": "West Bengal",
+   "city": "Kalimpong",
+   "schools": []
+  },
+  {
+   "id": "d-west-bengal-kolkata",
+   "name": "Kolkata",
+   "state": "West Bengal",
+   "city": "Kolkata",
+   "schools": []
+  },
+  {
+   "id": "d-west-bengal-malda",
+   "name": "Malda",
+   "state": "West Bengal",
+   "city": "Malda",
+   "schools": []
+  },
+  {
+   "id": "d-west-bengal-murshidabad",
+   "name": "Murshidabad",
+   "state": "West Bengal",
+   "city": "Murshidabad",
+   "schools": []
+  },
+  {
+   "id": "d-west-bengal-nadia",
+   "name": "Nadia",
+   "state": "West Bengal",
+   "city": "Nadia",
+   "schools": []
+  },
+  {
+   "id": "d-west-bengal-north-24-parganas",
+   "name": "North 24 Parganas",
+   "state": "West Bengal",
+   "city": "North 24 Parganas",
+   "schools": []
+  },
+  {
+   "id": "d-west-bengal-paschim-medinipur-west-medinipur",
+   "name": "Paschim Medinipur (West Medinipur)",
+   "state": "West Bengal",
+   "city": "Paschim Medinipur (West Medinipur)",
+   "schools": []
+  },
+  {
+   "id": "d-west-bengal-purba-medinipur-east-medinipur",
+   "name": "Purba Medinipur (East Medinipur)",
+   "state": "West Bengal",
+   "city": "Purba Medinipur (East Medinipur)",
+   "schools": []
+  },
+  {
+   "id": "d-west-bengal-purulia",
+   "name": "Purulia",
+   "state": "West Bengal",
+   "city": "Purulia",
+   "schools": []
+  },
+  {
+   "id": "d-west-bengal-south-24-parganas",
+   "name": "South 24 Parganas",
+   "state": "West Bengal",
+   "city": "South 24 Parganas",
+   "schools": []
+  },
+  {
+   "id": "d-west-bengal-uttar-dinajpur-north-dinajpur",
+   "name": "Uttar Dinajpur (North Dinajpur)",
+   "state": "West Bengal",
+   "city": "Uttar Dinajpur (North Dinajpur)",
+   "schools": []
+  }
+ ]
+}
