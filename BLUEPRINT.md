@@ -5,7 +5,7 @@
 **Campaign:** Seva Sankalp Abhiyan, 17 Sep 2026 → 17 Oct 2026 (Grand Showcase: Jansevak Mahakumbh, 17 Oct 2026, Chhatarsal Stadium)
 **Source:** RFP "Selection of Event Management/Production Agency for Seva Sankalp Abhiyan" (issued 07.09.2026)
 **Repo:** github.com/ganbjhs/StudentPortal · **Live:** studentportal-production-9d28.up.railway.app
-**Status:** v1 (school registration + reel submission + evaluation desk) delivered 15 Sep 2026
+**Status:** PENDING — development paused on 16 Sep 2026 and handed over for continuation on another system (see HANDOVER.md). v1 (school registration + reel submission + evaluation desk) delivered 15 Sep 2026
 
 ---
 

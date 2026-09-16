@@ -1,5 +1,8 @@
 # Meri Seva, Mera Sankalp — Reel Competition Portal
 
+> **Project status: PENDING (handed over on 16 Sep 2026).** Development continues on another system.
+> Start with **HANDOVER.md** for the current state, next steps and decisions to preserve.
+
 Online registration & submission portal for the **"Meri Seva, Mera Sankalp"** student reel-making
 competition under **Seva Sankalp Abhiyan** (Directorate of Education, Govt. of NCT of Delhi, 17 Sep – 17 Oct 2026).
 Schools register (State/UT → District → School), submit student reels (theme, title, message, consent,
