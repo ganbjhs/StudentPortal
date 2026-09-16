@@ -189,7 +189,23 @@ function entryFields(b) {
   };
 }
 
-// multipart: fields + optional "video" file
+// Mandatory-field check (same rules as the form in public/app.js).
+// hasMedia: an uploaded file (new or already stored) or an external link.
+function validateEntry(f, hasMedia) {
+  const missing = [];
+  const name = f.studentName || "";
+  if (name.length < 3 || !/[A-Za-z\u0900-\u097F]{2,}/.test(name)) missing.push("name (at least 3 letters)");
+  if (f.participantType === "student") {
+    if (!f.rollNo) missing.push("roll no.");
+    if (!f.class) missing.push("class");
+  } else if (!f.designation) missing.push("designation / subject");
+  if (!f.caption) missing.push(f.entryType === "reel" ? "reel title" : "artwork title");
+  if (!hasMedia) missing.push(f.entryType === "reel" ? "reel video (file or link)" : "drawing image (file or link)");
+  if (!(f.consentOriginal && f.consentParental && f.consentMusic)) missing.push("consent & declaration (all three boxes)");
+  return missing.length ? "Required: " + missing.join(", ") + "." : "";
+}
+
+// multipart: fields + "video" file (file or external link is mandatory)
 app.post("/api/videos", requireLogin, (req, res) => {
   upload.single("video")(req, res, (err) => {
     if (err) {
@@ -198,6 +214,8 @@ app.post("/api/videos", requireLogin, (req, res) => {
     }
     const fields = entryFields(req.body || {});
     const file = req.file;
+    const problem = validateEntry(fields, !!file || !!fields.videoUrl);
+    if (problem) { if (file) removeFile(`/uploads/${file.filename}`); return res.status(400).json({ error: problem }); }
     const video = store.createVideo({
       schoolId: req.school.id,
       ...fields,
@@ -216,6 +234,8 @@ app.put("/api/videos/:id", requireLogin, (req, res) => {
   upload.single("video")(req, res, (err) => {
     if (err) return res.status(400).json({ error: err.message });
     const patch = entryFields({ ...v, ...(req.body || {}) });
+    const problem = validateEntry(patch, !!req.file || !!v.videoFile || !!patch.videoUrl);
+    if (problem) { if (req.file) removeFile(`/uploads/${req.file.filename}`); return res.status(400).json({ error: problem }); }
     patch.mediaType = v.mediaType || "";
     if (req.file) {
       removeFile(v.videoFile);

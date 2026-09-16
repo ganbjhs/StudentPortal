@@ -96,34 +96,34 @@
 
     <div class="card add-card" id="addCard">
       <h2 id="formTitle">Submit an entry</h2>
-      <p class="hint" id="formHint">One entry per submission. Choose who is entering and what the entry is, then upload the file or paste a YouTube / Drive link. All fields are optional.</p>
-      <form class="form" id="addForm">
+      <p class="hint" id="formHint">One entry per submission. Choose who is entering and what the entry is, then upload the file or paste a YouTube / Drive link. Fields marked <b class="req">*</b> are mandatory; the entry cannot be submitted without the consent declaration.</p>
+      <form class="form" id="addForm" novalidate>
         <input type="hidden" id="editId" value="">
         <div class="row-2">
-          <div class="field"><label for="aPart">Participant category</label><select class="input" id="aPart"></select></div>
-          <div class="field"><label for="aType">Entry category</label><select class="input" id="aType"></select></div>
+          <div class="field"><label for="aPart">Participant category <b class="req">*</b></label><select class="input" id="aPart"></select></div>
+          <div class="field"><label for="aType">Entry category <b class="req">*</b></label><select class="input" id="aType"></select></div>
         </div>
         <div class="row-2">
-          <div class="field"><label for="aName" id="lblName">Student name</label><input class="input" id="aName" placeholder="Aarav Sharma"></div>
-          <div class="field" id="fldRoll"><label for="aRoll">Roll No.</label><input class="input" id="aRoll" placeholder="17"></div>
-          <div class="field" id="fldDesig" hidden><label for="aDesig">Designation / subject</label><input class="input" id="aDesig" placeholder="e.g. TGT (Social Science) / Nodal Officer"></div>
+          <div class="field"><label for="aName" id="lblName">Student name <b class="req">*</b></label><input class="input" id="aName" placeholder="Aarav Sharma" minlength="3" maxlength="120" autocomplete="off"></div>
+          <div class="field" id="fldRoll"><label for="aRoll">Roll No. <b class="req">*</b></label><input class="input" id="aRoll" placeholder="17"></div>
+          <div class="field" id="fldDesig" hidden><label for="aDesig">Designation / subject <b class="req">*</b></label><input class="input" id="aDesig" placeholder="e.g. TGT (Social Science) / Nodal Officer"></div>
         </div>
         <div class="row-2" id="fldClassRow">
-          <div class="field"><label for="aClass">Class</label>
+          <div class="field"><label for="aClass">Class <b class="req">*</b></label>
             <input class="input" id="aClass" list="classList" placeholder="e.g. 8"><datalist id="classList"></datalist></div>
-          <div class="field"><label for="aSec">Section</label>
+          <div class="field"><label for="aSec">Section <small>(optional)</small></label>
             <input class="input" id="aSec" list="secList" placeholder="e.g. B"><datalist id="secList"><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option></datalist></div>
         </div>
         <div class="field"><label for="aTheme">Theme</label><select class="input" id="aTheme"><option value="">Select theme</option></select></div>
-        <div class="field"><label for="aCaption" id="lblCaption">Reel title / caption</label><input class="input" id="aCaption" maxlength="200" placeholder="Ek Din Seva Ke Naam — cleaning our school park"></div>
-        <div class="field"><label for="aDesc">Message / description <small id="lblDescHint">(what the reel shows, in 2–3 lines)</small></label><textarea class="input" id="aDesc" rows="2" maxlength="2000" placeholder="Students of Class 8 organised a weekend cleanliness drive…"></textarea></div>
+        <div class="field"><label for="aCaption" id="lblCaption">Reel title / caption <b class="req">*</b></label><input class="input" id="aCaption" maxlength="200" placeholder="Ek Din Seva Ke Naam — cleaning our school park"></div>
+        <div class="field"><label for="aDesc">Message / description <small>(optional)</small> <small id="lblDescHint">(what the reel shows, in 2–3 lines)</small></label><textarea class="input" id="aDesc" rows="2" maxlength="2000" placeholder="Students of Class 8 organised a weekend cleanliness drive…"></textarea></div>
         <div class="row-2">
           <div class="field" id="fldDur"><label for="aDur">Duration <small>(seconds)</small></label><input class="input" id="aDur" type="number" min="1" max="600" placeholder="e.g. 60"></div>
           <div class="field"><label for="aStatus">Status</label><select class="input" id="aStatus"></select></div>
         </div>
 
         <div class="field">
-          <label id="lblMedia">Reel (video)</label>
+          <label id="lblMedia">Reel (video) <b class="req">*</b> <small class="req-hint">(upload the file or paste a link)</small></label>
           <label class="drop" id="drop" for="aFile">
             <input type="file" id="aFile" accept="video/*" hidden>
             <b id="dropText">Choose a video file</b> or drag &amp; drop here
@@ -133,7 +133,7 @@
           <input class="input" id="aLink" type="url" placeholder="Paste a YouTube / Google Drive link">
         </div>
         <fieldset class="consent">
-          <legend>Consent &amp; declaration</legend>
+          <legend>Consent &amp; declaration <b class="req">*</b> <small>(all three required)</small></legend>
           <label class="check"><input type="checkbox" id="cOriginal"> The entry is original work of the participant — nothing copied</label>
           <label class="check"><input type="checkbox" id="cParental"> Parental / guardian consent obtained for participation and use of the entry (for student entries)</label>
           <label class="check"><input type="checkbox" id="cMusic"> No copyrighted music or material used without permission</label>

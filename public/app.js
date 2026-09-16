@@ -28,22 +28,22 @@
     const p = partType($("aPart").value), t = entryType($("aType").value);
     const teacher = p.id !== "student";
     // who: student → roll / class / section · teacher or faculty → designation
-    $("lblName").textContent = p.nameLabel || (p.label + " name");
+    $("lblName").innerHTML = (p.nameLabel || (p.label + " name")) + ' <b class="req">*</b>';
     $("aName").placeholder = teacher ? "e.g. Sunita Verma" : "Aarav Sharma";
     $("fldRoll").hidden = teacher;
     $("fldDesig").hidden = !teacher;
     $("fldClassRow").hidden = teacher;
     // what: reel → video + duration · drawing → image, no duration
     const drawing = t.id !== "reel";
-    $("lblMedia").textContent = t.label;
-    $("lblCaption").textContent = drawing ? "Artwork title / caption" : "Reel title / caption";
+    $("lblMedia").innerHTML = t.label + ' <b class="req">*</b> <small class="req-hint">(upload the file or paste a link)</small>';
+    $("lblCaption").innerHTML = (drawing ? "Artwork title / caption" : "Reel title / caption") + ' <b class="req">*</b>';
     $("lblDescHint").textContent = drawing ? "(what the drawing shows, in 2–3 lines)" : "(what the reel shows, in 2–3 lines)";
     $("fldDur").hidden = drawing;
     $("aFile").accept = t.accept || "video/*";
     $("dropText").textContent = drawing ? "Choose an image file" : "Choose a video file";
     if (!pendingFile) $("fname").textContent = drawing ? "JPG / PNG / WebP" : "MP4 / MOV / WebM";
     $("aLink").placeholder = drawing ? "Paste a Google Drive / image link" : "Paste a YouTube / Google Drive video link";
-    $("formHint").textContent = t.hint || "";
+    $("formHint").innerHTML = (t.hint ? t.hint + " " : "") + 'Fields marked <b class="req">*</b> are mandatory — the entry cannot be submitted without the consent declaration.';
     $("formTitle").textContent = $("editId").value ? "Edit entry" : `Submit a ${drawing ? "drawing" : "reel"} — ${p.label.toLowerCase()}`;
   }
   $("aPart").addEventListener("change", applyCategories);
@@ -172,6 +172,7 @@
 
   function resetForm() {
     $("addForm").reset(); $("editId").value = ""; pendingFile = null;
+    document.querySelectorAll("#addForm .invalid").forEach((el) => el.classList.remove("invalid"));
     $("addBtn").textContent = "Submit"; $("cancelBtn").textContent = "Clear";
     $("aStatus").value = "submitted";
     applyCategories();
@@ -203,8 +204,35 @@
     fd.append("videoUrl", $("aLink").value);
     if (pendingFile) fd.append("video", pendingFile);
 
-    const hasAnything = ["studentName", "rollNo", "class", "section", "caption", "description", "theme", "designation", "videoUrl"].some((k) => String(fd.get(k) || "").trim()) || !!pendingFile;
-    if (!hasAnything) return showMsg("addMsg", "Fill in at least one field or add a video.");
+    // ---- mandatory fields (mirrors the server-side check in server.js) ----
+    const teacher = partType($("aPart").value).id !== "student";
+    const drawing = entryType($("aType").value).id !== "reel";
+    const val = (id) => $(id).value.trim();
+    const problems = [];
+    document.querySelectorAll("#addForm .invalid").forEach((el) => el.classList.remove("invalid"));
+    const bad = (id, msg) => { problems.push(msg); const el = $(id); if (el) el.classList.add("invalid"); };
+    if (!val("aPart")) bad("aPart", "Select the participant category.");
+    if (!val("aType")) bad("aType", "Select the entry category.");
+    const nm = val("aName");
+    if (nm.length < 3 || !/[A-Za-z\u0900-\u097F]{2,}/.test(nm)) bad("aName", (teacher ? "Participant" : "Student") + " name is required (at least 3 letters).");
+    if (teacher) {
+      if (!val("aDesig")) bad("aDesig", "Designation / subject is required.");
+    } else {
+      if (!val("aRoll")) bad("aRoll", "Roll No. is required.");
+      if (!val("aClass")) bad("aClass", "Class is required.");
+    }
+    if (!val("aCaption")) bad("aCaption", (drawing ? "Artwork" : "Reel") + " title is required.");
+    const hasMedia = !!pendingFile || !!val("aLink") || (editId && $("fname").textContent.startsWith("Current:"));
+    if (!hasMedia) bad("aLink", drawing ? "Upload the drawing (image) or paste a link." : "Upload the reel (video) or paste a link.");
+    if (!($("cOriginal").checked && $("cParental").checked && $("cMusic").checked)) {
+      problems.push("Tick all three consent & declaration boxes — the entry cannot be submitted without consent.");
+      document.querySelector(".consent").classList.add("invalid");
+    }
+    if (problems.length) {
+      showMsg("addMsg", problems.join(" "));
+      const first = document.querySelector("#addForm .invalid"); if (first) (first.querySelector("input") || first).focus();
+      return;
+    }
 
     const prog = $("prog"), bar = prog.querySelector("i");
     $("addBtn").disabled = true; prog.hidden = false; bar.style.width = "2%";
